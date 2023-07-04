@@ -57,8 +57,11 @@ public class HeartServiceImpl implements HeartService {
     }
 
     @Override
-    public Heart getHeartList() {
-        return heart;
+    public String toString() {
+        return "HeartServiceImpl{" +
+                "heart=" + heart +
+                ", productService=" + productService +
+                ", principalDetails=" + principalDetails +
+                '}';
     }
-
 }
