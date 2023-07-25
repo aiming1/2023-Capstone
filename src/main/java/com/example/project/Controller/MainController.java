@@ -38,7 +38,7 @@ public class MainController {
     //TODO : 틀만 잡았지 고쳐야할 부분 많음
 
     /** 메인 **/
-    @RequestMapping("")
+    @RequestMapping("/api")
     public LinkedHashMap<String, Product> main(Model model, HttpServletRequest request){
         logger.info("메인 페이지를 로딩합니다···");
 
