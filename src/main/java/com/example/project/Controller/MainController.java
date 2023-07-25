@@ -20,13 +20,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Random;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class MainController {
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
     private final CategoryService categoryService;
@@ -39,15 +40,16 @@ public class MainController {
 
     /** 메인 **/
     @RequestMapping("")
-    public LinkedHashMap<String, Product> main(Model model, HttpServletRequest request){
+    public ArrayList main(Model model, HttpServletRequest request){
         logger.info("메인 페이지를 로딩합니다···");
-
+        ArrayList datas = new ArrayList();
         String requestURL = request.getRequestURL().toString();
         System.out.println("requestURL = " + requestURL);
-
         LinkedHashMap<String, Product> page = mainPageService.getPage();
-
-        return page;
+        page.forEach((k, v) -> {
+            datas.add(v);
+        });
+        return datas;
     }
 
 //    /** 로고 클릭 시 메인화면으로 이동 **/
