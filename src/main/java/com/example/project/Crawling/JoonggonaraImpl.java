@@ -39,20 +39,28 @@ public class JoonggonaraImpl implements Joonggonara{
                 Document doc = Jsoup.connect(url).get();
 
                 Elements ids = doc.select(".grid.grid-cols-2 li:nth-child(n) a");
+                System.out.println("1");
                 Elements imgs = doc.select(".grid.grid-cols-2 li:nth-child(n) a div img");
+                System.out.println("2");
                 Elements prices = doc.select(".grid.grid-cols-2 li:nth-child(n) a div div.font-semibold");
+                System.out.println("3");
 
                 for (int i = 0; i < imgs.size(); i++) {
                     String[] id_string = ids.get(i).attr("href").split("/");
                     String id = id_string[2];
+                    System.out.println("4");
 
                     String name = imgs.get(i).attr("alt");
+                    System.out.println("5");
                     String img = imgs.get(i).attr("src");
+                    System.out.println("6");
 
                     String price_string = prices.get(i).text().replaceAll("[^0-9]", "");
                     int price = Integer.parseInt(price_string);
+                    System.out.println("7");
 
                     Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, null, null, null);
+                    System.out.println("8");
                     page.put(id, product);
                 }
 
