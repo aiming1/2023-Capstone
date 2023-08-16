@@ -99,7 +99,7 @@ public class MainController {
         System.out.println("requestURL = " + requestURL);
 
 //        Long id = principalDetails.getUser().getId();
-        Long id = Long.parseLong("1692167364866");
+        Long id = Long.parseLong("1");
         LinkedHashMap<String, Product> page = heartService.getHearts(id);
 
         ArrayList datas = new ArrayList();

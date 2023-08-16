@@ -73,8 +73,8 @@ public class ProductController {
 
         Long id = System.currentTimeMillis();
         if (product != null) {
-            if (!heartService.findDuplicateHearts(id + "", product)) {
-                heartService.addHeartById(id + "", product);
+            if (!heartService.findDuplicateHearts("1", product)) {
+                heartService.addHeartById("1", product);
                 return "선택한 상품이 추가되었습니다.";
             } else {
                 return "이미 등록된 상품입니다.";
@@ -92,8 +92,8 @@ public class ProductController {
 
         Long id = System.currentTimeMillis();
         if (product != null) {
-            if (heartService.findDuplicateHearts(id + "", product)) {
-                heartService.deleteHeartById(id + "", product);
+            if (heartService.findDuplicateHearts("1", product)) {
+                heartService.deleteHeartById("1", product);
                 return "선택한 상품이 제거되었습니다.";
             } else {
                 return "해당 상품이 찜목록에 존재하지 않습니다.";

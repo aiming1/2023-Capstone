@@ -6,7 +6,6 @@ import javax.annotation.Nullable;
 
 @NoArgsConstructor
 public class Product {
-
     private String id;
     private String name;
     private String image;

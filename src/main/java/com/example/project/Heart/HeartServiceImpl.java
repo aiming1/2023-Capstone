@@ -13,6 +13,7 @@ import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -49,8 +50,9 @@ public class HeartServiceImpl implements HeartService {
     @Override
     public void addHeartById(String id, Product p) {
         Long userId = Long.parseLong(id);
+        LocalDate date = LocalDate.now();
         Heart heart = new Heart(
-                userId,p.getId(),p.getName(),p.getMarket()+"",p.getProducturl(),1
+                p.getId(),userId,p.getName(),p.getMarket()+"",1,date+""
         );
         heartRepository.save(heart);
     }
