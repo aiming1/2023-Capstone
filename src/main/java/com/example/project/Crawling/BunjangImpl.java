@@ -57,10 +57,7 @@ public class BunjangImpl implements Bunjang {
                 retry = 0;
             } catch (Exception e) {
                 if (--retry != 0) System.out.println("[Warn] BunjangImpl: 카테고리 크롤링 오류··· 재시도 중");
-                else {
-                    System.out.println("[Error] BunjangImpl: 카테고리 크롤링 오류");
-                    page = null;
-                }
+                else System.out.println("[Error] BunjangImpl: 카테고리 크롤링 오류");
             }
         }
 
@@ -103,10 +100,7 @@ public class BunjangImpl implements Bunjang {
                 retry = 0;
             } catch (Exception e) {
                 if (--retry != 0) System.out.println("[Warn] BunjangImpl: 검색 크롤링 오류··· 재시도 중");
-                else {
-                    System.out.println("[Error] BunjangImpl: 검색 크롤링 오류");
-                    page = null;
-                }
+                else System.out.println("[Error] BunjangImpl: 검색 크롤링 오류");
             }
         }
 
@@ -192,10 +186,7 @@ public class BunjangImpl implements Bunjang {
                 retry = 0;
             } catch (Exception e) {
                 if (--retry != 0) System.out.println("[Warn] BunjangImpl: 메인화면 크롤링 오류··· 재시도 중");
-                else {
-                    System.out.println("[Error] BunjangImpl: 메인화면 크롤링 오류");
-                    page = null;
-                }
+                else System.out.println("[Error] BunjangImpl: 메인화면 크롤링 오류");
             }
         }
 
