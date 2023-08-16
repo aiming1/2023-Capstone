@@ -1,5 +1,7 @@
 package com.example.project.Product;
 
+import lombok.NoArgsConstructor;
+
 import javax.annotation.Nullable;
 
 public class Product {
