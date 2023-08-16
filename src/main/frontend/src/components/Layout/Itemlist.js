@@ -15,10 +15,19 @@ const ItemList = ({ selectedCategoryId }) => {
   const [error, setError] = useState(null);
 
   /* 페이지네이션 새로 추가한 부분 */
-  const limit = 40; //페이지 당 최대 게시물 수- 임시 지정
-  //const [limit, setLimit] = useState(8);
+  const limit = 8; //페이지 당 최대 게시물 수
   const [page, setPage] = useState(1); //현재 페이지 번호
-  const offset = (page - 1) * limit; //페이지 당 첫 게시물 위치
+  //const offset = (page - 1) * limit; //페이지 당 첫 게시물 위치
+
+  //흠
+  const indexOfLast = page * limit;
+  const indexOfFirst = (page - 1) * limit;
+  const currentPosts = (data) => {
+      let currentPosts = 0;
+      currentPosts = data.slice(indexOfFirst, indexOfLast);
+      //console.log({"current post: ": currentPosts, "indexofFirst": indexOfFirst, "indexofLast": indexOfLast})
+      return currentPosts;
+    };
   //
 
   const fetchData = async () => {
@@ -70,29 +79,29 @@ const ItemList = ({ selectedCategoryId }) => {
   if (!data) return null;
 
   return (
-    <div className={styles.itemlistbox}>
-        <div className={styles.itemlistcontent}>
-          {data.slice(offset, offset + limit).map((item) => (
-            <ListItem
-              className={styles.listItem}
-              key={item.name}
-              id={item.id}
-              store={item.market}
-              price={item.price}
-              title={truncate(item.name, 10)}
-              src={item.image}
-              heartCnt={item.hearts}
-            />
-          ))}
-        </div>
-        <div className={styles.paginationBox}>
-          <Pagination
-            total={data.length}
-            limit={limit}
-            page={page}
-            setPage={setPage}
+    <div>
+      <div className={styles.itemlistcontent}>
+        {currentPosts(data).map((item) => (
+          <ListItem
+            className={styles.listItem}
+            key={item.url}
+            id={item.id}
+            store={item.market}
+            price={item.price}
+            title={truncate(item.name, 10)}
+            src={item.image}
+            heartCnt={item.hearts}
           />
-        </div>
+        ))}
+      </div>
+      <div className={styles.pageMove}>
+        <Pagination
+          total={data.length}
+          limit={limit}
+          page={page}
+          setPage={setPage}
+        />
+      </div>
     </div>
   );
 };

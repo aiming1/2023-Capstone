@@ -28,9 +28,11 @@ public class MainController {
     private final MyLogger mylogger;
     private String classPath = Thread.currentThread().getStackTrace()[1].getClassName();
 
-    /** 메인 **/
-    @RequestMapping(value = {"","/logo"})
-    public ArrayList main(HttpServletRequest request){
+    /**
+     * 메인
+     **/
+    @RequestMapping(value = {"", "/logo"})
+    public ArrayList main(HttpServletRequest request) {
         mylogger.printRequestInfo(request, classPath, "메인 페이지를 로딩합니다···");
 
         LinkedHashMap<String, Product> page = mainPageService.getPage();
@@ -42,9 +44,11 @@ public class MainController {
         return datas;
     }
 
-    /** 카테고리 **/
+    /**
+     * 카테고리
+     **/
     @GetMapping("/{categoryName}/{pageNum}")
-    public ArrayList getCategory(@PathVariable int categoryName, @PathVariable int pageNum, HttpServletRequest request){
+    public ArrayList getCategory(@PathVariable int categoryName, @PathVariable int pageNum, HttpServletRequest request) {
 
         mylogger.printRequestInfo(request, classPath, "카테고리를 로딩합니다···");
         HashMap<String, Product> page = categoryService.getPage(categoryName, pageNum);
@@ -57,16 +61,17 @@ public class MainController {
         return datas;
     }
 
+
     /** 상품 검색 **/
     @GetMapping("/search/{productName}/{pageNum}")
-    public ArrayList getProductSearch(@PathVariable String productName, @PathVariable int pageNum, HttpServletRequest request){
-        mylogger.printRequestInfo(request, classPath, "상품명으로 검색을 진행합니다···");
-        String requestURL = request.getRequestURL().toString();
-        System.out.println("requestURL = " +requestURL +" 상품명 : "+productName);
+    public ArrayList getProductSearch(@PathVariable String productName, @PathVariable int pageNum, HttpServletRequest request) {
+        mylogger.printRequestInfo(request, classPath, "상품명으로 검색을 진행합니다··· 상품명: " + productName);
 
-        if(pageNum==0){ pageNum=1; }
+        if (pageNum == 0) {
+            pageNum = 1;
+        }
 
-        if(productName!=null){
+        if (productName != null) {
             LinkedHashMap<String, Product> page1 = searchService.getSearchResult(Market.JOONGGONARA, pageNum, productName);
             LinkedHashMap<String, Product> page2 = searchService.getSearchResult(Market.BUNJANG, pageNum, productName);
 

@@ -28,30 +28,40 @@ public class BunjangImpl implements Bunjang {
         String url = setURL(category, pagenum);
         WebDriver webDriver = chromeDriver.setChrome();
 
-        try {
-            webDriver.get(url);
-            Thread.sleep(500);
+        int retry = 5;
 
-            List<WebElement> webElements = webDriver.findElements(By.className("sc-gVLVqr"));
+        while(retry != 0) {
+            try {
+                webDriver.get(url);
+                Thread.sleep(500);
 
-            for(WebElement webElement : webElements){
-                String ad = webElement.findElement(By.cssSelector("a div.sc-iGPElx div.sc-gtfDJT div.sc-fOICqy")).getText();
-                if(!ad.equals("AD")) {
-                    String id = webElement.findElement(By.tagName("a")).getAttribute("data-pid");
+                List<WebElement> webElements = webDriver.findElements(By.className("sc-gVLVqr"));
 
-                    String name = webElement.findElement(By.className("sc-kasBVs")).getText();
-                    String img = webElement.findElement(By.tagName("img")).getAttribute("src");
+                for (WebElement webElement : webElements) {
+                    String ad = webElement.findElement(By.cssSelector("a div.sc-iGPElx div.sc-gtfDJT div.sc-fOICqy")).getText();
+                    if (!ad.equals("AD")) {
+                        String id = webElement.findElement(By.tagName("a")).getAttribute("data-pid");
 
-                    String price_string = webElement.findElement(By.className("sc-hgHYgh")).getText()
-                            .replaceAll("[^0-9]", "");
-                    int price = Integer.parseInt(price_string);
+                        String name = webElement.findElement(By.className("sc-kasBVs")).getText();
+                        String img = webElement.findElement(By.tagName("img")).getAttribute("src");
 
-                    Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, null, null, null);
-                    page.put(id, product);
+                        String price_string = webElement.findElement(By.className("sc-hgHYgh")).getText()
+                                .replaceAll("[^0-9]", "");
+                        int price = Integer.parseInt(price_string);
+
+                        Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, null, null, null);
+                        page.put(id, product);
+                    }
+                }
+
+                retry = 0;
+            } catch (Exception e) {
+                if (--retry != 0) System.out.println("[Warn] BunjangImpl: 카테고리 크롤링 오류··· 재시도 중");
+                else {
+                    System.out.println("[Error] BunjangImpl: 카테고리 크롤링 오류");
+                    page = null;
                 }
             }
-        } catch(Exception e) {
-            System.out.println("[Error] BunjangImpl: 카테고리 크롤링 오류");
         }
 
         return page;
@@ -65,28 +75,39 @@ public class BunjangImpl implements Bunjang {
         String url = setURL(pagenum, keyword);
         WebDriver webDriver = chromeDriver.setChrome();
 
-        try {
-            webDriver.get(url);
-            Thread.sleep(500);
+        int retry = 5;
 
-            List<WebElement> webElements = webDriver.findElements(By.className("sc-kcDeIU"));
+        while(retry != 0) {
+            try {
+                webDriver.get(url);
+                Thread.sleep(500);
 
-            for(WebElement webElement : webElements){
-                String id = webElement.findElement(By.tagName("a")).getAttribute("data-pid");
+                List<WebElement> webElements = webDriver.findElements(By.className("sc-kcDeIU"));
 
-                String name = webElement.findElement(By.cssSelector("a div.sc-eInJlc div.sc-gtfDJT")).getText();
+                for (WebElement webElement : webElements) {
+                    String id = webElement.findElement(By.tagName("a")).getAttribute("data-pid");
 
-                String img = webElement.findElement(By.cssSelector("a div.sc-hgHYgh img")).getAttribute("src");
+                    String name = webElement.findElement(By.cssSelector("a div.sc-eInJlc div.sc-gtfDJT")).getText();
 
-                String price_string = webElement.findElement(By.cssSelector("a div.sc-eInJlc div.sc-jeCdPy div")).getText()
-                        .replaceAll("[^0-9]", "");;
-                int price = Integer.parseInt(price_string);
+                    String img = webElement.findElement(By.cssSelector("a div.sc-hgHYgh img")).getAttribute("src");
 
-                Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, null, null, null);
-                page.put(id, product);
+                    String price_string = webElement.findElement(By.cssSelector("a div.sc-eInJlc div.sc-jeCdPy div")).getText()
+                            .replaceAll("[^0-9]", "");
+                    ;
+                    int price = Integer.parseInt(price_string);
+
+                    Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, null, null, null);
+                    page.put(id, product);
+                }
+
+                retry = 0;
+            } catch (Exception e) {
+                if (--retry != 0) System.out.println("[Warn] BunjangImpl: 검색 크롤링 오류··· 재시도 중");
+                else {
+                    System.out.println("[Error] BunjangImpl: 검색 크롤링 오류");
+                    page = null;
+                }
             }
-        } catch(Exception e) {
-            System.out.println("[Error] BunjangImpl: 검색 크롤링 오류");
         }
 
         return page;
@@ -98,35 +119,40 @@ public class BunjangImpl implements Bunjang {
         String url = setURL(id);
         WebDriver webDriver = chromeDriver.setChrome();
 
-        try {
-            webDriver.get(url);
-            Thread.sleep(500);
+        int retry = 5;
 
-            String name = webDriver.findElement(By.className("ProductSummarystyle__Name-sc-oxz0oy-4")).getText();
-            String img = webDriver.findElement(By.className("sc-jKVCRD")).findElement(By.tagName("img")).
-                    getAttribute("src");
-            String prices = webDriver.findElement(By.className("ProductSummarystyle__Price-sc-oxz0oy-6")).getText();
-            int price = Integer.parseInt(prices.replaceAll("[^0-9]", ""));
-            String seller = webDriver.findElement(By.className("ProductSellerstyle__Name-sc-1qnzvgu-7")).getText();
+        while(retry != 0) {
+            try {
+                webDriver.get(url);
+                Thread.sleep(500);
 
-            //TODO 업데이트 시간 -> 크롤링 안 됨
-            String hearts = webDriver.findElement(By.className("ProductSummarystyle__StatusValue-sc-oxz0oy-14")).getText();
-            int heart = Integer.parseInt(hearts);
-            String detail = webDriver.findElement(By.className("ProductInfostyle__DescriptionContent-sc-ql55c8-3"))
-                    .findElement(By.tagName("p")).getText();
+                String name = webDriver.findElement(By.className("ProductSummarystyle__Name-sc-oxz0oy-4")).getText();
+                String img = webDriver.findElement(By.className("sc-jKVCRD")).findElement(By.tagName("img")).
+                        getAttribute("src");
+                String prices = webDriver.findElement(By.className("ProductSummarystyle__Price-sc-oxz0oy-6")).getText();
+                int price = Integer.parseInt(prices.replaceAll("[^0-9]", ""));
+                String seller = webDriver.findElement(By.className("ProductSellerstyle__Name-sc-1qnzvgu-7")).getText();
 
-            HashMap<Integer, String> categoryset = getCategory();
-            String[] categories = webDriver.findElement(By.cssSelector(".Productsstyle__ProductBottom-sc-13cvfvh-15.ksyzGu div.Productsstyle__ProductInfoContent-sc-13cvfvh-14.lcdoPu div div div.ProductInfostyle__Description-sc-ql55c8-2.hWujk div.ProductInfostyle__DetailInfo-sc-ql55c8-8.UrLSZ div:nth-child(2) div.ProductInfostyle__InfoValue-sc-ql55c8-13.gLVyVQ a"))
-                    .getAttribute("href").split("categories/");
-            String category = null;
-            if(categoryset.containsKey(Integer.parseInt(categories[1].substring(0, 3)))){
-                category = categoryset.get(Integer.parseInt(categories[1].substring(0, 3)));
+                //TODO 업데이트 시간 -> 크롤링 안 됨
+                String hearts = webDriver.findElement(By.className("ProductSummarystyle__StatusValue-sc-oxz0oy-14")).getText();
+                int heart = Integer.parseInt(hearts);
+                String detail = webDriver.findElement(By.className("ProductInfostyle__DescriptionContent-sc-ql55c8-3"))
+                        .findElement(By.tagName("p")).getText();
+
+                HashMap<Integer, String> categoryset = getCategory();
+                String[] categories = webDriver.findElement(By.cssSelector(".Productsstyle__ProductBottom-sc-13cvfvh-15.ksyzGu div.Productsstyle__ProductInfoContent-sc-13cvfvh-14.lcdoPu div div div.ProductInfostyle__Description-sc-ql55c8-2.hWujk div.ProductInfostyle__DetailInfo-sc-ql55c8-8.UrLSZ div:nth-child(2) div.ProductInfostyle__InfoValue-sc-ql55c8-13.gLVyVQ a"))
+                        .getAttribute("href").split("categories/");
+                String category = null;
+                if (categoryset.containsKey(Integer.parseInt(categories[1].substring(0, 3)))) {
+                    category = categoryset.get(Integer.parseInt(categories[1].substring(0, 3)));
+                }
+
+                Product product = new Product(id, name, img, price, market, seller, null, heart, detail, category, url);
+                return product;
+            } catch (Exception e) {
+                if (--retry != 0) System.out.println("[Warn] BunjangImpl: 상품 상세 크롤링 오류··· 재시도 중");
+                else System.out.println("[Error] BunjangImpl: 상품 상세 크롤링 오류");
             }
-
-            Product product = new Product(id, name, img, price, market, seller, null, heart, detail, category, url);
-            return product;
-        } catch(Exception e) {
-            System.out.println("[Error] BunjangImpl: 상품 상세 크롤링 오류");
         }
 
         return null;
@@ -140,27 +166,37 @@ public class BunjangImpl implements Bunjang {
         String url = setURL();
         WebDriver webDriver = chromeDriver.setChrome();
 
-        try {
-            webDriver.get(url);
-            Thread.sleep(500);
+        int retry = 5;
 
-            List<WebElement> webElements = webDriver.findElements(By.className("styled__ProductWrapper-sc-32dn86-1"));
+        while(retry != 0) {
+            try {
+                webDriver.get(url);
+                Thread.sleep(500);
 
-            for(WebElement webElement : webElements){
-                String id = webElement.findElement(By.tagName("a")).getAttribute("data-pid");
+                List<WebElement> webElements = webDriver.findElements(By.className("styled__ProductWrapper-sc-32dn86-1"));
 
-                String name = webElement.findElement(By.className("sc-kasBVs")).getText();
-                String img = webElement.findElement(By.tagName("img")).getAttribute("src");
+                for (WebElement webElement : webElements) {
+                    String id = webElement.findElement(By.tagName("a")).getAttribute("data-pid");
 
-                String price_string = webElement.findElement(By.className("sc-hgHYgh")).getText()
-                        .replaceAll("[^0-9]", "");
-                int price = Integer.parseInt(price_string);
+                    String name = webElement.findElement(By.className("sc-kasBVs")).getText();
+                    String img = webElement.findElement(By.tagName("img")).getAttribute("src");
 
-                Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, null, null, null);
-                page.put(id, product);
+                    String price_string = webElement.findElement(By.className("sc-hgHYgh")).getText()
+                            .replaceAll("[^0-9]", "");
+                    int price = Integer.parseInt(price_string);
+
+                    Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, null, null, null);
+                    page.put(id, product);
+                }
+
+                retry = 0;
+            } catch (Exception e) {
+                if (--retry != 0) System.out.println("[Warn] BunjangImpl: 메인화면 크롤링 오류··· 재시도 중");
+                else {
+                    System.out.println("[Error] BunjangImpl: 메인화면 크롤링 오류");
+                    page = null;
+                }
             }
-        } catch(Exception e) {
-            System.out.println("[Error] BunjangImpl: 메인화면 크롤링 오류");
         }
 
         return page;

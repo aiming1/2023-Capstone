@@ -11,11 +11,11 @@ const Header = () => {
   return (
     <div className={styles.groupParent}>
       <div className={styles.planetParent}>
-        <button className={styles.planet}
-            onClick={() => navigate('/')}>
-            <img src="/img/임시로고.svg" /></button>
+        <button className={styles.planet} onClick={() => navigate("/")}>
+          <img src="/img/임시로고.svg" />
+        </button>
       </div>
-      <img
+      <div
         className={styles.basketAlt3Icon}
         alt=""
         src="/img/basket-alt-3.svg"

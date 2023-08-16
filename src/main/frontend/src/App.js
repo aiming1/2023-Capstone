@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Join from "./components/Join";
 import SearchPage from "./components/SearchPage";
+import HeartList from "./components/HeartList";
 
 function App() {
   //컴포넌트를 만드는 코드
@@ -26,6 +27,8 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/Logout" element={<Logout />} />
           <Route path="/Join" element={<Join />} />
+          {/* 찜목록 */}
+          <Route path="/heartList" element={<HeartList />} />
         </Route>
         {/* <NotFoundPage /> */}
         <Route path="*" element={<NotFoundPage />} />

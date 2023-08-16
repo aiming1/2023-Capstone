@@ -32,28 +32,38 @@ public class JoonggonaraImpl implements Joonggonara{
         String url = setURL(category, pagenum);
         LinkedHashMap<String, Product> page = new LinkedHashMap<>();
 
-        try {
-            Document doc = Jsoup.connect(url).get();
+        int retry = 5;
 
-            Elements ids = doc.select(".grid.grid-cols-2 li:nth-child(n) a");
-            Elements imgs = doc.select(".grid.grid-cols-2 li:nth-child(n) a div img");
-            Elements prices = doc.select(".grid.grid-cols-2 li:nth-child(n) a div div.font-semibold");
+        while(retry != 0) {
+            try {
+                Document doc = Jsoup.connect(url).get();
 
-            for (int i = 0; i < imgs.size(); i++){
-                String[] id_string = ids.get(i).attr("href").split("/");
-                String id = id_string[2];
+                Elements ids = doc.select(".grid.grid-cols-2 li:nth-child(n) a");
+                Elements imgs = doc.select(".grid.grid-cols-2 li:nth-child(n) a div img");
+                Elements prices = doc.select(".grid.grid-cols-2 li:nth-child(n) a div div.font-semibold");
 
-                String name = imgs.get(i).attr("alt");
-                String img = imgs.get(i).attr("src");
+                for (int i = 0; i < imgs.size(); i++) {
+                    String[] id_string = ids.get(i).attr("href").split("/");
+                    String id = id_string[2];
 
-                String price_string = prices.get(i).text().replaceAll("[^0-9]", "");
-                int price = Integer.parseInt(price_string);
+                    String name = imgs.get(i).attr("alt");
+                    String img = imgs.get(i).attr("src");
 
-                Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, null, null, null);
-                page.put(id, product);
+                    String price_string = prices.get(i).text().replaceAll("[^0-9]", "");
+                    int price = Integer.parseInt(price_string);
+
+                    Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, null, null, null);
+                    page.put(id, product);
+                }
+
+                retry = 0;
+            } catch (IOException e) {
+                if (--retry != 0) System.out.println("[Warn] JoonggonaraImpl: 카테고리 크롤링 오류··· 재시도 중");
+                else {
+                    System.out.println("[Error] JoonggonaraImpl: 카테고리 크롤링 오류");
+                    page = null;
+                }
             }
-        } catch(IOException e){
-            System.out.println("[Error] JoonggonaraImpl: 카테고리 크롤링 오류");
         }
         return page;
     }
@@ -67,32 +77,42 @@ public class JoonggonaraImpl implements Joonggonara{
         LinkedHashMap<String, Product> page = new LinkedHashMap<>();
         WebDriver webDriver = chromeDriver.setChrome();
 
-        try {
-            webDriver.get(url);
-            Thread.sleep(500);
+        int retry = 5;
 
-            List<WebElement> webElements = webDriver.findElements(By.cssSelector("a.group.box-border"));
+        while(retry != 0) {
+            try {
+                webDriver.get(url);
+                Thread.sleep(500);
 
-            for (WebElement webElement : webElements) {
-                String ad = webElement.findElement(By.cssSelector(".w-full.overflow-hidden div.my-1 span:nth-child(3)")).getText();
-                if(!ad.equals("광고")){
-                    String[] pid = webElement.getAttribute("href").split("t/");
-                    String id = pid[1];
+                List<WebElement> webElements = webDriver.findElements(By.cssSelector("a.group.box-border"));
 
-                    String name = webElement.getAttribute("title");
+                for (WebElement webElement : webElements) {
+                    String ad = webElement.findElement(By.cssSelector(".w-full.overflow-hidden div.my-1 span:nth-child(3)")).getText();
+                    if (!ad.equals("광고")) {
+                        String[] pid = webElement.getAttribute("href").split("t/");
+                        String id = pid[1];
 
-                    String img = webElement.findElement(By.cssSelector("div.relative img")).getAttribute("src");
+                        String name = webElement.getAttribute("title");
 
-                    String price_string = webElement.findElement(By.cssSelector("div div.font-semibold")).getText()
-                            .replaceAll("[^0-9]", "");
-                    int price = Integer.parseInt(price_string);
+                        String img = webElement.findElement(By.cssSelector("div.relative img")).getAttribute("src");
 
-                    Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, null, null, null);
-                    page.put(id, product);
+                        String price_string = webElement.findElement(By.cssSelector("div div.font-semibold")).getText()
+                                .replaceAll("[^0-9]", "");
+                        int price = Integer.parseInt(price_string);
+
+                        Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, null, null, null);
+                        page.put(id, product);
+                    }
+                }
+
+                retry = 0;
+            } catch (Exception e) {
+                if (--retry != 0) System.out.println("[Warn] JoonggonaraImpl: 검색 크롤링 오류··· 재시도 중");
+                else {
+                    System.out.println("[Error] JoonggonaraImpl: 검색 크롤링 오류");
+                    page = null;
                 }
             }
-        } catch (Exception e) {
-            System.out.println("[Error] JoonggonaraImpl: 검색 크롤링 오류");
         }
 
         return page;
@@ -104,44 +124,49 @@ public class JoonggonaraImpl implements Joonggonara{
         String url = setURL(id);
         WebDriver webDriver = chromeDriver.setChrome();
 
-        try {
-            Document doc = Jsoup.connect(url).get();
-            webDriver.get(url);
-            Thread.sleep(500);
+        int retry = 5;
 
-            String name = doc.select(".pb-5 h1").text();
-            String img = doc.select(".col-span-1 img").attr("src");
+        while(retry != 0) {
+            try {
+                Document doc = Jsoup.connect(url).get();
+                webDriver.get(url);
+                Thread.sleep(500);
 
-            String prices = doc.select(".pb-5.border-b.border-gray-300 div div").text()
-                    .replaceAll("[^0-9]", "");
-            int price = Integer.parseInt(prices);
+                String name = doc.select(".pb-5 h1").text();
+                String img = doc.select(".col-span-1 img").attr("src");
 
-            String sellerURL = webDriver.findElement(By.cssSelector(".col-span-2 div div.flex a.font-semibold")).getAttribute("href");
-            webDriver.get(sellerURL);
-            String seller = webDriver.findElement(By.cssSelector(".mt-5 div h1")).getText();
+                String prices = doc.select(".pb-5.border-b.border-gray-300 div div").text()
+                        .replaceAll("[^0-9]", "");
+                int price = Integer.parseInt(prices);
 
-            String[] etcs = doc.select(".text-body span").text().split(" · ");
-            String updatedate = etcs[0];
+                String sellerURL = webDriver.findElement(By.cssSelector(".col-span-2 div div.flex a.font-semibold")).getAttribute("href");
+                webDriver.get(sellerURL);
+                String seller = webDriver.findElement(By.cssSelector(".mt-5 div h1")).getText();
 
-            int heart = Integer.parseInt(etcs[2].replaceAll("[^0-9]", ""));
-            String detail = doc.select(".col-span-3 article p").text();
+                String[] etcs = doc.select(".text-body span").text().split(" · ");
+                String updatedate = etcs[0];
 
-            HashMap<Integer, String> categoryset = getCategory();
-            String[] categories = doc.select(".chawkbazarBreadcrumb ol li:nth-child(3) a").attr("href").split("y=");
-            String category = null;
-            if (categoryset.containsKey(Integer.parseInt(categories[1]))) {
-                category = categoryset.get(Integer.parseInt(categories[1]));
-            } else{
-                categories = doc.select(".chawkbazarBreadcrumb ol li:nth-child(5) a").attr("href").split("y=");
+                int heart = Integer.parseInt(etcs[2].replaceAll("[^0-9]", ""));
+                String detail = doc.select(".col-span-3 article p").text();
+
+                HashMap<Integer, String> categoryset = getCategory();
+                String[] categories = doc.select(".chawkbazarBreadcrumb ol li:nth-child(3) a").attr("href").split("y=");
+                String category = null;
                 if (categoryset.containsKey(Integer.parseInt(categories[1]))) {
                     category = categoryset.get(Integer.parseInt(categories[1]));
+                } else {
+                    categories = doc.select(".chawkbazarBreadcrumb ol li:nth-child(5) a").attr("href").split("y=");
+                    if (categoryset.containsKey(Integer.parseInt(categories[1]))) {
+                        category = categoryset.get(Integer.parseInt(categories[1]));
+                    }
                 }
-            }
 
-            Product product = new Product(id, name, img, price, market, seller, updatedate, heart, detail, category, url);
-            return product;
-        } catch (Exception e) {
-            System.out.println("[Error] JoonggonaraImpl: 상품 크롤링 오류");
+                Product product = new Product(id, name, img, price, market, seller, updatedate, heart, detail, category, url);
+                return product;
+            } catch (Exception e) {
+                if (--retry != 0) System.out.println("[Warn] JoonggonaraImpl: 상품 크롤링 오류··· 재시도 중");
+                else System.out.println("[Error] JoonggonaraImpl: 상품 크롤링 오류");
+            }
         }
 
         return null;
@@ -153,28 +178,38 @@ public class JoonggonaraImpl implements Joonggonara{
         String url = setURL();
         LinkedHashMap<String, Product> page = new LinkedHashMap<>();
 
-        try {
-            Document doc = Jsoup.connect(url).get();
+        int retry = 5;
 
-            Elements ids = doc.select(".swiper-slide.pt-2 a");
-            Elements imgs = doc.select(".swiper-slide.pt-2 a div img");
-            Elements prices = doc.select(".swiper-slide.pt-2 a div div.font-semibold");
+        while(retry != 0) {
+            try {
+                Document doc = Jsoup.connect(url).get();
 
-            for (int i = 0; i < 10; i++){
-                String[] id_string = ids.get(i).attr("href").split("/");
-                String id = id_string[2];
+                Elements ids = doc.select(".swiper-slide.pt-2 a");
+                Elements imgs = doc.select(".swiper-slide.pt-2 a div img");
+                Elements prices = doc.select(".swiper-slide.pt-2 a div div.font-semibold");
 
-                String name = imgs.get(i).attr("alt");
-                String img = imgs.get(i).attr("src");
+                for (int i = 0; i < 10; i++) {
+                    String[] id_string = ids.get(i).attr("href").split("/");
+                    String id = id_string[2];
 
-                String price_string = prices.get(i).text().replaceAll("[^0-9]", "");
-                int price = Integer.parseInt(price_string);
+                    String name = imgs.get(i).attr("alt");
+                    String img = imgs.get(i).attr("src");
 
-                Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, null, null, null);
-                page.put(id, product);
+                    String price_string = prices.get(i).text().replaceAll("[^0-9]", "");
+                    int price = Integer.parseInt(price_string);
+
+                    Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, null, null, null);
+                    page.put(id, product);
+                }
+
+                retry = 0;
+            } catch (IOException e) {
+                if (--retry != 0) System.out.println("[Warn] JoonggonaraImpl: 메인화면 크롤링 오류··· 재시도 중");
+                else {
+                    System.out.println("[Error] JoonggonaraImpl: 메인화면 크롤링 오류");
+                    page = null;
+                }
             }
-        } catch(IOException e){
-            System.out.println("[Error] JoonggonaraImpl: 메인화면 크롤링 오류");
         }
         return page;
     }
