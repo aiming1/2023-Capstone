@@ -18,6 +18,11 @@
   display: block;
   position: relative;
 }
+.divcategorylabel {
+  display: flex;
+  width: 70%;
+  margin: 0 auto;
+}
 
 .divcontent {
   display: inline-block;
@@ -25,6 +30,10 @@
   top: 10px;
   width: 100%;
   /*left: 80px;*/
+}
+
+.wrap {
+    min-height: 100%;
 }
 
 .divsidebar {

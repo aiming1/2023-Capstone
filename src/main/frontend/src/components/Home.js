@@ -58,7 +58,10 @@ const Home = () => {
     <div className={styles.divhome}>
       <div className={styles.divcategory}>
         <Category onCategorySelect={handleCategorySelect} ></Category>
-        <p>{categoryName}</p>
+        {selectedCategory !== null && (
+        <div className={styles.divcategorylabel}>
+            <p><a href="/">Home</a>» {categoryName}</p>
+        </div>)}
       </div>
       <div className={styles.divcontent}>
         <ItemList selectedCategoryId={selectedCategory} ></ItemList>
