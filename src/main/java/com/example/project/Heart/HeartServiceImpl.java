@@ -4,9 +4,6 @@ import com.example.project.Product.Market;
 import com.example.project.Product.Product;
 import com.example.project.Product.ProductService;
 import com.example.project.Repository.HeartRepository;
-import com.example.project.Search.SearchService;
-import com.example.project.config.auth.PrincipalDetails;
-import com.example.project.domain.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -25,7 +22,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HeartServiceImpl implements HeartService {
     private final HeartRepository heartRepository;
-    private final SearchService searchService;
     private final ProductService productService;
 
     @Override
@@ -38,8 +34,10 @@ public class HeartServiceImpl implements HeartService {
             i += 1;
             Market m = parseMarket(h.getMarket());
             Product p = null;
-            while (p==null){
+            try {
                 p = productService.getProduct(h.getProductId(), m);
+            } catch (NullPointerException exception){
+                deleteHeartById(String.valueOf(id),p);
             }
             page.put(i+"",p);
         }
