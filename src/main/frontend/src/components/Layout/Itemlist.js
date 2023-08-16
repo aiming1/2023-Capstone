@@ -78,8 +78,6 @@ const ItemList = ({ selectedCategoryId }) => {
   if (error) return <div>에러가 발생했습니다</div>;
   if (!data) return null;
 
-
-
   return (
     <div>
       <div className={styles.itemlistcontent}>

@@ -1,17 +1,26 @@
 import styles from "../styles/css/ContentDetail.module.css";
 import React, { useState, useEffect, useParams } from "react";
-
+import { useLocation } from "react-router";
 import HeartButton from "./HeartButton";
 import axios from "axios";
 
 let url = "https://web.joongna.com/"; //상품의 원글
 
 const ContentDetail = (props) => {
+  const product = useLocation();
+  const productId = product.state.id;
+  //alert(product.state.id);
+  const productStore = product.state.store[0];
+  //alert(productStore);
+
+  const [data, setData] = useState(null);
   const [heart, setHeart] = useState(false);
 
   const fetchURLData = async () => {
+    setData(null);
     //해당 상품 외부 링크 이동
-    const response = await axios.get("/api/product/{itemId}/{market}/url");
+    const response = await axios.get(`/api/product/${productId}/${productStore}`);
+    setData(response.data);
     url = response.data;
     //console.log("url", url);
   };
@@ -65,36 +74,36 @@ const ContentDetail = (props) => {
 
   return (
     <div className={styles.div}>
-      <img className={styles.icon} alt="" src="/img/빈 이미지.svg" />
+      <img className={styles.icon} alt="" src={data?.image} />
       <div className={styles.parent}>
-        <b className={styles.title}>제목</b>
-        <b className={styles.price}>120,000원</b>
+        <b className={styles.title}>{data?.name}</b>
+        <b className={styles.price}>{data?.price}원</b>
         <div className={styles.category}>{`홈 > 여성의류 > 신발`}</div>
-        <div className={styles.name}>닉네임</div>
+        <div className={styles.name}>{data?.seller}</div>
         <div className={styles.date}>5분 전</div>
         <div className={styles.views}>조회 20000</div>
-        <div className={styles.heart}>찜 25</div>
+        <div className={styles.heart}>찜 {data?.hearts}</div>
       </div>
       <HeartButton heart={heart} onClick={toggleLike}></HeartButton>
 
       <div
         className={styles.btn_golink}
         onClick={() => {
-          window.open(url);
+          window.open(data?.producturl);
         }}
       >
         <div className={styles.child} />
         <div className={styles.div7}>보러 가기</div>
       </div>
 
-      <div className={styles.div8}>여기는 본문 긁어온 것...</div>
+      <div className={styles.div8}>{data?.details}</div>
       <div className={styles.div9}>
         <p className={styles.p}>거래거래</p>
         <p className={styles.p}>대충 거래글 끝</p>
       </div>
       <div className={styles.line}></div>
       <div className={styles.group}>
-        <img className={styles.icon5} alt="" src="/img/빈 이미지.svg" />
+        <img className={styles.icon5} alt="" src={data?.image} />
         <div className={styles.div12}>
           <div className={styles.inner} />
           <img className={styles.div13} alt="" src="/img/right-side.svg" />

@@ -1,0 +1,16 @@
+[33mb32ace2[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: commit: 충돌 수정
+[33m82cf353[m HEAD@{1}: pull upstream main: Merge made by the 'recursive' strategy.
+[33m550d6c7[m HEAD@{2}: commit: package.json 수정
+[33m5ee02ba[m HEAD@{3}: commit: 카테고리 api 수정
+[33m1ea3ab9[m HEAD@{4}: pull upstream main: Merge made by the 'recursive' strategy.
+[33m8caa7c7[m HEAD@{5}: pull upstream main: Merge made by the 'recursive' strategy.
+[33mf257c23[m HEAD@{6}: commit (merge): 0810-1
+[33mb2edb47[m HEAD@{7}: commit: 0810
+[33mde4d7f5[m HEAD@{8}: commit: selected category label
+[33m3824741[m HEAD@{9}: pull upstream main: Merge made by the 'recursive' strategy.
+[33m406e25c[m HEAD@{10}: commit: 0809
+[33mc1f5f8f[m HEAD@{11}: commit (merge): 0807
+[33m77a1401[m HEAD@{12}: commit: 0803
+[33mbc6dc63[m HEAD@{13}: pull upstream main: Merge made by the 'recursive' strategy.
+[33m0f21599[m HEAD@{14}: commit: 번개 category 필터링 추가1
+[33m1510ae6[m HEAD@{15}: clone: from https://github.com/seojung87/2023-Capstone.git
