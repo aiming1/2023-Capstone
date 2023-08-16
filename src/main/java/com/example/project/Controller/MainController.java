@@ -8,6 +8,7 @@ import com.example.project.Product.Product;
 import com.example.project.Search.SearchService;
 import com.example.project.config.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -90,19 +91,19 @@ public class MainController {
 
     /** 찜 목록 이동 **/
     @GetMapping("/list")
-    public ArrayList getHeartList(PrincipalDetails principalDetails, HttpServletRequest request){
+    public ArrayList getHeartList(@AuthenticationPrincipal PrincipalDetails principalDetails, HttpServletRequest request){
         mylogger.printRequestInfo(request, classPath, "찜목록으로 이동합니다···");
         String requestURL = request.getRequestURL().toString();
         System.out.println("requestURL = " + requestURL);
 
-//        User user = principalDetails.getUser();
-//        Heart page = user.getHeart();
+//        Long id = principalDetails.getUser().getId();
+        Long id = Long.parseLong("1");
+        LinkedHashMap<String, Product> page = heartService.getHearts(id);
 
         ArrayList datas = new ArrayList();
-//        page.forEach((k, v) -> {
-//            datas.add(v);
-//        });
+        page.forEach((k, v) -> {
+            datas.add(v);
+        });
         return datas;
     }
-
 }
