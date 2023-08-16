@@ -1,13 +1,16 @@
 package com.example.project.Heart;
 
 import com.example.project.Product.Market;
+import com.example.project.Product.Product;
 import org.springframework.stereotype.Service;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 @Service
 public interface HeartService {
-
-    public void addHeart(String itemId, Market market);
-    public void deleteHeart(String itemId, Market market);
-    public String getHeartLink(String itemId, Market market);
-    public Heart getHeartList(String userId);
+    public LinkedHashMap<String, Product> getHearts(Long id);
+    public void addHeartById(String id, Product p);
+    public void deleteHeartById(String id, Product p);
+    public boolean findDuplicateHearts(String id, Product p);
+    public String getHeartUrl(String id, Product p);
 }
