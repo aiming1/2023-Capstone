@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import HeartButtonMain from "./HeartButtonMain";
 import styles from "../styles/css/ItemList.module.css";
 
@@ -40,9 +41,17 @@ export const ListItem = ({
     return null;
   };
 
+  const navigate = useNavigate();
   const handleItemClick = () => {
-    window.location.href = `/product/${id}`;
+    //window.location.href = `/product/${id}`;
+    navigate(`/product/${id}`, {
+        state : {
+          id: id,
+          store: store
+        }
+    });
   };
+
 
   const handleHeartClick = () => {
     setLike(!like);
