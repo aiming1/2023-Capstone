@@ -79,6 +79,13 @@
   font-size: 13px;
 }
 
+.paginationBox{
+    display: block;
+    background-color: white;
+    border: none;
+    margin: 10px;
+}
+
 .pageBox {
     background-color: white;
     border: none;
