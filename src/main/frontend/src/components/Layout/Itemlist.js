@@ -25,7 +25,7 @@ const ItemList = ({ selectedCategoryId }) => {
   const currentPosts = (data) => {
       let currentPosts = 0;
       currentPosts = data.slice(indexOfFirst, indexOfLast);
-      console.log({"current post: ": currentPosts, "indexofFirst": indexOfFirst, "indexofLast": indexOfLast})
+      //console.log({"current post: ": currentPosts, "indexofFirst": indexOfFirst, "indexofLast": indexOfLast})
       return currentPosts;
     };
   //

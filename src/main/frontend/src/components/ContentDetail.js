@@ -10,8 +10,6 @@ const ContentDetail = (props) => {
   //alert(product.state.id);
   const productMarket = product.state.market[0];
   //alert(productStore);
-  //const productname=product.state.name;
-  //const productPrice=;
 
   const [data, setData] = useState(null);
   const [heart, setHeart] = useState(false);
@@ -22,8 +20,6 @@ const ContentDetail = (props) => {
       `/api/product/${productId}/${productMarket}`
     );
     setData(response.data);
-    //url = response.data;
-    //console.log("url", url);
   };
   useEffect(() => {
     fetchData();
