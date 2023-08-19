@@ -3,6 +3,7 @@ import axios from "axios";
 import styles from "../styles/css/ItemList.module.css";
 import { ListItem } from "./ListItem";
 import { useParams } from "react-router";
+import Pagination from "./Pagination";
 
 //글자수 제한 함수
 const truncate = (str, n) => {
@@ -13,8 +14,23 @@ const Search = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const limit = 8; //페이지 당 최대 게시물 수
   const [page, setPage] = useState(1);
   const params = useParams();
+
+  /*
+  한 페이지에 출력할 물건 개수 조절하려면 이부분 주석 해제하고
+  62번쩨 줄에 currentPosts(data).map~으로 수정하면 돼요!!
+  일단 주석처리 해놨습니당..
+  const indexOfLast = page * limit;
+    const indexOfFirst = (page - 1) * limit;
+    const currentPosts = (data) => {
+        let currentPosts = 0;
+        currentPosts = data.slice(indexOfFirst, indexOfLast);
+        //console.log({"current post: ": currentPosts, "indexofFirst": indexOfFirst, "indexofLast": indexOfLast})
+        return currentPosts;
+      }; */
+
   const fetchData = async () => {
     try {
       // 요청이 시작 할 때에는 error 와 users 를 초기화하고
@@ -56,24 +72,14 @@ const Search = () => {
           />
         ))}
       </div>
+
       <div className={styles.pageMove}>
-        <button
-          className={styles.pageBox}
-          onClick={() => {
-            setPage(page - 1);
-          }}
-        >
-          이전
-        </button>
-        {page}
-        <button
-          className={styles.pageBox}
-          onClick={() => {
-            setPage(page + 1);
-          }}
-        >
-          다음
-        </button>
+        <Pagination
+          total={data.length}
+          limit={limit}
+          page={page}
+          setPage={setPage}
+        />
       </div>
     </div>
   );
