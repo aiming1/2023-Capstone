@@ -48,11 +48,11 @@ const Search = () => {
             className={styles.listItem}
             key={item.name}
             id={item.id}
-            store={item.market}
+            market={item.market}
             price={item.price}
-            title={truncate(item.name, 10)}
-            src={item.image}
-            heartCnt={item.heartCnt}
+            name={truncate(item.name, 10)}
+            image={item.image}
+            hearts={item.hearts}
           />
         ))}
       </div>
