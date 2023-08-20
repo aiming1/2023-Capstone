@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 
 @Service
 public interface HeartService {
-    public LinkedHashMap<String, Product> getHearts(Long id);
+    public LinkedHashMap<String, Product> getHearts(String id);
     public void addHeartById(String id, Product p);
     public void deleteHeartById(String id, Product p);
     public boolean findDuplicateHearts(String id, Product p);

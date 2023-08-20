@@ -4,6 +4,7 @@ import com.example.project.Product.Market;
 import com.example.project.Product.Product;
 import com.example.project.Product.ProductService;
 import com.example.project.Repository.HeartRepository;
+import com.example.project.domain.UserView;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -23,16 +24,18 @@ import java.util.List;
 public class HeartServiceImpl implements HeartService {
     private final HeartRepository heartRepository;
     private final ProductService productService;
+    private final UserView userView;
 
     @Override
-    public LinkedHashMap<String, Product> getHearts(Long id) {
+    public LinkedHashMap<String, Product> getHearts(String s) {
+        Long id = Long.parseLong(s);
         ArrayList<Heart> hearts = heartRepository.findByUserId(id);
         LinkedHashMap<String, Product> page = new LinkedHashMap<>();
         int i = 0;
 
         for(Heart h : hearts){
             i += 1;
-            Market m = parseMarket(h.getMarket());
+            Market m = userView.parseMarket(h.getMarket());
             Product p = null;
             try {
                 p = productService.getProduct(h.getProductId(), m);
@@ -80,16 +83,4 @@ public class HeartServiceImpl implements HeartService {
         return p.getProducturl();
     }
 
-    /** String -> Market **/
-    public Market parseMarket(String s) {
-        String m = s.toUpperCase();
-        if (m.startsWith("J")) {
-            return Market.JOONGGONARA;
-        } else if (m.startsWith("B")) {
-            return Market.BUNJANG;
-        } else if (m.startsWith("C")) {
-            return Market.CARROT;
-        }
-        return null;
-    }
 }
