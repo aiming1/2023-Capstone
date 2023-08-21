@@ -7,21 +7,17 @@ class Login extends Component {
   //로그인페이지
   render() {
     return (
-      <div className={styles.container}>
-        <div>
-          <button /*onClick={}*/ className={styles.exit}>X</button>
-        </div>
+      <div className={styles.logincontainer}>
         <br></br>
         <img alt="" src={"img/임시로고.svg"} />
         <br></br>
         <br></br>
-        <div className={styles.h2}> 로그인하여 더 많은 서비스를 이용하기 </div>
+        <div className={styles.lh2}> 로그인하여 더 많은 서비스를 이용하기 </div>
         <br></br>
         <div>
           <button
             className={styles.kakao}
-            onClick={() => window.open("http://localhost:8080/oauth2/authorization/kakao")}
-          >
+            onClick={() => window.open("http://localhost:8080/oauth2/authorization/kakao")}>
             <img src={kakaobtn} width="222" alt="카카오 로그인 버튼" />
           </button>
         </div>

@@ -1,18 +1,19 @@
 import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import HeartButtonMain from "./HeartButtonMain";
 import styles from "../styles/css/ItemList.module.css";
 
 export const ListItem = ({
   id = 0,
-  title = "상품명",
-  store = "당근",
+  name = "상품명",
+  market = "당근",
   price = "0",
-  src = "/img/빈 이미지.svg",
-  heartCnt = 0,
+  image = "/img/빈 이미지.svg",
+  hearts = 0,
 }) => {
   const renderLogo = () => {
-    if (store === "CARROT") { //당근마켓
+    if (market === "CARROT") { //당근마켓
       return (
         <img
           className={styles.itemstorelogo}
@@ -20,7 +21,7 @@ export const ListItem = ({
           src="/img/당근마켓 아이콘 1.png"
         />
       );
-    } else if (store === "BUNJANG") { //번개장터
+    } else if (market === "BUNJANG") { //번개장터
       return (
         <img
           className={styles.itemstorelogo}
@@ -28,7 +29,7 @@ export const ListItem = ({
           src="/img/번개장터 아이콘 1.png"
         />
       );
-    } else if (store === "JOONGGONARA") { //중고나라
+    } else if (market === "JOONGGONARA") { //중고나라
       return (
         <img
           className={styles.itemstorelogo}
@@ -40,9 +41,18 @@ export const ListItem = ({
     return null;
   };
 
+  const navigate = useNavigate();
   const handleItemClick = () => {
-    window.location.href = `/product/${id}`;
+    //window.location.href = `/product/${id}`;
+    navigate(`/product/${id}`, {
+        state : {
+          id: id,
+          market: market,
+
+        }
+    });
   };
+
 
   const handleHeartClick = () => {
     setLike(!like);
@@ -67,7 +77,7 @@ export const ListItem = ({
         <img
           className={styles.itemimg}
           alt=""
-          src={src}
+          src={image}
           onClick={handleItemClick}
         />
 
@@ -78,8 +88,8 @@ export const ListItem = ({
       </div>
       <div className={styles.iteminfo}>
         {renderLogo()}
-        <div className={styles.itemname}>{title}</div>
-        <div className={styles.itempick}>찜 {heartCnt}</div>
+        <div className={styles.itemname}>{name}</div>
+        <div className={styles.itempick}>찜 {hearts}</div>
         <div className={styles.itemprice}>{price} 원</div>
       </div>
     </div>
@@ -88,5 +98,5 @@ export const ListItem = ({
 
 ListItem.propTypes = {
   text: PropTypes.string,
-  store: PropTypes.string,
+  market: PropTypes.string,
 };

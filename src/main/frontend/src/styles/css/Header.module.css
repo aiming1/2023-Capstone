@@ -91,6 +91,9 @@
   border: none;
   background-color: white;
 }
+.searchAltIcon {
+  cursor: pointer;
+}
 .div16 {
   top: 21px;
   left: 357px;

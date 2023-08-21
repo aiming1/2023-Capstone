@@ -19,7 +19,6 @@ const ItemList = ({ selectedCategoryId }) => {
   const [page, setPage] = useState(1); //현재 페이지 번호
   //const offset = (page - 1) * limit; //페이지 당 첫 게시물 위치
 
-  //흠
   const indexOfLast = page * limit;
   const indexOfFirst = (page - 1) * limit;
   const currentPosts = (data) => {
@@ -78,8 +77,6 @@ const ItemList = ({ selectedCategoryId }) => {
   if (error) return <div>에러가 발생했습니다</div>;
   if (!data) return null;
 
-
-
   return (
     <div>
       <div className={styles.itemlistcontent}>
@@ -88,11 +85,11 @@ const ItemList = ({ selectedCategoryId }) => {
             className={styles.listItem}
             key={item.url}
             id={item.id}
-            store={item.market}
+            market={item.market}
             price={item.price}
-            title={truncate(item.name, 10)}
-            src={item.image}
-            heartCnt={item.hearts}
+            name={truncate(item.name, 10)}
+            image={item.image}
+            hearts={item.hearts}
           />
         ))}
       </div>

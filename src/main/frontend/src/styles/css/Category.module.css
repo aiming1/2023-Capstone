@@ -76,8 +76,9 @@ il{
     background-color: transparent;
     border: none;
     
-    font-family: "Inter", Helvetica;
-    font-size: 14px;
+    font-family: "Noto Sans CJK KR";
+    font-size: 16px;
+    font-width: bold;
     list-style: none;
 
     /* 여기서부터 css 코드 */
