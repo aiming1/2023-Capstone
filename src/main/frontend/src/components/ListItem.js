@@ -13,7 +13,8 @@ export const ListItem = ({
   hearts = 0,
 }) => {
   const renderLogo = () => {
-    if (market === "CARROT") { //당근마켓
+    if (market === "CARROT") {
+      //당근마켓
       return (
         <img
           className={styles.itemstorelogo}
@@ -21,7 +22,8 @@ export const ListItem = ({
           src="/img/당근마켓 아이콘 1.png"
         />
       );
-    } else if (market === "BUNJANG") { //번개장터
+    } else if (market === "BUNJANG") {
+      //번개장터
       return (
         <img
           className={styles.itemstorelogo}
@@ -29,7 +31,8 @@ export const ListItem = ({
           src="/img/번개장터 아이콘 1.png"
         />
       );
-    } else if (market === "JOONGGONARA") { //중고나라
+    } else if (market === "JOONGGONARA") {
+      //중고나라
       return (
         <img
           className={styles.itemstorelogo}
@@ -45,11 +48,11 @@ export const ListItem = ({
   const handleItemClick = () => {
     //window.location.href = `/product/${id}`;
     navigate(`/product/${id}`, {
-        state : {
-          id: id,
-          market: market,
-
-        }
+      state: {
+        id: id,
+        market: market,
+        image: image,
+      },
     });
   };
 

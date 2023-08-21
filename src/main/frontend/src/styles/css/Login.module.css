@@ -20,7 +20,7 @@
     padding: 20px;
     margin: 150px auto;
     right: 50%;
-    top: 25%;
+    top: 10%;
 
 }
 
@@ -33,7 +33,6 @@
     font-weight: 600;
     font-size: 20px;
 }
-
 .kakao,
 .google {
     border: none;
@@ -54,6 +53,7 @@
 .guide2{
     text-decoration: underline;
     font-weight: bold;
+
 }
 
 .no,

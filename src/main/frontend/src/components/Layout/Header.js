@@ -1,17 +1,19 @@
 import styles from "../../styles/css/Header.module.css";
 import Searchbar from "./Searchbar";
-import Login from "../Login";
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
 
 const Header = () => {
-  let [modal, setModal] = useState(false);
   const navigate = useNavigate();
+  function loginlink() {
+    if (!localStorage.getItem("token")) navigate("/login");
+    else navigate("/logout");
+  }
 
   return (
     <div className={styles.groupParent}>
       <div className={styles.planetParent}>
-        <button className={styles.planet} onClick={() => navigate("/")}>
+        <button className={styles.planet} onClick={() => {navigate("/")
+                window.location.reload()}}>
           <img src="/img/임시로고.svg" />
         </button>
       </div>
@@ -21,13 +23,7 @@ const Header = () => {
       >
         <img src="/img/basket-alt-3.svg" />
       </div>
-      <button
-        className={styles.userCicrleDuotoneIcon}
-        onClick={() => navigate("/login")}
-      >
-        {/* <button className={styles.userCicrleDuotoneIcon}
-            onClick={() => setModal(true)}>
-         {modal === true ? <Login /> : null}</button>*/}
+      <button className={styles.userCicrleDuotoneIcon} onClick={loginlink}>
         <img src="/img/user-cicrle-duotone.svg" />
       </button>
       <Searchbar></Searchbar>
