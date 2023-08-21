@@ -81,10 +81,11 @@ const ContentDetail = (props) => {
 */
     console.log("data", productData);
     axios
-      .post(`/api/product/${productId}/${productMarket}/heart/add`, productData)
+      .get(`/api/product/${productId}/${productMarket}/heart/add`, productData)
       .then(function (response) {
-        console.log("성공", response);
+        console.log("추가 성공", response);
         setHeart(!heart);
+        alert("찜 성공");
         // response
       })
       .catch(function (error) {
@@ -97,25 +98,24 @@ const ContentDetail = (props) => {
       });
   };
 
-
   //찜 해제
-    const deleteHeart = async () => {
-      axios
-        .delete(`/api/product/${productId}/${productMarket}/heart/add`)
-        .then(function (response) {
-          console.log("성공", response);
-          setHeart(!heart);
-        })
-        .catch(function (error) {
-          // 오류발생시 실행
-          console.log("실패", error);
-        })
-        .then(function () {
-          // 항상 실행
-          console.log("데이터 요청 완료");
-        });
-    };
-
+  const deleteHeart = async () => {
+    axios
+      .get(`/api/product/${productId}/${productMarket}/heart/delete`)
+      .then(function (response) {
+        console.log("삭제 성공", response);
+        setHeart(!heart);
+        alert("찜 해제");
+      })
+      .catch(function (error) {
+        // 오류발생시 실행
+        console.log("실패", error);
+      })
+      .then(function () {
+        // 항상 실행
+        console.log("데이터 요청 완료");
+      });
+  };
 
   /*
   const addHeart = async (e) => {
@@ -153,7 +153,11 @@ const ContentDetail = (props) => {
         <div className={styles.views}>조회 20000</div>
         <div className={styles.heart}>찜 {data?.hearts}</div>
       </div>
-      <HeartButton heart={heart} onClick={addHeart}></HeartButton>
+      {heart ? (
+        <HeartButton heart={heart} onClick={deleteHeart}></HeartButton>
+      ) : (
+        <HeartButton heart={heart} onClick={addHeart}></HeartButton>
+      )}
 
       <div
         className={styles.btn_golink}
