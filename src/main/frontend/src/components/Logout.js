@@ -1,23 +1,32 @@
-import React, { Component } from "react";
-import styles from "../styles/css/Logout.module.css";
+import React from "react";
+import styles from "../styles/css/Login.module.css";
+import { useNavigate } from "react-router-dom";
 
-class Logout extends Component {
+function Logout() {
   //로그아웃 페이지
-  render() {
+    const navigate = useNavigate();
+    function logout(){
+        localStorage.removeItem("email")
+        localStorage.removeItem("name")
+        localStorage.removeItem("token")
+        navigate('/')
+    }
+
     return (
-      <div className={styles.container}>
+      <div className={styles.logoutcontainer}>
         <img alt="" src={"img/임시로고.svg"} />
         <br></br>
         <br></br>
-        <div className={styles.h2}> 로그아웃 하시겠습니까? </div>
+        <div className={styles.lh2}> 로그아웃 하시겠습니까? </div>
         <br></br>
         <div>
-          <button className={styles.no}> 취소 </button>
-          <button className={styles.yes}> 확인 </button>
+          <button className={styles.no}
+            onClick={() => navigate(-1)}> 취소 </button>
+          <button className={styles.yes}
+            onClick={logout}> 확인 </button>
         </div>
       </div>
     );
-  }
 }
 
 export default Logout;

@@ -10,12 +10,13 @@ const Layout = () => {
       <div className={styles.contentWrapper}>
         <Header></Header>
         <Outlet></Outlet>
-        <div className={styles.divsidebar}>
-          <Sidebar></Sidebar>
-        </div>
       </div>
-
-      <Footer></Footer>
+      <div className={styles.divsidebar}>
+        <Sidebar></Sidebar>
+      </div>
+      <div>
+        <Footer></Footer>
+      </div>
     </div>
   );
 };

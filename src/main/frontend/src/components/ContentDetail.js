@@ -4,55 +4,124 @@ import { useLocation } from "react-router";
 import HeartButton from "./HeartButton";
 import axios from "axios";
 
-let url = "https://web.joongna.com/"; //상품의 원글
-
 const ContentDetail = (props) => {
   const product = useLocation();
   const productId = product.state.id;
   //alert(product.state.id);
-  const productStore = product.state.store[0];
+  const productMarket = product.state.market[0];
   //alert(productStore);
 
   const [data, setData] = useState(null);
   const [heart, setHeart] = useState(false);
 
-  const fetchURLData = async () => {
-    setData(null);
-    //해당 상품 외부 링크 이동
-    const response = await axios.get(`/api/product/${productId}/${productStore}`);
-    setData(response.data);
-    url = response.data;
-    //console.log("url", url);
-  };
-  useEffect(() => {
-    fetchURLData();
-  }, []);
-
-  //찜하기/해제 작동되는지 백이랑 통합 후 확인가능
-
-  /*
   const fetchData = async () => {
-    try {
-      const response = await axios.get("/api/product/{itemId}/{market}/heart");
-      setData(response.data); // 데이터는 response.data 안에 들어있습니다.
-    } catch (e) {
-      setError(e);
-    }
+    setData(null);
+    const response = await axios.get(
+      `/api/product/${productId}/${productMarket}`
+    );
+    setData(response.data);
   };
-
   useEffect(() => {
     fetchData();
   }, []);
 
-  const toggleLike = async (e) => {
-    const res = await axios.post("api/product/{itemId}/{market}/heart/add"); // 좋아요 누름 -> DB 갱신
-    setHeart(!heart);
-  };
-  */
-  const toggleLike = async (e) => {
-    setHeart(!heart);
+  //찜하기/해제
+  //console.log({"name": data?.name});
+  /*
+  const addHeart = async () => {
+    try {
+      const productData={
+        "id": productId,
+                    "name": data?.name,
+                    "image": data?.image,
+                    "price": data?.price,
+                    "market": productMarket,
+                    "seller": data?.seller,
+                    "updatedate": data?.updatedate,
+                    "hearts": data?.hearts,
+                    "details": data?.details,
+                    "category": data?.category,
+                    "producturl": data?.producturl
+      };
+      const response = await axios.post(`/api/product/${productId}/${productMarket}/heart/add`, productData);
+      setHeart(!heart);
+    } catch (e) {
+      console.log({"error": e});
+      //setError(e);
+    }
   };
 
+  useEffect(() => {
+    addHeart();
+  }, []);
+*/
+  const addHeart = async () => {
+    const productData = {
+      productId: data?.id,
+      userId: data?.seller,
+      productName: data?.name,
+      market: data?.market,
+      heartCheck: 1, //??
+      date: data?.updatedate,
+    };
+    /*
+    const productData={
+            "id": productId,
+                        "name": data?.name,
+                        "image": data?.image,
+                        "price": data?.price,
+                        "market": productMarket,
+                        "seller": data?.seller,
+                        "updatedate": data?.updatedate,
+                        "hearts": data?.hearts,
+                        "details": data?.details,
+                        "category": data?.category,
+                        "producturl": data?.producturl
+          };
+*/
+    console.log("data", productData);
+    axios
+      .get(`/api/product/${productId}/${productMarket}/heart/add`, productData)
+      .then(function (response) {
+        console.log("추가 성공", response);
+        setHeart(!heart);
+        alert("찜 성공");
+        // response
+      })
+      .catch(function (error) {
+        // 오류발생시 실행
+        console.log("실패", error);
+      })
+      .then(function () {
+        // 항상 실행
+        console.log("데이터 요청 완료");
+      });
+  };
+
+  //찜 해제
+  const deleteHeart = async () => {
+    axios
+      .get(`/api/product/${productId}/${productMarket}/heart/delete`)
+      .then(function (response) {
+        console.log("삭제 성공", response);
+        setHeart(!heart);
+        alert("찜 해제");
+      })
+      .catch(function (error) {
+        // 오류발생시 실행
+        console.log("실패", error);
+      })
+      .then(function () {
+        // 항상 실행
+        console.log("데이터 요청 완료");
+      });
+  };
+
+  /*
+  const addHeart = async (e) => {
+    setHeart(!heart);
+  };
+*/
   {
     /*
     const lsts = localStorage.getItem("watched");
@@ -84,7 +153,11 @@ const ContentDetail = (props) => {
         <div className={styles.views}>조회 20000</div>
         <div className={styles.heart}>찜 {data?.hearts}</div>
       </div>
-      <HeartButton heart={heart} onClick={toggleLike}></HeartButton>
+      {heart ? (
+        <HeartButton heart={heart} onClick={deleteHeart}></HeartButton>
+      ) : (
+        <HeartButton heart={heart} onClick={addHeart}></HeartButton>
+      )}
 
       <div
         className={styles.btn_golink}

@@ -1,6 +1,6 @@
 import styles from "../../styles/css/Header.module.css";
 import Searchbar from "./Searchbar";
-import Login from "../Login"
+import Login from "../Login";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
@@ -17,15 +17,19 @@ const Header = () => {
       </div>
       <div
         className={styles.basketAlt3Icon}
-        alt=""
-        src="/img/basket-alt-3.svg"
-      />
-      <button className={styles.userCicrleDuotoneIcon}
-            onClick={() => navigate('/login')}>
-      {/* <button className={styles.userCicrleDuotoneIcon}
+        onClick={() => navigate("/heartList")}
+      >
+        <img src="/img/basket-alt-3.svg" />
+      </div>
+      <button
+        className={styles.userCicrleDuotoneIcon}
+        onClick={() => navigate("/login")}
+      >
+        {/* <button className={styles.userCicrleDuotoneIcon}
             onClick={() => setModal(true)}>
          {modal === true ? <Login /> : null}</button>*/}
-      <img src="/img/user-cicrle-duotone.svg"/></button>
+        <img src="/img/user-cicrle-duotone.svg" />
+      </button>
       <Searchbar></Searchbar>
       <div className={styles.line} />
       {/*<div className={styles.groupItem} />
