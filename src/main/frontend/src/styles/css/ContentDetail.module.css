@@ -277,8 +277,9 @@
 .icon5 {
   top: 0;
   left: 0;
-  width: 545px;
-  height: 360px;
+  width: 550px;
+  height: 400px;
+  object-fit: cover;
 }
 .div13,
 .icon5,

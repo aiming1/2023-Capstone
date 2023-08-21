@@ -78,7 +78,7 @@ const ContentDetail = (props) => {
       <div className={styles.parent}>
         <b className={styles.title}>{data?.name}</b>
         <b className={styles.price}>{data?.price}원</b>
-        <div className={styles.category}>{`홈 > 여성의류 > 신발`}</div>
+        <div className={styles.category}>{`홈 > 여성의류`}{data?.category}</div>
         <div className={styles.name}>{data?.seller}</div>
         <div className={styles.date}>5분 전</div>
         <div className={styles.views}>조회 20000</div>
