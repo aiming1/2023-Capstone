@@ -14,6 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,7 +43,9 @@ class CategoryServiceTest {
                 String id = id_string[2];
 
                 String name = imgs.get(i).attr("alt");
-                String img = imgs.get(i).attr("src");
+
+                ArrayList<String> img = new ArrayList<>();
+                img.add(imgs.get(i).attr("src"));
 
                 String price_string = prices.get(i).text().replaceAll("[^0-9]", "");
                 int price = Integer.parseInt(price_string);
@@ -62,16 +65,6 @@ class CategoryServiceTest {
             System.out.println("중고나라 크롤링 오류_카테고리");
         }
     }
-
-//    /** 중고나라에서 카테고리 불러오기 테스트 2 **/
-//    @Test
-//    void getPageTest2() {
-//        HashMap<String, Product> hashMap = categoryService.getPage(Market.JOONGGONARA, 1, 1);
-//        Assertions.assertThat(hashMap.size()).isEqualTo(40);
-//
-//        HashMap<String, Product> hashMap2 = categoryService.getPage(Market.JOONGGONARA, 2, 1);
-//        Assertions.assertThat(hashMap.size()).isEqualTo(40);
-//    }
 
     /** 번개장터에서 카테고리 불러오기 테스트 **/
     @Test
@@ -96,7 +89,8 @@ class CategoryServiceTest {
                     String name = webElement.findElement(By.className("sc-kasBVs")).getText();
                     System.out.println("name = " + name);
 
-                    String img = webElement.findElement(By.tagName("img")).getAttribute("src");
+                    ArrayList<String> img = new ArrayList<>();
+                    img.add(webElement.findElement(By.tagName("img")).getAttribute("src"));
                     System.out.println("img = " + img);
 
                     String price_string = webElement.findElement(By.className("sc-hgHYgh")).getText()
@@ -123,14 +117,6 @@ class CategoryServiceTest {
             webDriver.quit();
         }
     }
-
-//    /** 번개장터에서 카테고리 불러오기 테스트 2 **/
-//    @Test
-//    void getPageTest4(){
-//        HashMap<String, Product> hashMap = categoryService
-//                .getPage(Market.BUNJANG, 1, 5);
-//        Assertions.assertThat(hashMap.size()).isEqualTo(40);
-//    }
 
     /** 통합 카테고리 불러오기 테스트 **/
     @Test

@@ -1,5 +1,6 @@
 package com.example.project.Crawling;
 
+import com.beust.ah.A;
 import com.example.project.Category.MainPageService;
 import com.example.project.Category.MainPageServiceImpl;
 import com.example.project.Product.Market;
@@ -14,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -44,7 +46,9 @@ public class MainServiceTest {
                 String id = id_string[2];
 
                 String name = imgs.get(i).attr("alt");
-                String img = imgs.get(i).attr("src");
+
+                ArrayList<String> img = new ArrayList<>();
+                img.add(imgs.get(i).attr("src"));
 
                 String price_string = prices.get(i).text().replaceAll("[^0-9]", "");
                 int price = Integer.parseInt(price_string);
@@ -89,7 +93,9 @@ public class MainServiceTest {
                 String id = webElement.findElement(By.tagName("a")).getAttribute("data-pid");
 
                 String name = webElement.findElement(By.className("sc-kasBVs")).getText();
-                String img = webElement.findElement(By.tagName("img")).getAttribute("src");
+
+                ArrayList<String> img = new ArrayList<>();
+                img.add(webElement.findElement(By.tagName("img")).getAttribute("src"));
 
                 String price_string = webElement.findElement(By.className("sc-hgHYgh")).getText()
                         .replaceAll("[^0-9]", "");
@@ -139,7 +145,9 @@ public class MainServiceTest {
                 String id = webElement.findElement(By.cssSelector("a")).getAttribute("data-event-label");
 
                 String name = webElement.findElement(By.cssSelector("a div.card-photo img")).getAttribute("alt");
-                String img = webElement.findElement(By.cssSelector("a div.card-photo img")).getAttribute("src");
+
+                ArrayList<String> img = new ArrayList<>();
+                img.add(webElement.findElement(By.cssSelector("a div.card-photo img")).getAttribute("src"));
 
                 String price_string = webElement.findElement(By.cssSelector("a div.card-desc div.card-price")).getText()
                         .replaceAll("[^0-9]", "");

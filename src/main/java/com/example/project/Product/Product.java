@@ -3,12 +3,13 @@ package com.example.project.Product;
 import lombok.NoArgsConstructor;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 
 @NoArgsConstructor
 public class Product {
     private String id;
     private String name;
-    private String image;
+    private ArrayList<String> image;
     private int price;
     private Market market;
     private String seller;
@@ -18,7 +19,7 @@ public class Product {
     private String category;
     private String producturl;
 
-    public Product(String id, String name, String image, int price, Market market, @Nullable String seller,
+    public Product(String id, String name, ArrayList<String> image, int price, Market market, @Nullable String seller,
                    @Nullable String updatedate, @Nullable int hearts, @Nullable String details, @Nullable String category,
                    @Nullable String producturl) {
         this.id = id;
@@ -98,11 +99,11 @@ public class Product {
         this.name = name;
     }
 
-    public String getImage() {
+    public ArrayList<String> getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(ArrayList<String> image) {
         this.image = image;
     }
 
