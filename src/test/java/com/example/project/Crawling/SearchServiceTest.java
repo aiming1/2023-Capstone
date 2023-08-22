@@ -11,6 +11,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -43,7 +44,8 @@ public class SearchServiceTest {
                     String id = pid[1];
 
                     String name = webElement.getAttribute("title");
-                    String img = webElement.findElement(By.cssSelector("div.relative img")).getAttribute("src");
+                    ArrayList<String> img = new ArrayList<>();
+                    img.add(webElement.findElement(By.cssSelector("div.relative img")).getAttribute("src"));
 
                     String price_string = webElement.findElement(By.cssSelector("div div.font-semibold")).getText()
                             .replaceAll("[^0-9]", "");
@@ -88,7 +90,8 @@ public class SearchServiceTest {
                 String name = webElement.findElement(By.cssSelector("a div.sc-eInJlc div.sc-gtfDJT")).getText();
                 System.out.println("name = " + name);
 
-                String img = webElement.findElement(By.cssSelector("a div.sc-hgHYgh img")).getAttribute("src");
+                ArrayList<String> img = new ArrayList<>();
+                img.add(webElement.findElement(By.cssSelector("a div.sc-hgHYgh img")).getAttribute("src"));
                 System.out.println("img = " + img);
 
                 String price_string = webElement.findElement(By.cssSelector("a div.sc-eInJlc div.sc-jeCdPy div")).getText()
@@ -125,13 +128,15 @@ public class SearchServiceTest {
             webDriver.get(url);
             Thread.sleep(500);
 
-            WebElement btn = webDriver.findElement(By.cssSelector("div:nth-child(1) div.more-btn"));
-            JavascriptExecutor javascriptExecutor = (JavascriptExecutor) webDriver;
-            javascriptExecutor.executeScript("console.log(arg);", btn);
-            for (int i = 0; i < 3; i++) {
-                javascriptExecutor.executeScript("arguments[0].click();", btn);
-                System.out.println("clicked");
-            }
+            //TODO 더보기 버튼 안 눌림
+//            WebElement btn = webDriver.findElement(By.cssSelector("div:nth-child(1) div.more-btn"));
+//            JavascriptExecutor javascriptExecutor = (JavascriptExecutor) webDriver;
+//            javascriptExecutor.executeScript("console.log(arg);", btn);
+//            for (int i = 0; i < 3; i++) {
+//                javascriptExecutor.executeScript("arguments[0].click();", btn);
+//                System.out.println("clicked");
+//            }
+
             List<WebElement> webElements = webDriver.findElements(By.cssSelector("article.flea-market-article"));
 
             for(WebElement webElement : webElements){
@@ -139,11 +144,16 @@ public class SearchServiceTest {
                 String id = pid[1];
 
                 String name = webElement.findElement(By.cssSelector("a div.card-photo img")).getAttribute("alt");
-                String img = webElement.findElement(By.cssSelector("a div.card-photo img")).getAttribute("src");
+
+                ArrayList<String> img = new ArrayList<>();
+                img.add(webElement.findElement(By.cssSelector("a div.card-photo img")).getAttribute("src"));
 
                 String price_string = webElement.findElement(By.cssSelector("a div.article-info p.article-price")).getText()
-                        .replaceAll("[^0-9]", "");;
-                int price = Integer.parseInt(price_string);
+                        .replaceAll("[^0-9]", "");
+                int price = 0;
+                if (price_string.length() != 0) {
+                    price = Integer.parseInt(price_string);
+                }
 
                 Product product = new Product(id, name, img, price, Market.CARROT, null, null, 0, null, null, null);
                 page.put(id, product);
