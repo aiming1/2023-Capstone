@@ -12,33 +12,28 @@ function Sidebar(props) {
 
   const lsts = localStorage.getItem("watched");
   const lstss = JSON.parse(lsts).reverse();
-{/*
-  useEffect(() => {
-    let lst = JSON.parse(lsts);
-    let dtail = props[0];
-    if (!lst.length === 5) {
-      Array.shift();
-    }
-    lst.push(dtail);
-    lst = new Set(lst);
-    lst = Array.from(lst);
-    localStorage.setItem("watched", JSON.stringify(lst));
-  }, []);
-  // detail 들어가면 product id를 watched에 추가
-*/}
+
   return (
     <div className={styles.div}>
       <div className={styles.box}>
         <div className={styles.title}>최근 본 상품</div>
-        {lstss.map((itemid) => {
+        {lstss.map((it) => {
           return (
             <img
               className={styles.item}
               alt=""
-              src="/img/빈 이미지.svg"
-              style={{ margin: 5 }}
+              src= {it[2]}
+              style={{
+              borderRadius: 5,
+              margin: 5,}}
               onClick={() => {
-                navigate(`/product/${itemid}`);
+                navigate(`/product/${it[0]}`,{
+                state: {
+                    id: it[0],
+                    market: it[1],
+                    image: it[2],
+                }});
+                window.location.reload()
               }}
             />
           );
