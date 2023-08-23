@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "../styles/css/ItemList.module.css";
+import style from "../styles/css/ContentDetail.module.css";
 import { ListItem } from "./ListItem";
 import Pagination from "./Pagination";
 
@@ -52,7 +53,7 @@ const HeartList = () => {
   if (!data) return null;
 
   return (
-    <div>
+    <div className={style.divhome}>
       <div className={styles.itemlistcontent}>
         {currentPosts(data).map((item) => (
           <ListItem

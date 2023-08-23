@@ -72,12 +72,17 @@ const ContentDetail = (props) => {
   //찜하기
   const addHeart = async () => {
     const productData = {
-      productId: data?.id,
-      userId: data?.seller,
-      productName: data?.name,
-      market: data?.market,
-      heartCheck: 1, //??
-      date: data?.updatedate,
+      id: productId,
+      name: data?.name,
+      image: data?.image,
+      price: data?.price,
+      market: productMarket,
+      seller: data?.seller,
+      updatedate: data?.updatedate,
+      hearts: data?.hearts,
+      details: data?.details,
+      category: data?.category,
+      producturl: data?.producturl,
     };
 
     axios
