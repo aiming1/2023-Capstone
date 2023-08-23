@@ -12,6 +12,8 @@ export const ListItem = ({
   image = "/img/빈 이미지.svg",
   hearts = 0,
 }) => {
+  price = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  //가격에 , 추가
   const renderLogo = () => {
     if (market === "CARROT") {
       //당근마켓
@@ -52,6 +54,7 @@ export const ListItem = ({
         id: id,
         market: market,
         image: image,
+        price: price,
       },
     });
   };

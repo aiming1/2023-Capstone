@@ -11,6 +11,7 @@ const ContentDetail = (props) => {
   const productMarket = product.state.market[0];
   //alert(productStore);
   const productImage = product.state.image;
+  const productPrice = product.state.price;
 
   const [data, setData] = useState(null);
   const [heart, setHeart] = useState(false);
@@ -26,6 +27,38 @@ const ContentDetail = (props) => {
     fetchData();
   }, []);
 
+  const marketname = "오징어집"
+  const renderLogo = () => {
+    if (data?.market === "CARROT") {
+      //당근마켓
+      return (<div>
+        <img
+          className={styles.icon6}
+          alt=""
+          src="/img/당근마켓 아이콘 1.png"
+        /> <span className={styles.div20}>당근마켓</span></div>
+      );
+    } else if (data?.market === "BUNJANG") {
+      //번개장터
+      return (<div>
+        <img
+          className={styles.icon6}
+          alt=""
+          src="/img/번개장터 아이콘 1.png"
+        /><span className={styles.div20}>번개장터</span></div>
+      );
+    } else if (data?.market === "JOONGGONARA") {
+      //중고나라
+      return (<div>
+        <img
+          className={styles.icon6}
+          alt=""
+          src="/img/중고나라 아이콘 1.png"
+        /><span className={styles.div20}>중고나라</span></div>
+      );
+    }
+    return null;
+  };
   //찜하기/해제
   //console.log({"name": data?.name});
   /*
@@ -127,7 +160,7 @@ const ContentDetail = (props) => {
     const lsts = localStorage.getItem("watched");
     useEffect(() => {
       let lst = JSON.parse(lsts);
-      let dtail = [productId, productMarket, productImage];
+      let dtail = [productId, productMarket, productImage, productPrice];
       const isSame =JSON.stringify(lst).includes(JSON.stringify(dtail))
       if (!isSame){
         if (lst.length > 4) {
@@ -146,8 +179,8 @@ const ContentDetail = (props) => {
       <img className={styles.icon} alt="" src={data?.image} />
       <div className={styles.parent}>
         <b className={styles.title}>{data?.name}</b>
-        <b className={styles.price}>{data?.price}원</b>
-        <div className={styles.category}>{`홈 > 여성의류 > 신발`}</div>
+        <b className={styles.price}>{productPrice}원</b>
+        <div className={styles.category}>{"홈 > "+data?.category}</div>
         <div className={styles.name}>{data?.seller}</div>
         <div className={styles.date}>5분 전</div>
         <div className={styles.views}>조회 20000</div>
@@ -169,12 +202,12 @@ const ContentDetail = (props) => {
         <div className={styles.div7}>보러 가기</div>
       </div>
 
+      <div className={styles.line}></div>
       <div className={styles.div8}>{data?.details}</div>
       <div className={styles.div9}>
         <p className={styles.p}>거래거래</p>
         <p className={styles.p}>대충 거래글 끝</p>
       </div>
-      <div className={styles.line}></div>
       <div className={styles.group}>
         <img className={styles.icon5} alt="" src={data?.image} />
         <div className={styles.div12}>
@@ -187,13 +220,8 @@ const ContentDetail = (props) => {
         </div>
       </div>
       <div className={styles.container}>
-        <div className={styles.div20}>중고나라</div>
         <div className={styles.div21}>
-          <img
-            className={styles.icon6}
-            alt=""
-            src="/img/중고나라 아이콘 1.png"
-          />
+          {renderLogo()}
         </div>
       </div>
     </div>

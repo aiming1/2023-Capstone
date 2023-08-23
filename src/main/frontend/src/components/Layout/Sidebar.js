@@ -32,6 +32,7 @@ function Sidebar(props) {
                     id: it[0],
                     market: it[1],
                     image: it[2],
+                    price: it[3]
                 }});
                 window.location.reload()
               }}
