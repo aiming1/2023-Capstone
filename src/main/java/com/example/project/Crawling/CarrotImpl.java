@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -49,12 +50,16 @@ public class CarrotImpl implements Carrot{
                     String id = pid[1];
 
                     String name = webElement.findElement(By.cssSelector("a div.card-photo img")).getAttribute("alt");
-                    String img = webElement.findElement(By.cssSelector("a div.card-photo img")).getAttribute("src");
+
+                    ArrayList<String> img = new ArrayList<>();
+                    img.add(webElement.findElement(By.cssSelector("a div.card-photo img")).getAttribute("src"));
 
                     String price_string = webElement.findElement(By.cssSelector("a div.article-info p.article-price")).getText()
                             .replaceAll("[^0-9]", "");
-                    ;
-                    int price = Integer.parseInt(price_string);
+                    int price = 0;
+                    if (price_string.length() != 0) {
+                        price = Integer.parseInt(price_string);
+                    }
 
                     Product product = new Product(id, name, img, price, Market.CARROT, null, null, 0, null, null, null);
                     page.put(id, product);
@@ -81,11 +86,18 @@ public class CarrotImpl implements Carrot{
                 Document doc = Jsoup.connect(url).get();
 
                 String name = doc.select("#article-title").text();
-                String img = doc.select(".image-wrap img").attr("data-lazy");
 
-                Elements prices = doc.select("#article-price");
-                String price_string = prices.text().replaceAll("[^0-9]", "");
-                int price = Integer.parseInt(price_string);
+                Elements imgs = doc.select(".image-wrap img");
+                ArrayList<String> img = new ArrayList<>();
+                for (int i = 0; i < imgs.size(); i++){
+                    img.add(imgs.get(i).attr("data-lazy"));
+                }
+
+                String price_string = doc.select("#article-price").text().replaceAll("[^0-9]", "");
+                int price = 0;
+                if (price_string.length() != 0) {
+                    price = Integer.parseInt(price_string);
+                }
 
                 String seller = doc.select("#nickname").text();
 
@@ -131,9 +143,10 @@ public class CarrotImpl implements Carrot{
                 for (WebElement webElement : webElements) {
                     String id = webElement.findElement(By.cssSelector("a")).getAttribute("data-event-label");
 
-
                     String name = webElement.findElement(By.cssSelector("a div.card-photo img")).getAttribute("alt");
-                    String img = webElement.findElement(By.cssSelector("a div.card-photo img")).getAttribute("src");
+
+                    ArrayList<String> img = new ArrayList<>();
+                    img.add(webElement.findElement(By.cssSelector("a div.card-photo img")).getAttribute("src"));
 
                     String price_string = webElement.findElement(By.cssSelector("a div.card-desc div.card-price")).getText()
                             .replaceAll("[^0-9]", "");
@@ -142,7 +155,7 @@ public class CarrotImpl implements Carrot{
                         price = Integer.parseInt(price_string);
                     }
 
-                    Product product = new Product(id, name, img, price, Market.CARROT, null, null, 0, null, null, null);
+                    Product product = new Product(id, name, null, price, Market.CARROT, null, null, 0, null, null, null);
                     page.put(id, product);
                 }
 

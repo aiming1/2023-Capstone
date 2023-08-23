@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
 
@@ -35,8 +36,11 @@ public class ProductController {
             Product product = productService.getProduct(itemId, m);
             return product;
         } catch (NullPointerException exception){
+            ArrayList<String> img = new ArrayList<>();
+            img.add("https://i.imgur.com/gK1I2Bu.png");
+
             Product product = new Product(
-                    "404","삭제되거나 존재하지 않는 상품이에요.","https://i.imgur.com/gK1I2Bu.png",0,Market.CARROT,null,null,0,null,null,null
+                    "404","삭제되거나 존재하지 않는 상품이에요.",img,0,Market.CARROT,null,null,0,null,null,null
             );
             return product;
         }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -47,7 +48,8 @@ public class JoonggonaraImpl implements Joonggonara{
                     String id = id_string[2];
 
                     String name = imgs.get(i).attr("alt");
-                    String img = imgs.get(i).attr("src");
+                    ArrayList<String> img = new ArrayList<>();
+                    img.add(imgs.get(i).attr("src"));
 
                     String price_string = prices.get(i).text().replaceAll("[^0-9]", "");
                     int price = Integer.parseInt(price_string);
@@ -90,8 +92,8 @@ public class JoonggonaraImpl implements Joonggonara{
                         String id = pid[1];
 
                         String name = webElement.getAttribute("title");
-
-                        String img = webElement.findElement(By.cssSelector("div.relative img")).getAttribute("src");
+                        ArrayList<String> img = new ArrayList<>();
+                        img.add(webElement.findElement(By.cssSelector("div.relative img")).getAttribute("src"));
 
                         String price_string = webElement.findElement(By.cssSelector("div div.font-semibold")).getText()
                                 .replaceAll("[^0-9]", "");
@@ -127,7 +129,12 @@ public class JoonggonaraImpl implements Joonggonara{
                 Thread.sleep(500);
 
                 String name = doc.select(".pb-5 h1").text();
-                String img = doc.select(".col-span-1 img").attr("src");
+
+                Elements imgs = doc.select(".swiper-wrapper div:nth-child(n) div img");
+                ArrayList<String> img = new ArrayList<>();
+                for (int i = 0; i < imgs.size(); i++){
+                    img.add(imgs.get(i).attr("src"));
+                }
 
                 String prices = doc.select(".pb-5.border-b.border-gray-300 div div").text()
                         .replaceAll("[^0-9]", "");
@@ -187,7 +194,9 @@ public class JoonggonaraImpl implements Joonggonara{
                     String id = id_string[2];
 
                     String name = imgs.get(i).attr("alt");
-                    String img = imgs.get(i).attr("src");
+
+                    ArrayList<String> img = new ArrayList<>();
+                    img.add(imgs.get(i).attr("src"));
 
                     String price_string = prices.get(i).text().replaceAll("[^0-9]", "");
                     int price = Integer.parseInt(price_string);
