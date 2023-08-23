@@ -27,68 +27,49 @@ const ContentDetail = (props) => {
     fetchData();
   }, []);
 
-  const marketname = "오징어집"
+  const marketname = "오징어집";
   const renderLogo = () => {
     if (data?.market === "CARROT") {
       //당근마켓
-      return (<div>
-        <img
-          className={styles.icon6}
-          alt=""
-          src="/img/당근마켓 아이콘 1.png"
-        /> <span className={styles.div20}>당근마켓</span></div>
+      return (
+        <div>
+          <img
+            className={styles.icon6}
+            alt=""
+            src="/img/당근마켓 아이콘 1.png"
+          />{" "}
+          <span className={styles.div20}>당근마켓</span>
+        </div>
       );
     } else if (data?.market === "BUNJANG") {
       //번개장터
-      return (<div>
-        <img
-          className={styles.icon6}
-          alt=""
-          src="/img/번개장터 아이콘 1.png"
-        /><span className={styles.div20}>번개장터</span></div>
+      return (
+        <div>
+          <img
+            className={styles.icon6}
+            alt=""
+            src="/img/번개장터 아이콘 1.png"
+          />
+          <span className={styles.div20}>번개장터</span>
+        </div>
       );
     } else if (data?.market === "JOONGGONARA") {
       //중고나라
-      return (<div>
-        <img
-          className={styles.icon6}
-          alt=""
-          src="/img/중고나라 아이콘 1.png"
-        /><span className={styles.div20}>중고나라</span></div>
+      return (
+        <div>
+          <img
+            className={styles.icon6}
+            alt=""
+            src="/img/중고나라 아이콘 1.png"
+          />
+          <span className={styles.div20}>중고나라</span>
+        </div>
       );
     }
     return null;
   };
-  //찜하기/해제
-  //console.log({"name": data?.name});
-  /*
-  const addHeart = async () => {
-    try {
-      const productData={
-        "id": productId,
-                    "name": data?.name,
-                    "image": data?.image,
-                    "price": data?.price,
-                    "market": productMarket,
-                    "seller": data?.seller,
-                    "updatedate": data?.updatedate,
-                    "hearts": data?.hearts,
-                    "details": data?.details,
-                    "category": data?.category,
-                    "producturl": data?.producturl
-      };
-      const response = await axios.post(`/api/product/${productId}/${productMarket}/heart/add`, productData);
-      setHeart(!heart);
-    } catch (e) {
-      console.log({"error": e});
-      //setError(e);
-    }
-  };
 
-  useEffect(() => {
-    addHeart();
-  }, []);
-*/
+  //찜하기
   const addHeart = async () => {
     const productData = {
       productId: data?.id,
@@ -98,22 +79,7 @@ const ContentDetail = (props) => {
       heartCheck: 1, //??
       date: data?.updatedate,
     };
-    /*
-    const productData={
-            "id": productId,
-                        "name": data?.name,
-                        "image": data?.image,
-                        "price": data?.price,
-                        "market": productMarket,
-                        "seller": data?.seller,
-                        "updatedate": data?.updatedate,
-                        "hearts": data?.hearts,
-                        "details": data?.details,
-                        "category": data?.category,
-                        "producturl": data?.producturl
-          };
-*/
-    console.log("data", productData);
+
     axios
       .get(`/api/product/${productId}/${productMarket}/heart/add`, productData)
       .then(function (response) {
@@ -151,28 +117,23 @@ const ContentDetail = (props) => {
       });
   };
 
-  /*
-  const addHeart = async (e) => {
-    setHeart(!heart);
-  };
-*/
-
-    const lsts = localStorage.getItem("watched");
-    useEffect(() => {
-      let lst = JSON.parse(lsts);
-      let dtail = [productId, productMarket, productImage, productPrice];
-      const isSame =JSON.stringify(lst).includes(JSON.stringify(dtail))
-      if (!isSame){
-        if (lst.length > 4) {
-           lst.shift();
-          }
-         lst.push(dtail);
+  const lsts = localStorage.getItem("watched");
+  useEffect(() => {
+    let lst = JSON.parse(lsts);
+    let dtail = [productId, productMarket, productImage, productPrice];
+    const isSame = JSON.stringify(lst).includes(JSON.stringify(dtail));
+    if (!isSame) {
+      if (lst.length > 4) {
+        lst.shift();
+      }
+      lst.push(dtail);
       lst = new Set(lst);
       lst = Array.from(lst);
       localStorage.setItem("watched", JSON.stringify(lst));
-    }}, []);
-    // 최근 본  상품.
-    // detail 들어가면 product id를 watched에 추가
+    }
+  }, []);
+  // 최근 본  상품.
+  // detail 들어가면 product id를 watched에 추가
 
   return (
     <div className={styles.div}>
@@ -180,7 +141,7 @@ const ContentDetail = (props) => {
       <div className={styles.parent}>
         <b className={styles.title}>{data?.name}</b>
         <b className={styles.price}>{productPrice}원</b>
-        <div className={styles.category}>{"홈 > "+data?.category}</div>
+        <div className={styles.category}>{"홈 > " + data?.category}</div>
         <div className={styles.name}>{data?.seller}</div>
         <div className={styles.date}>5분 전</div>
         <div className={styles.views}>조회 20000</div>
@@ -220,9 +181,7 @@ const ContentDetail = (props) => {
         </div>
       </div>
       <div className={styles.container}>
-        <div className={styles.div21}>
-          {renderLogo()}
-        </div>
+        <div className={styles.div21}>{renderLogo()}</div>
       </div>
     </div>
   );

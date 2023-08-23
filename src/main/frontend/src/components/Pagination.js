@@ -15,8 +15,6 @@ function Pagination({ total, limit, page, setPage }) {
   const [currPage, setCurrPage] = useState(page);
   let firstNum = currPage - (currPage % 5) + 1;
   let lastNum = currPage - (currPage % 5) + 5;
-  console.log({"currPage is":currPage, "firsNum is" : firstNum, "lsstNum is": lastNum, "현재 page is" : page})
-  /**/
 
   return (
     <Nav>
