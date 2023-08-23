@@ -27,8 +27,8 @@
 }
 .title {
   top: 18px;
-  left: 10px;
-  font-weight: 500;
+  left: 15px;
+  font-weight: bold;
   text-align: center;
   color: #767676;
   font-size: 16px;
@@ -36,8 +36,8 @@
 }
 .item {
   position: relative;
-  top: 67px;
+  top: 60px;
   left: 1px;
-  width: 74px;
-  height: 49px;
+  width: 80px;
+  height: 50px;
 }

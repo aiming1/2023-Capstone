@@ -6,6 +6,7 @@ import com.example.project.Product.ProductService;
 import com.example.project.Product.ProductServiceImpl;
 import com.example.project.Search.SearchService;
 import com.example.project.Search.SearchServiceImpl;
+import org.checkerframework.checker.units.qual.A;
 import org.checkerframework.checker.units.qual.C;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.security.core.parameters.P;
@@ -22,7 +24,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ProductServiceTest {
 
@@ -35,7 +39,7 @@ public class ProductServiceTest {
     /** 중고나라 상품 상세 테스트 **/
     @Test
     void getProductTest(){
-        String url = "https://web.joongna.com/product/119272335";
+        String url = "https://web.joongna.com/product/113380183";
         WebDriver webDriver = chromeDriver.setChrome();
 
         try {
@@ -45,7 +49,13 @@ public class ProductServiceTest {
 
             String name = doc.select(".pb-5 h1").text();
 
-            String img = doc.select(".col-span-1 img").attr("src");
+            Elements imgs = doc.select(".swiper-wrapper div:nth-child(n) div img");
+            ArrayList<String> img = new ArrayList<>();
+            for (int i = 0; i < imgs.size(); i++){
+                String invimg = imgs.get(i).attr("src");
+                img.add(invimg);
+                System.out.println("img[i] = " + img.get(i));
+            }
 
             String prices = doc.select(".pb-5.border-b.border-gray-300 div div").text()
                     .replaceAll("[^0-9]", "");
@@ -114,7 +124,7 @@ public class ProductServiceTest {
     /** 번개장터 상품 상세 테스트 **/
     @Test
     void getProductTest3(){
-        String url = "https://m.bunjang.co.kr/products/227279899";
+        String url = "https://m.bunjang.co.kr/products/226642218";
         WebDriver webDriver = chromeDriver.setChrome();
 
         try {
@@ -122,8 +132,14 @@ public class ProductServiceTest {
             Thread.sleep(500);
 
             String name = webDriver.findElement(By.className("ProductSummarystyle__Name-sc-oxz0oy-4")).getText();
-            String img = webDriver.findElement(By.className("sc-jKVCRD")).findElement(By.tagName("img")).
-                    getAttribute("src");
+
+            List<WebElement> imgs = webDriver.findElements(By.cssSelector(".sc-kaNhvL"));
+            ArrayList<String> img = new ArrayList<>();
+            for(WebElement invimg:imgs) {
+                img.add(invimg.getAttribute("src"));
+                System.out.println("invimg = " + invimg.getAttribute("src"));
+            }
+
 
             String prices = webDriver.findElement(By.className("ProductSummarystyle__Price-sc-oxz0oy-6")).getText();
             int price = Integer.parseInt(prices.replaceAll("[^0-9]", ""));
@@ -185,17 +201,26 @@ public class ProductServiceTest {
     /** 당근마켓 상품 상세 테스트 **/
     @Test
     void getProductTest5(){
-        String url = "https://www.daangn.com/articles/589353858";
+        String url = "https://www.daangn.com/articles/627918611";
 
         try {
             Document doc = Jsoup.connect(url).get();
 
             String name = doc.select("#article-title").text();
-            String img = doc.select(".image-wrap img").attr("data-lazy");
 
-            Elements prices = doc.select("#article-price");
-            String price_string = prices.text().replaceAll("[^0-9]", "");
-            int price = Integer.parseInt(price_string);
+            Elements imgs = doc.select(".image-wrap img");
+            ArrayList<String> img = new ArrayList<>();
+            for (int i = 0; i < imgs.size(); i++){
+                String invimg = imgs.get(i).attr("data-lazy");
+                img.add(invimg);
+                System.out.println("invimg = " + invimg);
+            }
+
+            String price_string = doc.select("#article-price").text().replaceAll("[^0-9]", "");
+            int price = 0;
+            if (price_string.length() != 0) {
+                price = Integer.parseInt(price_string);
+            }
 
             String seller = doc.select("#nickname").text();
 

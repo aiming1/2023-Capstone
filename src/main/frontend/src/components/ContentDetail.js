@@ -10,6 +10,7 @@ const ContentDetail = (props) => {
   //alert(product.state.id);
   const productMarket = product.state.market[0];
   //alert(productStore);
+  const productImage = product.state.image;
 
   const [data, setData] = useState(null);
   const [heart, setHeart] = useState(false);
@@ -122,24 +123,23 @@ const ContentDetail = (props) => {
     setHeart(!heart);
   };
 */
-  {
-    /*
+
     const lsts = localStorage.getItem("watched");
     useEffect(() => {
       let lst = JSON.parse(lsts);
-      let dtail = product.itemId;
-      if (!lst.length === 5) {
-        Array.shift();
-      }
-      lst.push(dtail);
+      let dtail = [productId, productMarket, productImage];
+      const isSame =JSON.stringify(lst).includes(JSON.stringify(dtail))
+      if (!isSame){
+        if (lst.length > 4) {
+           lst.shift();
+          }
+         lst.push(dtail);
       lst = new Set(lst);
       lst = Array.from(lst);
       localStorage.setItem("watched", JSON.stringify(lst));
-    }, []);
+    }}, []);
     // 최근 본  상품.
     // detail 들어가면 product id를 watched에 추가
-  */
-  }
 
   return (
     <div className={styles.div}>

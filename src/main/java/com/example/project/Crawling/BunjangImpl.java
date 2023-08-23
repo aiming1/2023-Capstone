@@ -8,6 +8,7 @@ import org.openqa.selenium.*;
 import org.springframework.stereotype.Component;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -43,7 +44,8 @@ public class BunjangImpl implements Bunjang {
                         String id = webElement.findElement(By.tagName("a")).getAttribute("data-pid");
 
                         String name = webElement.findElement(By.className("sc-kasBVs")).getText();
-                        String img = webElement.findElement(By.tagName("img")).getAttribute("src");
+                        ArrayList<String> img = new ArrayList<>();
+                        img.add(webElement.findElement(By.tagName("img")).getAttribute("src"));
 
                         String price_string = webElement.findElement(By.className("sc-hgHYgh")).getText()
                                 .replaceAll("[^0-9]", "");
@@ -86,7 +88,8 @@ public class BunjangImpl implements Bunjang {
 
                     String name = webElement.findElement(By.cssSelector("a div.sc-eInJlc div.sc-gtfDJT")).getText();
 
-                    String img = webElement.findElement(By.cssSelector("a div.sc-hgHYgh img")).getAttribute("src");
+                    ArrayList<String> img = new ArrayList<>();
+                    img.add(webElement.findElement(By.cssSelector("a div.sc-hgHYgh img")).getAttribute("src"));
 
                     String price_string = webElement.findElement(By.cssSelector("a div.sc-eInJlc div.sc-jeCdPy div")).getText()
                             .replaceAll("[^0-9]", "");
@@ -121,8 +124,13 @@ public class BunjangImpl implements Bunjang {
                 Thread.sleep(500);
 
                 String name = webDriver.findElement(By.className("ProductSummarystyle__Name-sc-oxz0oy-4")).getText();
-                String img = webDriver.findElement(By.className("sc-jKVCRD")).findElement(By.tagName("img")).
-                        getAttribute("src");
+
+                List<WebElement> imgs = webDriver.findElements(By.cssSelector(".sc-kaNhvL"));
+                ArrayList<String> img = new ArrayList<>();
+                for(WebElement invimg:imgs) {
+                    img.add(invimg.getAttribute("src"));
+                }
+
                 String prices = webDriver.findElement(By.className("ProductSummarystyle__Price-sc-oxz0oy-6")).getText();
                 int price = Integer.parseInt(prices.replaceAll("[^0-9]", ""));
                 String seller = webDriver.findElement(By.className("ProductSellerstyle__Name-sc-1qnzvgu-7")).getText();
@@ -173,7 +181,8 @@ public class BunjangImpl implements Bunjang {
                     String id = webElement.findElement(By.tagName("a")).getAttribute("data-pid");
 
                     String name = webElement.findElement(By.className("sc-kasBVs")).getText();
-                    String img = webElement.findElement(By.tagName("img")).getAttribute("src");
+                    ArrayList<String> img = new ArrayList<>();
+                    img.add(webElement.findElement(By.tagName("img")).getAttribute("src"));
 
                     String price_string = webElement.findElement(By.className("sc-hgHYgh")).getText()
                             .replaceAll("[^0-9]", "");
