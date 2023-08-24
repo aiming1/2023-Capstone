@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import HeartButtonMain from "./HeartButtonMain";
 import styles from "../styles/css/ItemList.module.css";
+import axios from "axios";
 
 export const ListItem = ({
   id = 0,
@@ -12,6 +13,11 @@ export const ListItem = ({
   image = "/img/빈 이미지.svg",
   hearts = 0,
 }) => {
+  const productId = id;
+  const productMarket = market[0];
+
+  price = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  //가격에 , 추가
   const renderLogo = () => {
     if (market === "CARROT") {
       //당근마켓
@@ -52,27 +58,56 @@ export const ListItem = ({
         id: id,
         market: market,
         image: image,
+        price: price,
       },
     });
   };
 
-
-  const handleHeartClick = () => {
-    setLike(!like);
+  //찜하기
+  const [heart, setHeart] = useState(false);
+  const addHeart = async () => {
+    const productData = {
+      productId: id,
+      productName: name,
+      market: market,
+      heartCheck: 1,
+    };
+    axios
+      .get(`/api/product/${productId}/${productMarket}/heart/add`, productData)
+      .then(function (response) {
+        console.log("추가 성공", response);
+        setHeart(!heart);
+        alert("찜 성공");
+        // response
+      })
+      .catch(function (error) {
+        // 오류발생시 실행
+        console.log("실패", error);
+      })
+      .then(function () {
+        // 항상 실행
+        console.log("데이터 요청 완료");
+      });
   };
 
-  const [like, setLike] = useState(false);
-  {
-    /* const [like, setLike] = useState(false)
-
-    useEffect(async () => {
-      const fetchData = async () => {
-        const res = await axios.get(...)
-        if (res.data.type === 'liked') setLike(true)
-      }
-      fetchData()
-    }, []); */
-  }
+  //찜 해제
+  const deleteHeart = async () => {
+    axios
+      .get(`/api/product/${productId}/${productMarket}/heart/delete`)
+      .then(function (response) {
+        console.log("삭제 성공", response);
+        setHeart(!heart);
+        alert("찜 해제");
+      })
+      .catch(function (error) {
+        // 오류발생시 실행
+        console.log("실패", error);
+      })
+      .then(function () {
+        // 항상 실행
+        console.log("데이터 요청 완료");
+      });
+  };
 
   return (
     <div className={styles.listItem}>
@@ -83,8 +118,16 @@ export const ListItem = ({
           src={image}
           onClick={handleItemClick}
         />
+        {heart ? (
+          <HeartButtonMain
+            heart={heart}
+            onClick={deleteHeart}
+          ></HeartButtonMain>
+        ) : (
+          <HeartButtonMain heart={heart} onClick={addHeart}></HeartButtonMain>
+        )}
 
-        <HeartButtonMain like={like} onClick={handleHeartClick} />
+        {/*<HeartButtonMain heart={heart} onClick={handleHeartClick} />*/}
         {/* <button className={styles.heartButton} onClick={handleHeartClick}>
                 <img className={styles.heartIcon} src="/img/heart_empty.png" alt="하트" />
             </button>*/}

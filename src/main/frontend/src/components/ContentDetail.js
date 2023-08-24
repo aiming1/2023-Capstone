@@ -12,6 +12,7 @@ const ContentDetail = (props) => {
   const productMarket = product.state.market[0];
   //alert(productStore);
   const productImage = product.state.image;
+  const productPrice = product.state.price;
 
   const [data, setData] = useState(null);
   const [heart, setHeart] = useState(false);
@@ -27,61 +28,64 @@ const ContentDetail = (props) => {
     fetchData();
   }, []);
 
-  //찜하기/해제
-  //console.log({"name": data?.name});
-  /*
-  const addHeart = async () => {
-    try {
-      const productData={
-        "id": productId,
-                    "name": data?.name,
-                    "image": data?.image,
-                    "price": data?.price,
-                    "market": productMarket,
-                    "seller": data?.seller,
-                    "updatedate": data?.updatedate,
-                    "hearts": data?.hearts,
-                    "details": data?.details,
-                    "category": data?.category,
-                    "producturl": data?.producturl
-      };
-      const response = await axios.post(`/api/product/${productId}/${productMarket}/heart/add`, productData);
-      setHeart(!heart);
-    } catch (e) {
-      console.log({"error": e});
-      //setError(e);
+  const marketname = "오징어집";
+  const renderLogo = () => {
+    if (data?.market === "CARROT") {
+      //당근마켓
+      return (
+        <div>
+          <img
+            className={styles.icon6}
+            alt=""
+            src="/img/당근마켓 아이콘 1.png"
+          />{" "}
+          <span className={styles.div20}>당근마켓</span>
+        </div>
+      );
+    } else if (data?.market === "BUNJANG") {
+      //번개장터
+      return (
+        <div>
+          <img
+            className={styles.icon6}
+            alt=""
+            src="/img/번개장터 아이콘 1.png"
+          />
+          <span className={styles.div20}>번개장터</span>
+        </div>
+      );
+    } else if (data?.market === "JOONGGONARA") {
+      //중고나라
+      return (
+        <div>
+          <img
+            className={styles.icon6}
+            alt=""
+            src="/img/중고나라 아이콘 1.png"
+          />
+          <span className={styles.div20}>중고나라</span>
+        </div>
+      );
     }
+    return null;
   };
 
-  useEffect(() => {
-    addHeart();
-  }, []);
-*/
+  //찜하기
   const addHeart = async () => {
     const productData = {
-      productId: data?.id,
-      userId: data?.seller,
-      productName: data?.name,
-      market: data?.market,
-      heartCheck: 1, //??
-      date: data?.updatedate,
+      id: productId,
+      name: data?.name,
+      image: data?.image,
+      price: data?.price,
+      market: productMarket,
+      seller: data?.seller,
+      updatedate: data?.updatedate,
+      hearts: data?.hearts,
+      details: data?.details,
+      category: data?.category,
+      producturl: data?.producturl,
     };
-    /*
-    const productData={
-            "id": productId,
-                        "name": data?.name,
-                        "image": data?.image,
-                        "price": data?.price,
-                        "market": productMarket,
-                        "seller": data?.seller,
-                        "updatedate": data?.updatedate,
-                        "hearts": data?.hearts,
-                        "details": data?.details,
-                        "category": data?.category,
-                        "producturl": data?.producturl
-          };
-*/
-    console.log("data", productData);
+
     axios
       .get(`/api/product/${productId}/${productMarket}/heart/add`, productData)
       .then(function (response) {
@@ -119,28 +123,23 @@ const ContentDetail = (props) => {
       });
   };
 
-  /*
-  const addHeart = async (e) => {
-    setHeart(!heart);
-  };
-*/
-
-    const lsts = localStorage.getItem("watched");
-    useEffect(() => {
-      let lst = JSON.parse(lsts);
-      let dtail = [productId, productMarket, productImage];
-      const isSame =JSON.stringify(lst).includes(JSON.stringify(dtail))
-      if (!isSame){
-        if (lst.length > 4) {
-           lst.shift();
-          }
-         lst.push(dtail);
+  const lsts = localStorage.getItem("watched");
+  useEffect(() => {
+    let lst = JSON.parse(lsts);
+    let dtail = [productId, productMarket, productImage, productPrice];
+    const isSame = JSON.stringify(lst).includes(JSON.stringify(dtail));
+    if (!isSame) {
+      if (lst.length > 4) {
+        lst.shift();
+      }
+      lst.push(dtail);
       lst = new Set(lst);
       lst = Array.from(lst);
       localStorage.setItem("watched", JSON.stringify(lst));
-    }}, []);
-    // 최근 본  상품.
-    // detail 들어가면 product id를 watched에 추가
+    }
+  }, []);
+  // 최근 본  상품.
+  // detail 들어가면 product id를 watched에 추가
 
   return (
     <div className={styles.div}>
@@ -149,6 +148,7 @@ const ContentDetail = (props) => {
         <b className={styles.title}>{data?.name}</b>
         <b className={styles.price}>{data?.price}원</b>
         <div className={styles.category}>{`홈 > 여성의류`}{data?.category}</div>
+
         <div className={styles.name}>{data?.seller}</div>
         <div className={styles.date}>5분 전</div>
         <div className={styles.views}>조회 20000</div>
@@ -170,12 +170,13 @@ const ContentDetail = (props) => {
         <div className={styles.div7}>보러 가기</div>
       </div>
 
+      <div className={styles.line}></div>
       <div className={styles.div8}>{data?.details}</div>
 {/*      <div className={styles.div9}>
         <p className={styles.p}>거래거래</p>
         <p className={styles.p}>대충 거래글 끝</p>
-      </div>*/}
-      <div className={styles.line}></div>
+      </div>
+      
       <div className={styles.group}>
         <ImageSlide images={data?.image} />
         <div className={styles.div12}>
@@ -188,14 +189,7 @@ const ContentDetail = (props) => {
         </div>
       </div>
       <div className={styles.container}>
-        <div className={styles.div20}>중고나라</div>
-        <div className={styles.div21}>
-          <img
-            className={styles.icon6}
-            alt=""
-            src="/img/중고나라 아이콘 1.png"
-          />
-        </div>
+        <div className={styles.div21}>{renderLogo()}</div>
       </div>
     </div>
   );
