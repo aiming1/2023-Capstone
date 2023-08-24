@@ -118,14 +118,14 @@ export const ListItem = ({
           src={image}
           onClick={handleItemClick}
         />
-        {heart ?
+        {heart ? (
           <HeartButtonMain
             heart={heart}
             onClick={deleteHeart}
           ></HeartButtonMain>
-         :
+        ) : (
           <HeartButtonMain heart={heart} onClick={addHeart}></HeartButtonMain>
-        }
+        )}
 
         {/*<HeartButtonMain heart={heart} onClick={handleHeartClick} />*/}
         {/* <button className={styles.heartButton} onClick={handleHeartClick}>

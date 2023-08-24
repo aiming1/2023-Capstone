@@ -1,5 +1,4 @@
-.background{
-  {/*position: absolute;*/}
+.background {
   width: 100vw;
   height: 100vh;
   top: 0;
@@ -13,6 +12,6 @@
 }
 
 .loadingText {
-  font: 1rem 'Noto Sans KR';
+  font: 1rem "Noto Sans KR";
   text-align: center;
 }
