@@ -4,6 +4,7 @@ import styles from "../styles/css/ItemList.module.css";
 import style from "../styles/css/ContentDetail.module.css";
 import { ListItem } from "./ListItem";
 import Pagination from "./Pagination";
+import Loading from './Loading';
 
 //글자수 제한 함수
 const truncate = (str, n) => {
@@ -48,7 +49,7 @@ const HeartList = () => {
     fetchData();
   }, []);
 
-  if (loading) return <div>로딩중..</div>;
+  if (loading) return <div><Loading /></div>;
   if (error) return <div>에러가 발생했습니다</div>;
   if (!data) return null;
 
