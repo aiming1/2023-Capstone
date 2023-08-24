@@ -1,14 +1,9 @@
 .box {
-position: absolute;
+  position: absolute;
   top: 0;
-
   background-color: #ededed;
   width: 100%;
   height: 128px;
-
-
-
-
 }
 .notice {
   position: absolute;
