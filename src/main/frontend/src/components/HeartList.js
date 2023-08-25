@@ -79,7 +79,6 @@ const HeartList = () => {
             data={data}
             heartListId={heartListId}
             isHeart={heartListId.includes(item.id)}
-
           />
         ))}
       </div>

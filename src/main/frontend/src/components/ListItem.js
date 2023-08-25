@@ -12,10 +12,6 @@ export const ListItem = ({
   price = "0",
   image = "/img/빈 이미지.svg",
   hearts = 0,
-
-  isHeart, //하트 유지
-  data,
-  heartListId,
 }) => {
   const productId = id;
   const productMarket = market[0];
@@ -68,20 +64,13 @@ export const ListItem = ({
   };
 
   //찜하기
-  const [heart, setHeart] = useState(isHeart);
+  const [heart, setHeart] = useState(false);
   const addHeart = async () => {
     const productData = {
-      id: productId,
-      name: data?.name,
-      image: data?.image,
-      price: data?.price,
-      market: productMarket,
-      seller: data?.seller,
-      updatedate: data?.updatedate,
-      hearts: data?.hearts,
-      details: data?.details,
-      category: data?.category,
-      producturl: data?.producturl,
+      productId: id,
+      productName: name,
+      market: market,
+      heartCheck: 1,
     };
     axios
       .get(`/api/product/${productId}/${productMarket}/heart/add`, productData)
