@@ -13,9 +13,7 @@ import org.springframework.stereotype.Component;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 @Getter
 @Setter
@@ -26,6 +24,7 @@ public class HeartServiceImpl implements HeartService {
     private final ProductService productService;
     private final UserView userView;
 
+    @Transactional
     @Override
     public LinkedHashMap<String, Product> getHearts(String s) {
         Long id = Long.parseLong(s);
