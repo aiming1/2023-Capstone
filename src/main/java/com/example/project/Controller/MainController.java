@@ -101,4 +101,17 @@ public class MainController {
         });
         return datas;
     }
+
+    /** 찜 목록 전체 비우기 **/
+    @GetMapping("/list/delete")
+    public String heartListDelete(Authentication authentication, HttpServletRequest request){
+        mylogger.printRequestInfo(request, classPath, "유저 정보를 조회합니다···");
+        if(!userView.loginCheck(authentication)){
+            return "로그인을 먼저 진행해주세요.";
+        }
+
+        String id = userView.getUserid(authentication);
+        heartService.deleteAllHeart(id);
+        return "찜목록을 비웠습니다.";
+    }
 }

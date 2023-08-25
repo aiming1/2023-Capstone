@@ -15,8 +15,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-@Getter
-@Setter
 @Component
 @RequiredArgsConstructor
 public class HeartServiceImpl implements HeartService {
@@ -76,10 +74,17 @@ public class HeartServiceImpl implements HeartService {
         }
         return true;
     }
-
+    @Transactional
     @Override
-    public String getHeartUrl(String id, Product p) {
-        return p.getProducturl();
-    }
+    public String getHeartUrl(String id, Product p) { return p.getProducturl(); }
 
+    @Transactional
+    @Override
+    public void deleteAllHeart(String s) {
+        Long id = Long.parseLong(s);
+        ArrayList<Heart> hearts = heartRepository.findByUserId(id);
+        for (Heart h : hearts) {
+            heartRepository.delete(h);
+        }
+    }
 }
