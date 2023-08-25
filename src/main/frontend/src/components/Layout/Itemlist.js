@@ -3,7 +3,6 @@ import axios from "axios";
 import styles from "../../styles/css/ItemList.module.css";
 import { ListItem } from "../ListItem";
 import Pagination from "../Pagination";
-import HeartButtonMain from "../HeartButtonMain";
 import Loading from "../Loading";
 
 //글자수 제한 함수
