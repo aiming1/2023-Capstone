@@ -2,7 +2,7 @@ import styles from "../styles/css/ContentDetail.module.css";
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 import HeartButton from "./HeartButton";
-import ImageSlide from "./ImageSlide"
+import ImageSlide from "./ImageSlide";
 import axios from "axios";
 
 const ContentDetail = (props) => {
@@ -58,7 +58,6 @@ const ContentDetail = (props) => {
     fetchData();
   }, []); */
 
-  const marketname = "오징어집";
   const renderLogo = () => {
     if (data?.market === "CARROT") {
       //당근마켓
@@ -173,14 +172,19 @@ const ContentDetail = (props) => {
 
   return (
     <div className={styles.div}>
-      <img className={styles.icon} alt="" src={data?.image[0]} />
+      {/*<img className={styles.icon} alt="" src={data?.image[0]} />*/}
       <div className={styles.parent}>
         <b className={styles.title}>{data?.name}</b>
-        <b className={styles.price}>{data?.price}원</b>
-        <div className={styles.category}>{`홈 > 여성의류`}{data?.category}</div>
+        <b className={styles.price}>{productPrice}원</b>
+        <div className={styles.category}>
+          {`홈 > `}
+          {data?.category == null ? "카테고리" : data?.category}
+        </div>
 
         <div className={styles.name}>{data?.seller}</div>
-        <div className={styles.date}>5분 전</div>
+        <div className={styles.date}>
+          {data?.updatedate == null ? "0분전" : data?.updatedate}
+        </div>
         <div className={styles.views}>조회 20000</div>
         <div className={styles.heart}>찜 {data?.hearts}</div>
       </div>
@@ -202,17 +206,21 @@ const ContentDetail = (props) => {
 
       <div className={styles.line}></div>
       <div className={styles.div8}>{data?.details}</div>
+      {/*      <div className={styles.div9}>
+        <p className={styles.p}>거래거래</p>
+        <p className={styles.p}>대충 거래글 끝</p>
+      </div>*/}
 
       <div className={styles.group}>
         <ImageSlide images={data?.image} />
-        <div className={styles.div12}>
+        {/*<div className={styles.div12}>
           <div className={styles.inner} />
           <img className={styles.div13} alt="" src="/img/right-side.svg" />
         </div>
         <div className={styles.div14}>
           <div className={styles.inner} />
           <img className={styles.div15} alt="" src="/img/left-side.svg" />
-        </div>
+        </div>*/}
       </div>
       <div className={styles.container}>
         <div className={styles.div21}>{renderLogo()}</div>
