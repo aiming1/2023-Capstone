@@ -12,6 +12,8 @@ export const ListItem = ({
   price = "0",
   image = "/img/빈 이미지.svg",
   hearts = 0,
+
+  data,
 }) => {
   const productId = id;
   const productMarket = market[0];
@@ -67,11 +69,18 @@ export const ListItem = ({
   const [heart, setHeart] = useState(false);
   const addHeart = async () => {
     const productData = {
-      productId: id,
-      productName: name,
-      market: market,
-      heartCheck: 1,
-    };
+          id: productId,
+          name: data?.name,
+          image: data?.image,
+          price: data?.price,
+          market: productMarket,
+          seller: data?.seller,
+          updatedate: data?.updatedate,
+          hearts: data?.hearts,
+          details: data?.details,
+          category: data?.category,
+          producturl: data?.producturl,
+        };
     axios
       .get(`/api/product/${productId}/${productMarket}/heart/add`, productData)
       .then(function (response) {

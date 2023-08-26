@@ -20,7 +20,6 @@ const ItemList = ({ selectedCategoryId }) => {
   const [page, setPage] = useState(1); //현재 페이지 번호
   //const offset = (page - 1) * limit; //페이지 당 첫 게시물 위치
 
-  //흠
   const indexOfLast = page * limit;
   const indexOfFirst = (page - 1) * limit;
   const currentPosts = (data) => {
@@ -28,7 +27,6 @@ const ItemList = ({ selectedCategoryId }) => {
     currentPosts = data.slice(indexOfFirst, indexOfLast);
     return currentPosts;
   };
-  //
 
   const fetchData = async () => {
     try {
@@ -69,6 +67,9 @@ const ItemList = ({ selectedCategoryId }) => {
     }
   }, [selectedCategoryId]);
 
+
+
+
   // 카테고리 선택을 처리하는 함수
   /*  const handleListItemClick = (categoryId) => {
     alert(categoryId);
@@ -91,13 +92,15 @@ const ItemList = ({ selectedCategoryId }) => {
         {currentPosts(data).map((item) => (
           <ListItem
             className={styles.listItem}
-            key={item.url}
-            id={item.id}
-            market={item.market}
-            price={item.price}
-            name={truncate(item.name, 10)}
-            image={item.image}
-            hearts={item.hearts}
+            key={item?.url}
+            id={item?.id}
+            market={item?.market}
+            price={item?.price}
+            name={truncate(item?.name, 10)}
+            image={item?.image}
+            hearts={item?.hearts}
+
+            data={data}
           />
         ))}
       </div>
