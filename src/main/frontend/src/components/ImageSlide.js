@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '@fortawesome/fontawesome-free/css/all.min.css'
 import styles from "../styles/css/ContentDetail.module.css";
 
 class ImageSlide extends Component {

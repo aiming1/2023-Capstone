@@ -281,54 +281,11 @@
   height: 400px;
   object-fit: cover;
 }
-.div13,
-.icon5,
-.inner {
+
+.icon5 {
   position: absolute;
 }
-.inner {
-  height: 100%;
-  width: 100%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  border-radius: 50%;
-  background-color: var(--color-gray-300);
-}
-.div13 {
-  width: 25px;
-  height: 25px;
-  flex-shrink: 0;
-  top: 16%;
-  left: 24%;
-  display: flex;
-  align-items: center;
-}
-.div12,
-.div15 {
-  position: absolute;
-  top: 322px;
-  left: 505px;
-  width: 25px;
-  height: 25px;
-}
-.div15 {
-  width: 25px;
-  height: 25px;
-  flex-shrink: 0;
-  top: 16%;
-  left: 20%;
-  display: flex;
-  align-items: center;
-}
-.div14 {
-  top: 322px;
-  left: 465px;
-  width: 25px;
-  height: 25px;
-}
-.div14,
+
 .group,
 .planet {
   position: absolute;
@@ -569,6 +526,9 @@
       font-weight: 100;
       vertical-align: middle;
       color: #eeeeee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .buttonPrev {
       left: -50px;
