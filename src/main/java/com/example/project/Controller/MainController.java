@@ -10,12 +10,9 @@ import com.example.project.config.auth.PrincipalDetails;
 import com.example.project.domain.UserView;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.nio.file.Paths;
 import java.util.*;
 
 @RequiredArgsConstructor
@@ -113,5 +110,16 @@ public class MainController {
         String id = userView.getUserid(authentication);
         heartService.deleteAllHeart(id);
         return "찜목록을 비웠습니다.";
+    }
+    
+    /** 찜 목록 새로고침 **/
+    @GetMapping("/list/f5")
+    public void refreshHearts(Authentication authentication, HttpServletRequest request){
+        mylogger.printRequestInfo(request, classPath, "유저 정보를 조회합니다···");
+        if(!userView.loginCheck(authentication)){
+            return;
+        }
+        String id = userView.getUserid(authentication);
+        heartService.refreshHearts(id);
     }
 }
