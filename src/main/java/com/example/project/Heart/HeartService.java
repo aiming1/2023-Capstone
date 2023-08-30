@@ -13,4 +13,5 @@ public interface HeartService {
     public void deleteHeartById(String id, Product p);
     public boolean findDuplicateHearts(String id, Product p);
     public String getHeartUrl(String id, Product p);
+    public void deleteAllHeart(String id);
 }
