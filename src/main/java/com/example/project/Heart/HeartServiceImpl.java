@@ -5,9 +5,7 @@ import com.example.project.Product.Product;
 import com.example.project.Product.ProductService;
 import com.example.project.Repository.HeartRepository;
 import com.example.project.domain.UserView;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -30,16 +28,15 @@ public class HeartServiceImpl implements HeartService {
         LinkedHashMap<String, Product> page = new LinkedHashMap<>();
         int i = 0;
 
-        for(Heart h : hearts){
+        for(Heart h : hearts) {
             i += 1;
             Market m = userView.parseMarket(h.getMarket());
-            Product p = null;
-            try {
-                p = productService.getProduct(h.getProductId(), m);
-            } catch (NullPointerException exception){
-                deleteHeartById(String.valueOf(id),p);
-            }
-            page.put(i+"",p);
+            ArrayList<String> img = new ArrayList<>();
+            img.add(h.getImg_url());
+            Product p = new Product(
+                    h.getProductId(), h.getProductName(), img, h.getPrice(), m, null, null, h.getExternal_heart(), null, null, null
+            );
+            page.put(i+"", p);
         }
         return page;
     }
@@ -49,8 +46,9 @@ public class HeartServiceImpl implements HeartService {
     public void addHeartById(String id, Product p) {
         Long userId = Long.parseLong(id);
         LocalDate date = LocalDate.now();
+        ArrayList<String> img = p.getImage();
         Heart heart = new Heart(
-                p.getId(),userId,p.getName(),p.getMarket()+"",1,date+""
+                p.getId(),userId,p.getName(),p.getMarket()+"",date+"",p.getPrice(),img.get(0),p.getHearts()
         );
         heartRepository.save(heart);
     }
@@ -80,11 +78,29 @@ public class HeartServiceImpl implements HeartService {
 
     @Transactional
     @Override
-    public void deleteAllHeart(String s) {
-        Long id = Long.parseLong(s);
-        ArrayList<Heart> hearts = heartRepository.findByUserId(id);
+    public void deleteAllHeart(String id) {
+        Long userId = Long.parseLong(id);
+        ArrayList<Heart> hearts = heartRepository.findByUserId(userId);
         for (Heart h : hearts) {
             heartRepository.delete(h);
+        }
+    }
+    @Transactional
+    @Override
+    public void refreshHearts(String id) {
+        Long userId = Long.parseLong(id);
+        ArrayList<Heart> hearts = heartRepository.findByUserId(userId);
+
+        for (Heart h : hearts) {
+            Market m = userView.parseMarket(h.getMarket());
+            Product p = null;
+            try {
+                p = productService.getProduct(h.getProductId(), m);
+            } catch (NullPointerException exception) {
+                ArrayList<Heart> heart = heartRepository.findByProductIdAndUserId(h.getProductId(), userId);
+                Heart wrong = heart.get(0);
+                heartRepository.delete(wrong);
+            }
         }
     }
 }
