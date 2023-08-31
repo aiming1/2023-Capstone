@@ -246,12 +246,13 @@
   cursor: pointer;
 }
 .div8 {
-  top: 735px;
-  left: 414px;
+  top: 700px;
+  left: 200px;
   color: var(--color-gray-200);
   display: inline-block;
-  width: 453px;
+  width: 850px;
   height: 46px;
+  font-size: 18px;
 }
 .p {
   margin: 0;

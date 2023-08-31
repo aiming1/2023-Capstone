@@ -13,6 +13,7 @@ const truncate = (str, n) => {
 
 const HeartList = () => {
   const [data, setData] = useState(null);
+  const [heartListId, setHeartListId]=useState([]); //하트 유지
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -33,14 +34,14 @@ const HeartList = () => {
       // 요청이 시작 할 때에는 error 와 users 를 초기화하고
       setError(null);
       setData(null);
+      setHeartListId(null);
       // loading 상태를 true 로 바꿉니다.
       setLoading(true);
       const response = await axios.get("/api/list");
       setData(response.data); // 데이터는 response.data 안에 들어있습니다.
-      console.log("list: ", data);
     } catch (e) {
       setError(e);
-      console.log("list: ", data);
+      console.log("에러...왜죠"); //
     }
     setLoading(false);
   };
@@ -61,16 +62,17 @@ const HeartList = () => {
   return (
     <div className={style.divhome}>
       <div className={styles.itemlistcontent}>
-        {currentPosts(data).map((item) => (
+        { currentPosts(data).map((item) => (
           <ListItem
             className={styles.listItem}
-            key={item.url}
-            id={item.id}
-            market={item.market}
-            price={item.price}
-            name={truncate(item.name, 10)}
-            image={item.image}
-            hearts={item.hearts}
+            key={item?.id}
+            id={item?.id}
+            market={item?.market}
+            price={item?.price}
+            name={truncate(item?.name, 10)}
+            image={item?.image}
+            hearts={item?.hearts}
+            data={data}
           />
         ))}
       </div>
