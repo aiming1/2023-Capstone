@@ -2,20 +2,21 @@ import styles from "../styles/css/ContentDetail.module.css";
 import React, { useState, useEffect, useParams } from "react";
 import { useLocation } from "react-router";
 import HeartButton from "./HeartButton";
-import ImageSlide from "./ImageSlide"
+import ImageSlide from "./ImageSlide";
+import Modal from './ImageModal';
 import axios from "axios";
 
 const ContentDetail = (props) => {
   const product = useLocation();
   const productId = product.state.id;
-  //alert(product.state.id);
   const productMarket = product.state.market[0];
-  //alert(productStore);
   const productImage = product.state.image;
   const productPrice = product.state.price;
 
   const [data, setData] = useState(null);
   const [heart, setHeart] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState("");
 
   const fetchData = async () => {
     setData(null);
@@ -141,15 +142,30 @@ const ContentDetail = (props) => {
   // 최근 본  상품.
   // detail 들어가면 product id를 watched에 추가
 
+
+  // 이미지 클릭 시 모달 열기
+  const openModal = (image) => {
+    setSelectedImage(image);
+    setIsModalOpen(true);
+  };
+
+  // 모달 닫기
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className={styles.div}>
       {/*<img className={styles.icon} alt="" src={data?.image[0]} />*/}
       <div className={styles.productTop}>
         <div className={styles.productImageWrapper}>
           <div className={styles.group}>
-            <ImageSlide images={data?.image} />
+            <ImageSlide images={data?.image} onImageClick={openModal} />
           </div>
         </div>
+        {isModalOpen && (
+           <Modal image={selectedImage} onClose={closeModal} />
+        )}
 
         <div className={styles.productSummaryWrapper}>
           <div className={styles.parent}>
