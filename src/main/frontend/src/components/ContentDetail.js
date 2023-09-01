@@ -33,7 +33,7 @@ const ContentDetail = (props) => {
     if (data?.market === "CARROT") {
       //당근마켓
       return (
-        <div>
+        <div className={styles.wrapicon}>
           <img
             className={styles.icon6}
             alt=""
@@ -45,7 +45,7 @@ const ContentDetail = (props) => {
     } else if (data?.market === "BUNJANG") {
       //번개장터
       return (
-        <div>
+        <div className={styles.wrapicon}>
           <img
             className={styles.icon6}
             alt=""
@@ -57,7 +57,7 @@ const ContentDetail = (props) => {
     } else if (data?.market === "JOONGGONARA") {
       //중고나라
       return (
-        <div>
+        <div className={styles.wrapicon}>
           <img
             className={styles.icon6}
             alt=""
@@ -143,46 +143,66 @@ const ContentDetail = (props) => {
 
   return (
     <div className={styles.div}>
-      <img className={styles.icon} alt="" src={data?.image[0]} />
-      <div className={styles.parent}>
-        <b className={styles.title}>{data?.name}</b>
-        <b className={styles.price}>{data?.price}원</b>
-        <div className={styles.category}>{`홈 > 여성의류`}{data?.category}</div>
+      {/*<img className={styles.icon} alt="" src={data?.image[0]} />*/}
+      <div className={styles.productTop}>
+        <div className={styles.productImageWrapper}>
+          <div className={styles.group}>
+            <ImageSlide images={data?.image} />
+          </div>
+        </div>
 
-        <div className={styles.name}>{data?.seller}</div>
-        <div className={styles.date}>5분 전</div>
-        <div className={styles.views}>조회 20000</div>
-        <div className={styles.heart}>찜 {data?.hearts}</div>
+        <div className={styles.productSummaryWrapper}>
+          <div className={styles.parent}>
+            <div className={styles.productDetails}>
+              <div className={styles.category}>{`홈 > `}{data?.category}</div>
+              <div className={styles.title}>{data?.name}</div>
+              <div className={styles.name}>{data?.seller}</div>
+              <div className={styles.state}>
+                <div className={styles.date}>5분 전</div>
+                <div className={styles.views}>조회 20000</div>
+                <div className={styles.heart}>찜 {data?.hearts}</div>
+              </div>
+              <div className={styles.price}>{data?.price}원</div>
+            </div>
+
+            <div className={styles.productButtons}>
+              {heart ? (
+                <HeartButton heart={heart} onClick={deleteHeart}></HeartButton>
+              ) : (
+                <HeartButton heart={heart} onClick={addHeart}></HeartButton>
+              )}
+
+              <div
+                className={styles.btn_golink}
+                onClick={() => {
+                  window.open(data?.producturl);
+                }}
+              >
+                <div className={styles.child} />
+                <div className={styles.div7}>보러 가기</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      {heart ? (
-        <HeartButton heart={heart} onClick={deleteHeart}></HeartButton>
-      ) : (
-        <HeartButton heart={heart} onClick={addHeart}></HeartButton>
-      )}
 
-      <div
-        className={styles.btn_golink}
-        onClick={() => {
-          window.open(data?.producturl);
-        }}
-      >
-        <div className={styles.child} />
-        <div className={styles.div7}>보러 가기</div>
+      <div className={styles.container}>
+        <div className={styles.div21}>{renderLogo()}</div>
       </div>
 
       <div className={styles.line}></div>
-      <div className={styles.div8}>{data?.details}</div>
+
+      <div className={styles.productInfo}>
+        <div className={styles.infoHeadLine}>상품 설명</div>
+        <div className={styles.description}>{data?.details}</div>
+      </div>
+
 {/*      <div className={styles.div9}>
         <p className={styles.p}>거래거래</p>
         <p className={styles.p}>대충 거래글 끝</p>
       </div>
  */}
-      <div className={styles.group}>
-        <ImageSlide images={data?.image} />
-      </div>
-      <div className={styles.container}>
-        <div className={styles.div21}>{renderLogo()}</div>
-      </div>
+
     </div>
   );
 };

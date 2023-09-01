@@ -31,9 +31,9 @@ class ImageSlide extends Component {
           <div
             className={styles.slideList}
             style={{
-              width: `${(this.state.imageCurrentNo + 1) * 550}px`,
+              width: `${(this.state.imageCurrentNo + 1) * 450}px`,
               transform: `translate3d(
-                ${this.state.imageCurrentNo * -550}px, 0px, 0px`,
+                ${this.state.imageCurrentNo * -450}px, 0px, 0px`,
             }}
           >
             {images?.map((image, no) => (

@@ -45,8 +45,7 @@
   width: 10%;
 }
 
-.title,
-.price,
+
 .icon {
   position: absolute;
 }
@@ -58,22 +57,31 @@
 }
 .title,
 .price {
-  font-size: 24px;
+  font-size: 27px;
+  font-weight: bold;
   color: var(--color-gray-200);
-  width: 312px;
 }
 .title {
-  top: 34px;
   left: 0;
-  display: flex;
+  display: block;
   align-items: center;
-  height: 30px;
+  width: 100%;
+  margin-top: 10px;
 }
 .price {
-  top: 149px;
   left: 1px;
   height: 31px;
+  width: 100%;
+ /* margin-top: 10px; */
+  padding: 30px 0px;
 }
+.state {
+  display: flex;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
+
 .price,
 .category,
 .name,
@@ -83,12 +91,11 @@
   align-items: center;
 }
 .category {
-  position: absolute;
   top: 0;
   left: 1px;
   font-size: var(--font-size-lg);
   font-weight: 500;
-  width: 408px;
+  width: 100%;
   height: 22px;
 }
 .name,
@@ -97,12 +104,13 @@
   height: 20px;
 }
 .name {
-  position: absolute;
-  top: 76px;
   left: 1px;
 
   font-weight: 500;
-  width: 130px;
+  width: 100%;
+  margin-top: 15px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(238, 238, 238);
 
   color: #767676;
   font-size: 16px;
@@ -111,13 +119,8 @@
   font-weight: 500;
   line-height: normal;
 }
-.date,
-.views {
-  top: 104px;
-}
+
 .date {
-  position: absolute;
-  left: 1px;
   width: 80px;
 
   flex-direction: column;
@@ -148,10 +151,9 @@
 .views,
 .heart,
 .parent {
-  position: absolute;
+  position: relative;
 }
 .heart {
-  top: 104px;
   left: 181px;
   display: flex;
   align-items: center;
@@ -169,10 +171,11 @@
   line-height: normal;
 }
 .parent {
-  top: 191px;
-  left: 655px;
-  width: 409px;
-  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
   font-size: var(--font-size-sm);
 }
 
@@ -217,15 +220,13 @@
   box-sizing: border-box;
 }
 .btn_golink {
-  top: 472px;
-  left: 799px;
+  left: 150px;
   width: 201px;
   height: 54px;
   cursor: pointer;
 }
 .btn_golink,
-.div7,
-.div8 {
+.div7 {
   position: absolute;
 }
 .div7 {
@@ -245,14 +246,21 @@
   font-family: Noto Sans KR;
   cursor: pointer;
 }
-.div8 {
-  top: 735px;
-  left: 414px;
+
+.infoHeadLine {
+  width: 95%;
+  font-size: 20px;
+  padding: 30px 0px 15px;
+  border-bottom: 1px solid rgb(238, 238, 238);
+}
+.description {
   color: var(--color-gray-200);
   display: inline-block;
-  width: 453px;
-  height: 46px;
+  width: 90%;
+  margin: 40px 10px;
+  line-height: 1.5;
 }
+
 .p {
   margin: 0;
 }
@@ -267,34 +275,30 @@
 }
 
 .line {
-  position: absolute;
-  top: 668px;
-  left: 194px;
-  width: 862px;
+  margin: 15px 0px;
+  width: 100%;
   height: 2px;
   background: #dbdbdb;
 }
-.icon5 {
+/*.icon5 {
   top: 0;
   left: 0;
   width: 550px;
   height: 400px;
   object-fit: cover;
-}
+}*/
 
 .icon5 {
   position: absolute;
 }
 
-.group,
+
 .planet {
   position: absolute;
 }
 .group {
-  top: 191px;
-  left: 80px;
-  width: 545px;
-  height: 360px;
+  width: 100%;
+  height: 100%;
   font-size: var(--font-size-xl);
   font-family: var(--font-inter);
 }
@@ -315,11 +319,8 @@
   box-sizing: border-box;
 }
 .div17 {
-  position: absolute;
   height: 50%;
-  width: 45.13%;
-  top: 25.93%;
-  left: 26.55%;
+  margin: 10px auto;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -333,11 +334,8 @@
 }
 
 .div177 {
-  position: absolute;
   height: 50%;
-  width: 45.13%;
-  top: 25.93%;
-  left: 26.55%;
+  margin: 10px auto;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -350,9 +348,6 @@
   font-family: Noto Sans KR;
 }
 .btn_unheart {
-  position: absolute;
-  top: 472px;
-  left: 656px;
   width: 113px;
   height: 54px;
   cursor: pointer;
@@ -364,9 +359,6 @@
 }
 
 .btn_heart {
-  position: absolute;
-  top: 472px;
-  left: 656px;
   width: 113px;
   height: 54px;
   color: var(--color-white);
@@ -391,13 +383,8 @@
   box-sizing: border-box;
 }
 
-.div20,
-.icon6 {
-  position: absolute;
-  top: 0;
-}
+
 .div20 {
-  left: 35px;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -416,37 +403,40 @@
   line-height: normal;
 }
 .icon6 {
-  height: 100%;
-  width: 100%;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  width: 20px;
+  margin-right: 5px;
   max-width: 100%;
   overflow: hidden;
   max-height: 100%;
 /*  object-fit: cover; <- 당근마켓이 짤려요ㅠㅠ*/
   object-fit: contain
 }
+.wrapicon {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
 .container,
 .div21 {
-  position: absolute;
-  top: 3px;
   left: 0;
-  width: 23px;
   height: 18px;
 }
 .container {
-  top: 568px;
-  left: 80px;
-  width: 91px;
+  width: 100%;
   height: 21px;
   font-size: var(--font-size-sm);
 }
+
+
 .div {
+  top: 130px;
   position: relative;
+  display: block;
   background-color: var(--color-white);
-  width: 100%;
-  height: 1510px;
+  width: 1024px;
+  margin: 0 auto;
+  height: 1000px;
   overflow: hidden;
   text-align: left;
   font-size: var(--font-size-base);
@@ -454,12 +444,38 @@
   font-family: var(--font-noto-sans-kr);
 }
 
+.productTop {
+  display: flex;
+  padding-top: 30px;
+  padding-bottom: 10px;
+/*  padding: 30px 0px;*/
+}
+
+.productImageWrapper {
+  display: block;
+  margin-right: 40px;
+  width: 450px;
+  height: 400px;
+}
+.productSummaryWrapper {
+  display: block;
+  width: 100%;
+  height: 400px;
+}
+.productButtons {
+  display: flex;
+  width: 100%;
+}
+
+.productInfo {
+  padding-bottom: 10px;
+}
+
+
 
 /* ImageSlide.js */
 .imageSlide {
   position: relative;
-  width: 550px;
-  height: 400px;
   margin: auto;
   padding-bottom: 30px;
 
@@ -482,6 +498,7 @@
     overflow-x: hidden;
 
     .slideList {
+      width: 100%;
       height: 400px;
       transition: all 300ms ease 0s;
       overflow: hidden;
@@ -489,6 +506,8 @@
       .slideContent {
         display: table;
         float: left;
+        width: 450px;
+        height: 400px;
 
         picture {
           display: table-cell;
@@ -499,9 +518,10 @@
     }
 
     .slideImg {
-      width: 550px;
+      width: 100%;
       height: 400px;
       object-fit: cover;
+
     }
 
     &:hover .buttonPrev {
