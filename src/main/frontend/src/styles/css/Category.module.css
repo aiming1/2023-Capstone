@@ -1,15 +1,15 @@
 .categorybox {
-    overflow: hidden;
-    /*cursor: pointer;*/
-    border: 3px solid;
-    border-color: #f5f5f5;
-    background-color: #ffffff;
-    padding: 10px;
-    position: relative;
-    border-radius: 10px;
-    width: 70%;
-    height: 20%;
-    margin: 0 auto;
+  overflow: hidden;
+  /*cursor: pointer;*/
+  border: 3px solid;
+  border-color: #f5f5f5;
+  background-color: #ffffff;
+  padding: 10px;
+  position: relative;
+  border-radius: 10px;
+  width: 70%;
+  height: 20%;
+  margin: 0 auto;
 }
 
 .accordionTitle {
@@ -32,58 +32,74 @@
   font-weight: bolder;
 }
 
+.cdelete {
+  display: inline;
+  float: right;
+  margin-right: 10px;
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    transform: translateY(0px);
+  }
+}
+
 .categoryContent {
-    display: flex;
-    align-items: center;
-    align-self: center;
-    gap: 5px;
-    height: 19px;
-    position: relative;
-    width: fit-content;
-    margin: 5px 10px;  /* 위아래, 좌우 */
+  display: flex;
+  align-items: center;
+  align-self: center;
+  gap: 5px;
+  height: 19px;
+  position: relative;
+  width: fit-content;
+  margin: 5px 10px; /* 위아래, 좌우 */
 }
 
 /*
 .categoryContent .checkbox {
-    background-color: #ffffff;
-    border: 1px solid;
-    border-color: #00000052;
-    height: 12px;
-    min-width: 12px;
-    position: relative;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #00000052;
+  height: 12px;
+  min-width: 12px;
+  position: relative;
 }
 */
 ul {
   list-style: none;
   padding-left: 0;
 }
-il{
+il {
   top: 5px;
   left: 5px;
 }
 #leftToRight li::after {
-  position: absolute; 
-  content:""; display: block; 
-  border-bottom: 3px solid #5d1fc2; 
-  transition: width 250ms ease-out; 
-  left: auto; right: 0;  width: 0;
+  position: absolute;
+  content: "";
+  display: block;
+  border-bottom: 3px solid #5d1fc2;
+  transition: width 250ms ease-out;
+  left: auto;
+  right: 0;
+  width: 0;
 }
 #leftToRight li:hover::after {
-  width: 100%; left: 0; right: auto;
+  width: 100%;
+  left: 0;
+  right: auto;
 }
 
 .contentBtn {
-    background-color: transparent;
-    border: none;
-    
-    font-family: "Noto Sans CJK KR";
-    font-size: 16px;
-    font-width: bold;
-    list-style: none;
+  background-color: transparent;
+  border: none;
 
-    /* 여기서부터 css 코드 */
-    position: relative;
-    transition: 0.3s;
+  font-family: "Noto Sans CJK KR";
+  font-size: 16px;
+  font-width: bold;
+  list-style: none;
+
+  /* 여기서부터 css 코드 */
+  position: relative;
+  transition: 0.3s;
 }
 .contentBtn:hover {
   /*color: 텍스트 색깔*/
@@ -91,37 +107,35 @@ il{
   /*background: rgb(234, 235, 235);*/
 }
 
-
-
 /* 아코디언 버튼 스타일 */
 
 .categorybox button {
-    width: 100%;
-    height: 40px;
-    margin-top: 10px;
-    background-color: #ebeaea;
-    color: #000000;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 3px;
-    cursor: pointer;
-    /*font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;*/
-    font-family: "Noto Sans KR";
-    font-size: large;
-  }
-  
-  .categorybox button:hover {
-    background-color: #dcdcdc;
-  }
-  
-  /* 아코디언 콘텐츠 스타일 */
-  .categorybox .accordionContent {
-    display: flex;
-    flex : 2;
-    flex-wrap: wrap;
-    align-content: space-around;
-    background-color: transparent;
-    /*border: 1px solid #ebeaea;*/
-    padding: 10px;
-    border-radius: 3px;
-  }
+  width: 100%;
+  height: 40px;
+  margin-top: 10px;
+  background-color: #ebeaea;
+  color: #000000;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  /*font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;*/
+  font-family: "Noto Sans KR";
+  font-size: large;
+}
+
+.categorybox button:hover {
+  background-color: #dcdcdc;
+}
+
+/* 아코디언 콘텐츠 스타일 */
+.categorybox .accordionContent {
+  display: flex;
+  flex: 2;
+  flex-wrap: wrap;
+  align-content: space-around;
+  background-color: transparent;
+  /*border: 1px solid #ebeaea;*/
+  padding: 10px;
+  border-radius: 3px;
+}

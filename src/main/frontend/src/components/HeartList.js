@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "../styles/css/ItemList.module.css";
 import style from "../styles/css/ContentDetail.module.css";
+import style2 from "../styles/css/Category.module.css";
 import { ListItem } from "./ListItem";
 import Pagination from "./Pagination";
 import Loading from "./Loading";
@@ -11,9 +12,9 @@ const truncate = (str, n) => {
   return str?.length > n ? str.substr(0, n - 1) + "..." : str;
 };
 
-const HeartList = () => {
+const HeartList = ({ deleteAll }) => {
   const [data, setData] = useState(null);
-  const [heartListId, setHeartListId] = useState([]); //하트 유지
+  //const [heartListId, setHeartListId] = useState([]); //하트 유지
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -32,14 +33,14 @@ const HeartList = () => {
       // 요청이 시작 할 때에는 error 와 users 를 초기화하고
       setError(null);
       setData(null);
-      setHeartListId([]);
+      //setHeartListId([]);
       // loading 상태를 true 로 바꿉니다.
       setLoading(true);
       const response = await axios.get("/api/list");
       setData(response.data); // 데이터는 response.data 안에 들어있습니다.
       //setHeartListId(makeArr(data)); //하트 유지
       //setHeartListId(heartData.map((list) => list.id)); //하트 유지
-      console.log("list", data, "id list", heartListId);
+      //console.log("list", data);
     } catch (e) {
       setError(e);
       console.log("에러...", e); //
@@ -49,7 +50,7 @@ const HeartList = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [deleteAll]);
 
   if (loading)
     return (
@@ -61,7 +62,7 @@ const HeartList = () => {
   if (!data) return null;
 
   return (
-    <div className={style.divhome}>
+    <div>
       <div className={styles.itemlistcontent}>
         {data.length > 0 &&
           data
@@ -80,6 +81,7 @@ const HeartList = () => {
               />
             ))}
       </div>
+
       <div className={styles.pageMove}>
         <Pagination
           postLength={data.length}
