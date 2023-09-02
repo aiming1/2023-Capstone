@@ -120,7 +120,7 @@ const ContentDetail = (props) => {
       .then(function (response) {
         console.log("추가 성공", response);
         setHeart(!heart);
-        alert("찜 성공");
+        alert("찜목록에 추가되었습니다.");
         // response
       })
       .catch(function (error) {
@@ -140,7 +140,7 @@ const ContentDetail = (props) => {
       .then(function (response) {
         console.log("삭제 성공", response);
         setHeart(!heart);
-        alert("찜 해제");
+        alert("찜목록에서 제거합니다.");
       })
       .catch(function (error) {
         // 오류발생시 실행

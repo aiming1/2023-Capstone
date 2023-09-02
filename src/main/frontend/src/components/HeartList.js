@@ -13,35 +13,36 @@ const truncate = (str, n) => {
 
 const HeartList = () => {
   const [data, setData] = useState(null);
-  const [heartListId, setHeartListId]=useState([]); //하트 유지
+  const [heartListId, setHeartListId] = useState([]); //하트 유지
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const limit = 8; //페이지 당 최대 게시물 수
-  const [page, setPage] = useState(1); //현재 페이지 번호
-  //const offset = (page - 1) * limit; //페이지 당 첫 게시물 위치
+  //페이징
+  const [oneViewNumber, setOneViewNumber] = useState(8);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * oneViewNumber;
 
-  const indexOfLast = page * limit;
-  const indexOfFirst = (page - 1) * limit;
-  const currentPosts = (data) => {
-    let currentPosts = 0;
-    currentPosts = data.slice(indexOfFirst, indexOfLast);
-    return currentPosts;
-  };
+  // 페이징 안의 페이징
+  const [pageNationPage, setPageNationPage] = useState(1);
+  const pageNationOffset = (pageNationPage - 1) * oneViewNumber;
 
   const fetchData = async () => {
     try {
       // 요청이 시작 할 때에는 error 와 users 를 초기화하고
       setError(null);
       setData(null);
-      setHeartListId(null);
+      setHeartListId([]);
       // loading 상태를 true 로 바꿉니다.
       setLoading(true);
       const response = await axios.get("/api/list");
       setData(response.data); // 데이터는 response.data 안에 들어있습니다.
+      //setHeartListId(makeArr(data)); //하트 유지
+      //setHeartListId(heartData.map((list) => list.id)); //하트 유지
+      console.log("list", data, "id list", heartListId);
     } catch (e) {
       setError(e);
-      console.log("에러...왜죠"); //
+      console.log("에러...", e); //
     }
     setLoading(false);
   };
@@ -62,26 +63,30 @@ const HeartList = () => {
   return (
     <div className={style.divhome}>
       <div className={styles.itemlistcontent}>
-        { currentPosts(data).map((item) => (
-          <ListItem
-            className={styles.listItem}
-            key={item?.id}
-            id={item?.id}
-            market={item?.market}
-            price={item?.price}
-            name={truncate(item?.name, 10)}
-            image={item?.image}
-            hearts={item?.hearts}
-            data={data}
-          />
-        ))}
+        {data.length > 0 &&
+          data
+            .slice(offset, offset + oneViewNumber)
+            .map((item) => (
+              <ListItem
+                className={styles.listItem}
+                key={item.url}
+                id={item.id}
+                market={item.market}
+                price={item.price}
+                name={truncate(item.name, 10)}
+                image={item.image}
+                hearts={item.hearts}
+                data={data}
+              />
+            ))}
       </div>
       <div className={styles.pageMove}>
         <Pagination
-          total={data.length}
-          limit={limit}
+          postLength={data.length}
+          oneViewNumber={oneViewNumber}
           page={page}
           setPage={setPage}
+          inMaxPageListNumber={5}
         />
       </div>
     </div>
