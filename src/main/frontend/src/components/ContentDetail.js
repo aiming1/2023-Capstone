@@ -1,9 +1,10 @@
 import styles from "../styles/css/ContentDetail.module.css";
-import React, { useState, useEffect, useParams } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 import HeartButton from "./HeartButton";
 import ImageSlide from "./ImageSlide";
 import Modal from './ImageModal';
+
 import axios from "axios";
 
 const ContentDetail = (props) => {
@@ -14,11 +15,40 @@ const ContentDetail = (props) => {
   const productPrice = product.state.price;
 
   const [data, setData] = useState(null);
+  const [data2, setData2] = useState(null);
   const [heart, setHeart] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
+  const [error, setError] = useState(null);
 
-  const fetchData = async () => {
+  useEffect(() => {
+    axios
+      .all([
+        axios.get(`/api/product/${productId}/${productMarket}`, {}),
+        axios.get("/api/list", {}),
+      ])
+      .then(
+        axios.spread((res, res2) => {
+          const data = res.data;
+          const data2 = res2.data;
+          setData(data);
+          setData2(data2);
+
+          let isHeart = data2.some((x) => {
+            return x?.id === data?.id;
+          });
+          setHeart(isHeart);
+          //console.log("heart", isHeart);
+        })
+      )
+      .catch((e) => {
+        setError(e);
+        //console.log("에러...");
+      });
+  }, []);
+
+  //
+  /*const fetchData = async () => {
     setData(null);
     const response = await axios.get(
       `/api/product/${productId}/${productMarket}`
@@ -27,9 +57,8 @@ const ContentDetail = (props) => {
   };
   useEffect(() => {
     fetchData();
-  }, []);
+  }, []); */
 
-  const marketname = "오징어집";
   const renderLogo = () => {
     if (data?.market === "CARROT") {
       //당근마켓
@@ -170,11 +199,16 @@ const ContentDetail = (props) => {
         <div className={styles.productSummaryWrapper}>
           <div className={styles.parent}>
             <div className={styles.productDetails}>
-              <div className={styles.category}>{`홈 > `}{data?.category}</div>
+              <div className={styles.category}>
+                {`홈 > `}
+                {data?.category == null ? "카테고리" : data?.category}
+              </div>
               <div className={styles.title}>{data?.name}</div>
               <div className={styles.name}>{data?.seller}</div>
               <div className={styles.state}>
-                <div className={styles.date}>5분 전</div>
+                <div className={styles.date}>
+                  {data?.updatedate == null ? "0분전" : data?.updatedate}
+                </div>
                 <div className={styles.views}>조회 20000</div>
                 <div className={styles.heart}>찜 {data?.hearts}</div>
               </div>
@@ -218,7 +252,6 @@ const ContentDetail = (props) => {
         <p className={styles.p}>대충 거래글 끝</p>
       </div>
  */}
-
     </div>
   );
 };

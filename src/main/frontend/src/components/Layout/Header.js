@@ -9,6 +9,11 @@ const Header = () => {
     else navigate("/logout");
   }
 
+  function heartlink() {
+    if (!localStorage.getItem("token")) {alert("로그인 후 이용해주세요!"); navigate("/login");}
+    else navigate("/heartList");
+  }
+
   return (
     <div className={styles.groupParent}>
       <div className={styles.planetParent}>
@@ -19,7 +24,7 @@ const Header = () => {
       </div>
       <div
         className={styles.basketAlt3Icon}
-        onClick={() => navigate("/heartList")}
+        onClick={heartlink}
       >
         <img src="/img/basket-alt-3.svg" />
       </div>
