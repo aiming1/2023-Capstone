@@ -1,4 +1,5 @@
 import styles from "../styles/css/ContentDetail.module.css";
+import '@fortawesome/fontawesome-free/css/all.min.css'
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 import HeartButton from "./HeartButton";
@@ -184,7 +185,7 @@ const ContentDetail = (props) => {
   };
 
   return (
-    <div className={styles.div}>
+    <div className={styles.productPage}>
       {/*<img className={styles.icon} alt="" src={data?.image[0]} />*/}
       <div className={styles.productTop}>
         <div className={styles.productImageWrapper}>
@@ -200,8 +201,16 @@ const ContentDetail = (props) => {
           <div className={styles.parent}>
             <div className={styles.productDetails}>
               <div className={styles.category}>
-                {`홈 > `}
-                {data?.category == null ? "카테고리" : data?.category}
+                <div className={styles.homebtn}>
+                {/* <i class="fas fa-home" style={{ marginRight: '5px' }}></i>*/}
+                홈
+                </div>
+                <div className={styles.categoryname}>
+                  <i className="fas fa-angle-right" style={{ margin: 'auto 10px' }}></i>
+                  {data?.category == null ? "카테고리" : data?.category}
+                </div>
+{/*                {`홈 > `}
+                {data?.category == null ? "카테고리" : data?.category}*/}
               </div>
               <div className={styles.title}>{data?.name}</div>
               <div className={styles.name}>{data?.seller}</div>
@@ -244,14 +253,15 @@ const ContentDetail = (props) => {
 
       <div className={styles.productInfo}>
         <div className={styles.infoHeadLine}>상품 설명</div>
-        <div className={styles.description}>{data?.details}</div>
+        <div className={styles.description}>
+          {data?.details.split('\n').map((line, index) => (
+            <React.Fragment key={index}>
+              {line}
+              <br />
+            </React.Fragment>
+          ))}
+        </div>
       </div>
-
-{/*      <div className={styles.div9}>
-        <p className={styles.p}>거래거래</p>
-        <p className={styles.p}>대충 거래글 끝</p>
-      </div>
- */}
     </div>
   );
 };

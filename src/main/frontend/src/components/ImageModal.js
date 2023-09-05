@@ -7,8 +7,8 @@ class Modal extends Component {
 
     return (
       <div className={styles.modaloverlay}>
+        <span className={styles.closebtn} onClick={onClose}>&times;</span>
         <div className={styles.modalcontent}>
-          <span className={styles.closebtn} onClick={onClose}>&times;</span>
           <img className={styles.modalImage} src={image} alt="Modal Image" />
         </div>
       </div>

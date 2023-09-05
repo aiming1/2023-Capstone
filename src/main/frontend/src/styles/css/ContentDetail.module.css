@@ -1,3 +1,4 @@
+/* Layout.js */
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -8,6 +9,21 @@
   flex: 1;
 }
 
+.divfooter {
+}
+
+.divsidebar {
+  z-index: 100;
+  position: fixed;
+  display: inline-block;
+  top: 24%;
+  right: 10px;
+  /*left: 1086px;*/
+  width: 10%;
+}
+
+
+/* Home.js */
 .divhome {
   position: relative;
   top: 130px;
@@ -32,19 +48,11 @@
   /*left: 80px;*/
 }
 
+
+/* ContentDetail.js */
 .wrap {
     min-height: 100%;
 }
-
-.divsidebar {
-  position: fixed;
-  display: inline-block;
-  top: 24%;
-  right: 10px;
-  /*left: 1086px;*/
-  width: 10%;
-}
-
 
 .icon {
   position: absolute;
@@ -429,14 +437,14 @@
 }
 
 
-.div {
+.productPage {
   top: 130px;
   position: relative;
   display: block;
   background-color: var(--color-white);
   width: 1024px;
   margin: 0 auto;
-  height: 1000px;
+  /*height: 1000px;*/
   overflow: hidden;
   text-align: left;
   font-size: var(--font-size-base);
@@ -468,7 +476,7 @@
 }
 
 .productInfo {
-  padding-bottom: 10px;
+/*  padding-bottom: 40px;*/
 }
 
 
@@ -597,11 +605,11 @@
 /* 모달 닫기 버튼 */
 .closebtn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 20px;
+  right: 50px;
   cursor: pointer;
-  font-size: 24px;
-  color: #333; /* 닫기 버튼 색상 */
+  font-size: 80px;
+  color: rgb(200, 200, 200); /* 닫기 버튼 색상 */
 }
 
 .modalImage {

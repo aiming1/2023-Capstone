@@ -11,13 +11,10 @@
   border: 3px solid #dbdbdb;
 }
 .div {
-  /*
-  top: 184px;
-  left: 1086px;
-  */
   width: 114px;
   height: 412px;
   text-align: center;
+  background-color: white;
 }
 
 .div,

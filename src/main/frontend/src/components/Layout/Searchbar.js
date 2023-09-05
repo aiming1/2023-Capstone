@@ -17,26 +17,30 @@ export default function Searchbar() {
   };
 
   return (
-    <div>
-      <div className={styles.groupItem} />
-      <button
-        className={styles.searchAltIcon}
-        type="submit"
-        onClick={() => {onSubmit();}}
-      >
-        <img alt="" src="/img/search-alt.svg" />
-      </button>
-      <input
-        className={styles.div16}
-        name="keyword"
-        type="text"
-        placeholder="상품명 입력"
-        onChange={(e) => {
-          setWord(e.target.value);
-          console.log(word);
-        }}
-        onKeyPress={onSubmitSearch}
-      />
+    <div className={styles.searchbarContainer}>
+      <div className={styles.groupItem}>
+        <div className={styles.inputWrapper}>
+                    <button
+                      className={styles.searchAltIcon}
+                      type="submit"
+                      onClick={() => {onSubmit();}}
+                    >
+                      <img alt="" src="/img/search-alt.svg" />
+                    </button>
+
+          <input
+            className={styles.div16}
+            name="keyword"
+            type="text"
+            placeholder="상품명 입력"
+            onChange={(e) => {
+              setWord(e.target.value);
+              console.log(word);
+            }}
+            onKeyPress={onSubmitSearch}
+          />
+        </div>
+      </div>
     </div>
   );
 }
