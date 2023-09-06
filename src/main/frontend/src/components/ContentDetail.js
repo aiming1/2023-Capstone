@@ -1,23 +1,25 @@
 import styles from "../styles/css/ContentDetail.module.css";
+import '@fortawesome/fontawesome-free/css/all.min.css'
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 import HeartButton from "./HeartButton";
 import ImageSlide from "./ImageSlide";
+import Modal from './ImageModal';
+
 import axios from "axios";
 
 const ContentDetail = (props) => {
   const product = useLocation();
   const productId = product.state.id;
-  //alert(product.state.id);
   const productMarket = product.state.market[0];
-  //alert(productStore);
   const productImage = product.state.image;
   const productPrice = product.state.price;
 
   const [data, setData] = useState(null);
   const [data2, setData2] = useState(null);
   const [heart, setHeart] = useState(false);
-  //const [loading, setLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState("");
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -62,7 +64,7 @@ const ContentDetail = (props) => {
     if (data?.market === "CARROT") {
       //당근마켓
       return (
-        <div>
+        <div className={styles.wrapicon}>
           <img
             className={styles.icon6}
             alt=""
@@ -74,7 +76,7 @@ const ContentDetail = (props) => {
     } else if (data?.market === "BUNJANG") {
       //번개장터
       return (
-        <div>
+        <div className={styles.wrapicon}>
           <img
             className={styles.icon6}
             alt=""
@@ -86,7 +88,7 @@ const ContentDetail = (props) => {
     } else if (data?.market === "JOONGGONARA") {
       //중고나라
       return (
-        <div>
+        <div className={styles.wrapicon}>
           <img
             className={styles.icon6}
             alt=""
@@ -170,60 +172,95 @@ const ContentDetail = (props) => {
   // 최근 본  상품.
   // detail 들어가면 product id를 watched에 추가
 
+
+  // 이미지 클릭 시 모달 열기
+  const openModal = (image) => {
+    setSelectedImage(image);
+    setIsModalOpen(true);
+  };
+
+  // 모달 닫기
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <div className={styles.div}>
+    <div className={styles.productPage}>
       {/*<img className={styles.icon} alt="" src={data?.image[0]} />*/}
-      <div className={styles.parent}>
-        <b className={styles.title}>{data?.name}</b>
-        <b className={styles.price}>{productPrice}원</b>
-        <div className={styles.category}>
-          {`홈 > `}
-          {data?.category == null ? "카테고리" : data?.category}
+      <div className={styles.productTop}>
+        <div className={styles.productImageWrapper}>
+          <div className={styles.group}>
+            <ImageSlide images={data?.image} onImageClick={openModal} />
+          </div>
         </div>
+        {isModalOpen && (
+           <Modal image={selectedImage} onClose={closeModal} />
+        )}
 
-        <div className={styles.name}>{data?.seller}</div>
-        <div className={styles.date}>
-          {data?.updatedate == null ? "0분전" : data?.updatedate}
+        <div className={styles.productSummaryWrapper}>
+          <div className={styles.parent}>
+            <div className={styles.productDetails}>
+              <div className={styles.category}>
+                <div className={styles.homebtn}>
+                {/* <i class="fas fa-home" style={{ marginRight: '5px' }}></i>*/}
+                홈
+                </div>
+                <div className={styles.categoryname}>
+                  <i className="fas fa-angle-right" style={{ margin: 'auto 10px' }}></i>
+                  {data?.category == null ? "카테고리" : data?.category}
+                </div>
+{/*                {`홈 > `}
+                {data?.category == null ? "카테고리" : data?.category}*/}
+              </div>
+              <div className={styles.title}>{data?.name}</div>
+              <div className={styles.name}>{data?.seller}</div>
+              <div className={styles.state}>
+                <div className={styles.date}>
+                  {data?.updatedate == null ? "0분전" : data?.updatedate}
+                </div>
+                <div className={styles.views}>조회 20000</div>
+                <div className={styles.heart}>찜 {data?.hearts}</div>
+              </div>
+              <div className={styles.price}>{data?.price}원</div>
+            </div>
+
+            <div className={styles.productButtons}>
+              {heart ? (
+                <HeartButton heart={heart} onClick={deleteHeart}></HeartButton>
+              ) : (
+                <HeartButton heart={heart} onClick={addHeart}></HeartButton>
+              )}
+
+              <div
+                className={styles.btn_golink}
+                onClick={() => {
+                  window.open(data?.producturl);
+                }}
+              >
+                <div className={styles.child} />
+                <div className={styles.div7}>보러 가기</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className={styles.views}>조회 20000</div>
-        <div className={styles.heart}>찜 {data?.hearts}</div>
       </div>
-      {heart ? (
-        <HeartButton heart={heart} onClick={deleteHeart}></HeartButton>
-      ) : (
-        <HeartButton heart={heart} onClick={addHeart}></HeartButton>
-      )}
 
-      <div
-        className={styles.btn_golink}
-        onClick={() => {
-          window.open(data?.producturl);
-        }}
-      >
-        <div className={styles.child} />
-        <div className={styles.div7}>보러 가기</div>
+      <div className={styles.container}>
+        <div className={styles.div21}>{renderLogo()}</div>
       </div>
 
       <div className={styles.line}></div>
-      <div className={styles.div8}>{data?.details}</div>
-      {/*      <div className={styles.div9}>
-        <p className={styles.p}>거래거래</p>
-        <p className={styles.p}>대충 거래글 끝</p>
-      </div>*/}
 
-      <div className={styles.group}>
-        <ImageSlide images={data?.image} />
-        {/*<div className={styles.div12}>
-          <div className={styles.inner} />
-          <img className={styles.div13} alt="" src="/img/right-side.svg" />
+      <div className={styles.productInfo}>
+        <div className={styles.infoHeadLine}>상품 설명</div>
+        <div className={styles.description}>
+          {data?.details.split('\n').map((line, index) => (
+            <React.Fragment key={index}>
+              {line}
+              <br />
+            </React.Fragment>
+          ))}
         </div>
-        <div className={styles.div14}>
-          <div className={styles.inner} />
-          <img className={styles.div15} alt="" src="/img/left-side.svg" />
-        </div>*/}
-      </div>
-      <div className={styles.container}>
-        <div className={styles.div21}>{renderLogo()}</div>
       </div>
     </div>
   );

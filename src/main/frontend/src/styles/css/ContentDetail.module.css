@@ -1,3 +1,4 @@
+/* Layout.js */
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -8,6 +9,21 @@
   flex: 1;
 }
 
+.divfooter {
+}
+
+.divsidebar {
+  z-index: 100;
+  position: fixed;
+  display: inline-block;
+  top: 24%;
+  right: 10px;
+  /*left: 1086px;*/
+  width: 10%;
+}
+
+
+/* Home.js */
 .divhome {
   position: relative;
   top: 130px;
@@ -32,21 +48,12 @@
   /*left: 80px;*/
 }
 
+
+/* ContentDetail.js */
 .wrap {
     min-height: 100%;
 }
 
-.divsidebar {
-  position: fixed;
-  display: inline-block;
-  top: 24%;
-  right: 10px;
-  /*left: 1086px;*/
-  width: 10%;
-}
-
-.title,
-.price,
 .icon {
   position: absolute;
 }
@@ -58,22 +65,31 @@
 }
 .title,
 .price {
-  font-size: 24px;
+  font-size: 27px;
+  font-weight: bold;
   color: var(--color-gray-200);
-  width: 312px;
 }
 .title {
-  top: 34px;
   left: 0;
-  display: flex;
+  display: block;
   align-items: center;
-  height: 30px;
+  width: 100%;
+  margin-top: 10px;
 }
 .price {
-  top: 149px;
   left: 1px;
   height: 31px;
+  width: 100%;
+ /* margin-top: 10px; */
+  padding: 30px 0px;
 }
+.state {
+  display: flex;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
+
 .price,
 .category,
 .name,
@@ -83,12 +99,11 @@
   align-items: center;
 }
 .category {
-  position: absolute;
   top: 0;
   left: 1px;
   font-size: var(--font-size-lg);
   font-weight: 500;
-  width: 408px;
+  width: 100%;
   height: 22px;
 }
 .name,
@@ -97,12 +112,13 @@
   height: 20px;
 }
 .name {
-  position: absolute;
-  top: 76px;
   left: 1px;
 
   font-weight: 500;
-  width: 130px;
+  width: 100%;
+  margin-top: 15px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(238, 238, 238);
 
   color: #767676;
   font-size: 16px;
@@ -111,13 +127,8 @@
   font-weight: 500;
   line-height: normal;
 }
-.date,
-.views {
-  top: 104px;
-}
+
 .date {
-  position: absolute;
-  left: 1px;
   width: 80px;
 
   flex-direction: column;
@@ -148,10 +159,9 @@
 .views,
 .heart,
 .parent {
-  position: absolute;
+  position: relative;
 }
 .heart {
-  top: 104px;
   left: 181px;
   display: flex;
   align-items: center;
@@ -169,10 +179,11 @@
   line-height: normal;
 }
 .parent {
-  top: 191px;
-  left: 655px;
-  width: 409px;
-  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
   font-size: var(--font-size-sm);
 }
 
@@ -217,15 +228,13 @@
   box-sizing: border-box;
 }
 .btn_golink {
-  top: 472px;
-  left: 799px;
+  left: 150px;
   width: 201px;
   height: 54px;
   cursor: pointer;
 }
 .btn_golink,
-.div7,
-.div8 {
+.div7 {
   position: absolute;
 }
 .div7 {
@@ -245,15 +254,21 @@
   font-family: Noto Sans KR;
   cursor: pointer;
 }
-.div8 {
-  top: 700px;
-  left: 200px;
+
+.infoHeadLine {
+  width: 95%;
+  font-size: 20px;
+  padding: 30px 0px 15px;
+  border-bottom: 1px solid rgb(238, 238, 238);
+}
+.description {
   color: var(--color-gray-200);
   display: inline-block;
-  width: 850px;
-  height: 46px;
-  font-size: 18px;
+  width: 90%;
+  margin: 40px 10px;
+  line-height: 1.5;
 }
+
 .p {
   margin: 0;
 }
@@ -268,77 +283,30 @@
 }
 
 .line {
-  position: absolute;
-  top: 668px;
-  left: 194px;
-  width: 862px;
+  margin: 15px 0px;
+  width: 100%;
   height: 2px;
   background: #dbdbdb;
 }
-.icon5 {
+/*.icon5 {
   top: 0;
   left: 0;
   width: 550px;
   height: 400px;
   object-fit: cover;
-}
-.div13,
-.icon5,
-.inner {
+}*/
+
+.icon5 {
   position: absolute;
 }
-.inner {
-  height: 100%;
-  width: 100%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  border-radius: 50%;
-  background-color: var(--color-gray-300);
-}
-.div13 {
-  width: 25px;
-  height: 25px;
-  flex-shrink: 0;
-  top: 16%;
-  left: 24%;
-  display: flex;
-  align-items: center;
-}
-.div12,
-.div15 {
-  position: absolute;
-  top: 322px;
-  left: 505px;
-  width: 25px;
-  height: 25px;
-}
-.div15 {
-  width: 25px;
-  height: 25px;
-  flex-shrink: 0;
-  top: 16%;
-  left: 20%;
-  display: flex;
-  align-items: center;
-}
-.div14 {
-  top: 322px;
-  left: 465px;
-  width: 25px;
-  height: 25px;
-}
-.div14,
-.group,
+
+
 .planet {
   position: absolute;
 }
 .group {
-  top: 191px;
-  left: 80px;
-  width: 545px;
-  height: 360px;
+  width: 100%;
+  height: 100%;
   font-size: var(--font-size-xl);
   font-family: var(--font-inter);
 }
@@ -359,11 +327,8 @@
   box-sizing: border-box;
 }
 .div17 {
-  position: absolute;
   height: 50%;
-  width: 45.13%;
-  top: 25.93%;
-  left: 26.55%;
+  margin: 10px auto;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -377,11 +342,8 @@
 }
 
 .div177 {
-  position: absolute;
   height: 50%;
-  width: 45.13%;
-  top: 25.93%;
-  left: 26.55%;
+  margin: 10px auto;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -394,9 +356,6 @@
   font-family: Noto Sans KR;
 }
 .btn_unheart {
-  position: absolute;
-  top: 472px;
-  left: 656px;
   width: 113px;
   height: 54px;
   cursor: pointer;
@@ -408,9 +367,6 @@
 }
 
 .btn_heart {
-  position: absolute;
-  top: 472px;
-  left: 656px;
   width: 113px;
   height: 54px;
   color: var(--color-white);
@@ -435,13 +391,8 @@
   box-sizing: border-box;
 }
 
-.div20,
-.icon6 {
-  position: absolute;
-  top: 0;
-}
+
 .div20 {
-  left: 35px;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -460,37 +411,40 @@
   line-height: normal;
 }
 .icon6 {
-  height: 100%;
-  width: 100%;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  width: 20px;
+  margin-right: 5px;
   max-width: 100%;
   overflow: hidden;
   max-height: 100%;
 /*  object-fit: cover; <- 당근마켓이 짤려요ㅠㅠ*/
   object-fit: contain
 }
+.wrapicon {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
 .container,
 .div21 {
-  position: absolute;
-  top: 3px;
   left: 0;
-  width: 23px;
   height: 18px;
 }
 .container {
-  top: 568px;
-  left: 80px;
-  width: 91px;
+  width: 100%;
   height: 21px;
   font-size: var(--font-size-sm);
 }
-.div {
+
+
+.productPage {
+  top: 130px;
   position: relative;
+  display: block;
   background-color: var(--color-white);
-  width: 100%;
-  height: 1510px;
+  width: 1024px;
+  margin: 0 auto;
+  /*height: 1000px;*/
   overflow: hidden;
   text-align: left;
   font-size: var(--font-size-base);
@@ -498,12 +452,38 @@
   font-family: var(--font-noto-sans-kr);
 }
 
+.productTop {
+  display: flex;
+  padding-top: 30px;
+  padding-bottom: 10px;
+/*  padding: 30px 0px;*/
+}
+
+.productImageWrapper {
+  display: block;
+  margin-right: 40px;
+  width: 450px;
+  height: 400px;
+}
+.productSummaryWrapper {
+  display: block;
+  width: 100%;
+  height: 400px;
+}
+.productButtons {
+  display: flex;
+  width: 100%;
+}
+
+.productInfo {
+/*  padding-bottom: 40px;*/
+}
+
+
 
 /* ImageSlide.js */
 .imageSlide {
   position: relative;
-  width: 550px;
-  height: 400px;
   margin: auto;
   padding-bottom: 30px;
 
@@ -526,6 +506,7 @@
     overflow-x: hidden;
 
     .slideList {
+      width: 100%;
       height: 400px;
       transition: all 300ms ease 0s;
       overflow: hidden;
@@ -533,6 +514,8 @@
       .slideContent {
         display: table;
         float: left;
+        width: 450px;
+        height: 400px;
 
         picture {
           display: table-cell;
@@ -543,9 +526,11 @@
     }
 
     .slideImg {
-      width: 550px;
+      width: 100%;
       height: 400px;
       object-fit: cover;
+      cursor: pointer;
+      transition: 0.3s
     }
 
     &:hover .buttonPrev {
@@ -570,6 +555,9 @@
       font-weight: 100;
       vertical-align: middle;
       color: #eeeeee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .buttonPrev {
       left: -50px;
@@ -589,4 +577,42 @@
       }
     }
   }
+}
+
+/* ImageModal.js */
+.modaloverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* 반투명 검은 배경 */
+  z-index: 999; /* 모달보다 앞에 표시 */
+  display: flex;
+  justify-content: center; /* 수평 가운데 정렬 */
+  align-items: center; /* 수직 가운데 정렬 */
+}
+
+/* 모달 창 */
+.modalcontent {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
+  max-width: 80%; /* 모달 창 최대 너비 */
+  max-height: 80%; /* 모달 창 최대 높이 */
+  overflow: auto; /* 스크롤 허용 */
+  position: relative; /* 상대 위치 설정 */
+}
+
+/* 모달 닫기 버튼 */
+.closebtn {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  cursor: pointer;
+  font-size: 80px;
+  color: rgb(200, 200, 200); /* 닫기 버튼 색상 */
+}
+
+.modalImage {
+  width: 500px;
+  height: auto;
 }
