@@ -173,6 +173,7 @@ const ContentDetail = (props) => {
   // detail 들어가면 product id를 watched에 추가
 
 
+
   // 이미지 클릭 시 모달 열기
   const openModal = (image) => {
     setSelectedImage(image);
