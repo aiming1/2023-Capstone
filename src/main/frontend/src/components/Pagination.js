@@ -1,76 +1,99 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-/*
-새로추가
--total: 총 게시물 수
--setPage() 함수를 호출하여 page 상태 변경
-  => <ItemList/> 컴포넌트는 새로운 페이지 번호에 해당하는 게시물 범위를 계산하여 다시 화면을 렌터링
+export const Pagination=({
+  postLength, // 아이템 배열의 길이
+  oneViewNumber, // 한 페이지의 보여줄 Number
+  page, // 현재페이지
+  setPage,
+  inMaxPageListNumber, // 페이지 그룹 개수
+}) => {
+  const [numPages, setNumPages] = useState(
+    Math.ceil(postLength / oneViewNumber)
+  );
 
-*/
+  const middleList = Array(numPages)
+    .fill()
+    .map((v, i) => i + 1);
 
-function Pagination({ total, limit, page, setPage }) {
-  const numPages = Math.ceil(total / limit); //필요한 페이지의 개수
-  /*페이지 40개씩- 추가 수정한 부분 */
-  const [currPage, setCurrPage] = useState(page);
-  let firstNum = currPage - (currPage % 5) + 1;
-  let lastNum = currPage - (currPage % 5) + 5;
+  const [start, setStart] = useState(0);
+  const [end, setEnd] = useState(inMaxPageListNumber);
+
+  const [resultList, setResultList] = useState(middleList.slice(start, end));
+
+  useEffect(() => {
+
+    var fpage = page;
+    var fInMaxPageListNumber = inMaxPageListNumber;
+
+    var start = 0;
+    var end = inMaxPageListNumber;
+    var pp = 0; //현재 페이지
+
+    while (fpage > fInMaxPageListNumber) {
+      fpage = fpage - fInMaxPageListNumber;
+      pp++;
+      if (fpage < fInMaxPageListNumber) {
+        break;
+      }
+    }
+
+    start = inMaxPageListNumber * pp + 1;
+    end = inMaxPageListNumber * (pp + 1);
+
+    setStart(start);
+    setEnd(end);
+
+    setResultList(middleList.slice(start - 1, end));
+  }, [page]);
 
   return (
     <Nav>
+        <Button
+          onClick={() => {
+            setPage(1);
+          }}
+          disabled={page === 1}
+        >
+          <span>&lt;&lt;</span>
+        </Button>
       <Button
         onClick={() => {
           setPage(page - 1);
-          setCurrPage(page - 2);
         }}
         disabled={page === 1}
       >
-        &lt;
+        <span>&lt;</span>
       </Button>
-      <Button
-        onClick={() => setPage(firstNum)}
-        aria-current={page === firstNum ? "page" : null}
-      >
-        {firstNum}
-      </Button>
-      {Array(4)
-        .fill()
-        .map((_, i) => {
-          if (i <= 2) {
-            return (
-              <Button
-                border="true"
-                key={i + 1}
-                onClick={() => {
-                  setPage(firstNum + 1 + i);
-                }}
-                aria-current={page === firstNum + 1 + i ? "page" : null}
-              >
-                {firstNum + 1 + i}
-              </Button>
-            );
-          } else if (i >= 3) {
-            return (
-              <Button
-                border="true"
-                key={i + 1}
-                onClick={() => setPage(lastNum)}
-                aria-current={page === lastNum ? "page" : null}
-              >
-                {lastNum}
-              </Button>
-            );
-          }
-        })}
-      <Button
-        onClick={() => {
-          setPage(page + 1);
-          setCurrPage(page);
-        }}
-        disabled={page === numPages}
-      >
-        &gt;
-      </Button>
+      {resultList.map((i) => (
+        <span key={i} >
+          <Button
+            key={i}
+            onClick={() => {
+              setPage(i);
+            }}
+            aria-current={page === i ? "page" : null}
+          >
+            {i}
+          </Button>
+        </span>
+      ))}
+        <Button
+          onClick={() => {
+            setPage(page + 1);
+          }}
+          disabled={page === numPages}
+        >
+          <span>&gt;</span>
+        </Button>
+        <Button
+          onClick={() => {
+            setPage(numPages);
+          }}
+          disabled={page === numPages}
+        >
+          <span>&gt;&gt;</span>
+        </Button>
     </Nav>
   );
 }
@@ -99,11 +122,12 @@ const Button = styled.button`
   }
 
   &[disabled] {
-    visibility: hidden;
-    /*background: #dbdbdb;
-    cursor: revert;
-    transform: revert;*/
+    /*visibility: hidden;
+    background: #dbdbdb;*/
 
+    color: #dbdbdb;
+    cursor: revert;
+    transform: revert;
   }
 
   &[aria-current] {
