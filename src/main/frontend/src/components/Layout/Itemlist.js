@@ -3,7 +3,6 @@ import axios from "axios";
 import styles from "../../styles/css/ItemList.module.css";
 import { ListItem } from "../ListItem";
 import Pagination from "../Pagination";
-import HeartButtonMain from "../HeartButtonMain";
 import Loading from "../Loading";
 
 //글자수 제한 함수
@@ -16,19 +15,14 @@ const ItemList = ({ selectedCategoryId }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  /* 페이지네이션 새로 추가한 부분 */
-  const limit = 8; //페이지 당 최대 게시물 수
-  const [page, setPage] = useState(1); //현재 페이지 번호
-  //const offset = (page - 1) * limit; //페이지 당 첫 게시물 위치
+  //페이징
+  const [oneViewNumber, setOneViewNumber] = useState(8);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * oneViewNumber;
 
-  const indexOfLast = page * limit;
-  const indexOfFirst = (page - 1) * limit;
-  const currentPosts = (data) => {
-    let currentPosts = 0;
-    currentPosts = data.slice(indexOfFirst, indexOfLast);
-    return currentPosts;
-  };
-  //
+  // 페이징 안의 페이징
+  const [pageNationPage, setPageNationPage] = useState(1);
+  const pageNationOffset = (pageNationPage - 1) * oneViewNumber;
 
   const fetchData = async () => {
     try {
@@ -86,25 +80,30 @@ const ItemList = ({ selectedCategoryId }) => {
   return (
     <div>
       <div className={styles.itemlistcontent}>
-        {currentPosts(data).map((item) => (
-          <ListItem
-            className={styles.listItem}
-            key={item.url}
-            id={item.id}
-            market={item.market}
-            price={item.price}
-            name={truncate(item.name, 10)}
-            image={item.image}
-            hearts={item.hearts}
-          />
-        ))}
+        {data.length > 0 &&
+          data
+            .slice(offset, offset + oneViewNumber)
+            .map((item) => (
+              <ListItem
+                className={styles.listItem}
+                key={item.url}
+                id={item.id}
+                market={item.market}
+                price={item.price}
+                name={truncate(item.name, 10)}
+                image={item.image}
+                hearts={item.hearts}
+                data={data}
+              />
+            ))}
       </div>
       <div className={styles.pageMove}>
         <Pagination
-          total={data.length}
-          limit={limit}
+          postLength={data.length}
+          oneViewNumber={oneViewNumber}
           page={page}
           setPage={setPage}
+          inMaxPageListNumber={5}
         />
       </div>
     </div>
