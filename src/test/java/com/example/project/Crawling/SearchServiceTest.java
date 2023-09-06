@@ -51,7 +51,7 @@ public class SearchServiceTest {
                             .replaceAll("[^0-9]", "");
                     int price = Integer.parseInt(price_string);
 
-                    Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, null, null, null);
+                    Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, null, null, null, null);
                     page.put(id, product);
                 }
             }
@@ -81,26 +81,30 @@ public class SearchServiceTest {
             webDriver.get(url);
             Thread.sleep(500);
 
-            List<WebElement> webElements = webDriver.findElements(By.className("sc-kcDeIU"));
+            List<WebElement> webElements = webDriver.findElements(By.className("sc-cHSUfg"));
 
             for(WebElement webElement : webElements){
                 String id = webElement.findElement(By.tagName("a")).getAttribute("data-pid");
-                System.out.println("ppid = " + id);
+                if (id != null) {
+                    System.out.println("ppid = " + id);
 
-                String name = webElement.findElement(By.cssSelector("a div.sc-eInJlc div.sc-gtfDJT")).getText();
-                System.out.println("name = " + name);
+                    String name = webElement.findElement(By.cssSelector("a div.sc-eInJlc div.sc-gtfDJT")).getText();
+                    System.out.println("name = " + name);
 
-                ArrayList<String> img = new ArrayList<>();
-                img.add(webElement.findElement(By.cssSelector("a div.sc-hgHYgh img")).getAttribute("src"));
-                System.out.println("img = " + img);
+                    ArrayList<String> img = new ArrayList<>();
+                    img.add(webElement.findElement(By.cssSelector("a div.sc-hgHYgh img")).getAttribute("src"));
+                    System.out.println("img = " + img);
 
-                String price_string = webElement.findElement(By.cssSelector("a div.sc-eInJlc div.sc-jeCdPy div")).getText()
-                        .replaceAll("[^0-9]", "");;
-                System.out.println("price_string = " + price_string);
-                int price = Integer.parseInt(price_string);
+                    String price_string = webElement.findElement(By.cssSelector("a div.sc-eInJlc div.sc-jeCdPy div")).getText()
+                            .replaceAll("[^0-9]", "");
+                    ;
+                    System.out.println("price_string = " + price_string);
+                    int price = 0;
+                    if (price_string != null) price = Integer.parseInt(price_string);
 
-                Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, null, null, url);
-                page.put(id, product);
+                    Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, null, null, url, null);
+                    page.put(id, product);
+                }
             }
             for (String key:page.keySet()){
                 Product p = page.get(key);
@@ -155,7 +159,7 @@ public class SearchServiceTest {
                     price = Integer.parseInt(price_string);
                 }
 
-                Product product = new Product(id, name, img, price, Market.CARROT, null, null, 0, null, null, null);
+                Product product = new Product(id, name, img, price, Market.CARROT, null, null, 0, null, null, null, null);
                 page.put(id, product);
             }
             for (String key:page.keySet()){

@@ -54,7 +54,7 @@ public class JoonggonaraImpl implements Joonggonara{
                     String price_string = prices.get(i).text().replaceAll("[^0-9]", "");
                     int price = Integer.parseInt(price_string);
 
-                    Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, null, null, null);
+                    Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, null, null, null, null);
                     page.put(id, product);
                 }
 
@@ -99,7 +99,7 @@ public class JoonggonaraImpl implements Joonggonara{
                                 .replaceAll("[^0-9]", "");
                         int price = Integer.parseInt(price_string);
 
-                        Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, null, null, null);
+                        Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, null, null, null, null);
                         page.put(id, product);
                     }
                 }
@@ -162,7 +162,7 @@ public class JoonggonaraImpl implements Joonggonara{
                     }
                 }
 
-                Product product = new Product(id, name, img, price, market, seller, updatedate, heart, detail, category, url);
+                Product product = new Product(id, name, img, price, market, seller, updatedate, heart, detail, category, url, null);
                 return product;
             } catch (Exception e) {
                 if (--retry != 0) System.out.println("[Warn] JoonggonaraImpl: 상품 크롤링 오류··· 재시도 중");
@@ -201,7 +201,7 @@ public class JoonggonaraImpl implements Joonggonara{
                     String price_string = prices.get(i).text().replaceAll("[^0-9]", "");
                     int price = Integer.parseInt(price_string);
 
-                    Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, null, null, null);
+                    Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, null, null, null, null);
                     page.put(id, product);
                 }
 
