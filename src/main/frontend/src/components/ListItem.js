@@ -12,6 +12,7 @@ export const ListItem = ({
   price = "0",
   image = "/img/빈 이미지.svg",
   hearts = 0,
+  data,
 }) => {
   const productId = id;
   const productMarket = market[0];
@@ -62,16 +63,23 @@ export const ListItem = ({
       },
     });
   };
-
-  //찜하기
+/*
+  //찜하기-임시 삭제
   const [heart, setHeart] = useState(false);
   const addHeart = async () => {
     const productData = {
-      productId: id,
-      productName: name,
-      market: market,
-      heartCheck: 1,
-    };
+          id: productId,
+          name: data?.name,
+          image: data?.image,
+          price: data?.price,
+          market: productMarket,
+          seller: data?.seller,
+          updatedate: data?.updatedate,
+          hearts: data?.hearts,
+          details: data?.details,
+          category: data?.category,
+          producturl: data?.producturl,
+        };
     axios
       .get(`/api/product/${productId}/${productMarket}/heart/add`, productData)
       .then(function (response) {
@@ -108,7 +116,7 @@ export const ListItem = ({
         console.log("데이터 요청 완료");
       });
   };
-
+*/
   return (
     <div className={styles.listItem}>
       <div className={styles.imgContainer}>
@@ -118,19 +126,15 @@ export const ListItem = ({
           src={image}
           onClick={handleItemClick}
         />
-        {heart ? (
+        {/*heart ? (
           <HeartButtonMain
             heart={heart}
             onClick={deleteHeart}
           ></HeartButtonMain>
         ) : (
           <HeartButtonMain heart={heart} onClick={addHeart}></HeartButtonMain>
-        )}
+        )*/}
 
-        {/*<HeartButtonMain heart={heart} onClick={handleHeartClick} />*/}
-        {/* <button className={styles.heartButton} onClick={handleHeartClick}>
-                <img className={styles.heartIcon} src="/img/heart_empty.png" alt="하트" />
-            </button>*/}
       </div>
       <div className={styles.iteminfo}>
         {renderLogo()}

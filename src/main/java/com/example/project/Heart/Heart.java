@@ -49,25 +49,37 @@ public class Heart {
     )
     private String market;
     @Column(
-            name = "heartCheck",
-            nullable = false
-    )
-    private int heartCheck;
-    @Column(
             name = "date",
             nullable = false
     )
     private String date;
+    @Column(
+            name = "price",
+            nullable = false
+    )
+    private int price;
+    @Column(
+            name = "img_url",
+            nullable = false
+    )
+    private String img_url;
+    @Column(
+            name = "external_heart",
+            nullable = false
+    )
+    private int external_heart;
 
     public Heart(){
     }
 
-    public Heart(String productId, Long userId, String productName, String market, int heartCheck, String date) {
+    public Heart(String productId, Long userId, String productName, String market, String date, int price, String img_url, int external_heart) {
         this.productId = productId;
         this.userId = userId;
         this.productName = productName;
         this.market = market;
-        this.heartCheck = heartCheck;
         this.date = date;
+        this.price = price;
+        this.img_url = img_url;
+        this.external_heart = external_heart;
     }
 }

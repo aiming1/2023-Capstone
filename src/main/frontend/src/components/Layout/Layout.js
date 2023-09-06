@@ -7,15 +7,15 @@ import { Outlet } from "react-router-dom";
 const Layout = () => {
   return (
     <div className={styles.wrapper}>
+      <Header></Header>
       <div className={styles.contentWrapper}>
         <Outlet></Outlet>
-        <Header></Header>
+      </div>
+      <div className={styles.divfooter}>
+        <Footer></Footer>
       </div>
       <div className={styles.divsidebar}>
         <Sidebar></Sidebar>
-      </div>
-      <div>
-        <Footer></Footer>
       </div>
     </div>
   );
