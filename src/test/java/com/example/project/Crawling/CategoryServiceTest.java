@@ -50,7 +50,7 @@ class CategoryServiceTest {
                 String price_string = prices.get(i).text().replaceAll("[^0-9]", "");
                 int price = Integer.parseInt(price_string);
 
-                Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, null, null, url);
+                Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, null, null, url, null);
                 page.put(id, product);
             }
             for (String key:page.keySet()){
@@ -78,7 +78,7 @@ class CategoryServiceTest {
             webDriver.get(url);
             Thread.sleep(500);
 
-            List<WebElement> webElements = webDriver.findElements(By.className("sc-gVLVqr"));
+            List<WebElement> webElements = webDriver.findElements(By.className("sc-cmjSyW"));
 
             for(WebElement webElement : webElements){
                 String ad = webElement.findElement(By.cssSelector("a div.sc-iGPElx div.sc-gtfDJT div.sc-fOICqy")).getText();
@@ -98,7 +98,7 @@ class CategoryServiceTest {
                     int price = Integer.parseInt(price_string);
                     System.out.println("price = " + price);
 
-                    Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, null, null, url);
+                    Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, null, null, url, null);
                     page.put(id, product);
                 }
             }

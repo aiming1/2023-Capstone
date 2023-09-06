@@ -40,7 +40,7 @@ public class ProductController {
             img.add("https://i.imgur.com/gK1I2Bu.png");
 
             Product product = new Product(
-                    "404","삭제되거나 존재하지 않는 상품이에요.",img,0,Market.CARROT,null,null,0,null,null,null
+                    "404","삭제되거나 존재하지 않는 상품이에요.",img,0,Market.CARROT,null,null,0,null,null,null,null
             );
             return product;
         }
