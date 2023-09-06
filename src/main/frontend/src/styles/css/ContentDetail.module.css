@@ -87,7 +87,7 @@
   display: flex;
   width: 100%;
   margin-top: 15px;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
 .price,
@@ -117,8 +117,8 @@
   font-weight: 500;
   width: 100%;
   margin-top: 15px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgb(238, 238, 238);
+  padding-bottom: 15px;
+  /*border-bottom: 1px solid rgb(238, 238, 238);*/
 
   color: #767676;
   font-size: 16px;
@@ -126,6 +126,13 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+}
+.location {
+  color: #767676;
+  font-size: 14px;
+
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(238, 238, 238);
 }
 
 .date {

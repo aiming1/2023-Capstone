@@ -214,6 +214,10 @@ const ContentDetail = (props) => {
               </div>
               <div className={styles.title}>{data?.name}</div>
               <div className={styles.name}>{data?.seller}</div>
+              <div className={styles.location}>
+                <i class="fas fa-map-marker-alt" style={{ fontSize: '15px', margin: '0 5px' }}></i>
+                거래지역 : {data?.name}
+              </div>
               <div className={styles.state}>
                 <div className={styles.date}>
                   {data?.updatedate == null ? "0분전" : data?.updatedate}

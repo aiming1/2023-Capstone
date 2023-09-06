@@ -20,13 +20,13 @@ export default function Searchbar() {
     <div className={styles.searchbarContainer}>
       <div className={styles.groupItem}>
         <div className={styles.inputWrapper}>
-                    <button
-                      className={styles.searchAltIcon}
-                      type="submit"
-                      onClick={() => {onSubmit();}}
-                    >
-                      <img alt="" src="/img/search-alt.svg" />
-                    </button>
+          <button
+            className={styles.searchAltIcon}
+            type="submit"
+            onClick={() => {onSubmit();}}
+          >
+            <img alt="" src="/img/search-alt.svg" />
+          </button>
 
           <input
             className={styles.div16}
