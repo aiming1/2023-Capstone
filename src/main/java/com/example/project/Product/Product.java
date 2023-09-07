@@ -124,4 +124,12 @@ public class Product {
     public void setMarket(Market market) {
         this.market = market;
     }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
 }
