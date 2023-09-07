@@ -147,8 +147,8 @@ public class ProductServiceTest {
             String seller = webDriver.findElement(By.className("ProductSellerstyle__Name-sc-1qnzvgu-7")).getText();
 
             /** 업데이트 시간 수정해야 함 **/
-//            String updatetime = webDriver.findElement(By.xpath("/html/body/div/div/div[4]/div[1]/div/div[2]/div/div[2]/div/div[1]/div[2]/div[1]/div/div[3]/img")).getText();
-//            System.out.println("updatetime = " + updatetime);
+            String updatedate = webDriver.findElement(By.cssSelector(".ProductSummarystyle__Status-sc-oxz0oy-13.jHkOld:nth-child(3)")).getText();
+            System.out.println("updatedate = " + updatedate);
 
             String hearts = webDriver.findElement(By.className("ProductSummarystyle__StatusValue-sc-oxz0oy-14")).getText();
             int heart = Integer.parseInt(hearts);
@@ -163,7 +163,7 @@ public class ProductServiceTest {
 
             String region = webDriver.findElement(By.cssSelector(".ProductSummarystyle__Value-sc-oxz0oy-19.hdHOwM")).getText();
 
-            Product product = new Product("227279899", name, img, price, Market.BUNJANG, seller, null, heart, detail, category, url, region);
+            Product product = new Product("227279899", name, img, price, Market.BUNJANG, seller, updatedate, heart, detail, category, url, region);
 
             System.out.println("product.getId() = " + product.getId());
             System.out.println("product.getName() = " + product.getName());
