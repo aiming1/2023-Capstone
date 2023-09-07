@@ -61,7 +61,7 @@ public class CarrotImpl implements Carrot{
                         price = Integer.parseInt(price_string);
                     }
 
-                    Product product = new Product(id, name, img, price, Market.CARROT, null, null, 0, null, null, null, null);
+                    Product product = new Product(id, name, img, price, Market.CARROT, null, null, 0, 0, null, null, null, null);
                     page.put(id, product);
                 }
 
@@ -108,12 +108,13 @@ public class CarrotImpl implements Carrot{
 
                 String[] etcs = doc.select("#article-counts").text().split(" ∙ ");
                 int heart = Integer.parseInt(etcs[0].replaceAll("[^0-9]", ""));
+                int views = Integer.parseInt(etcs[2].replaceAll("[^0-9]", ""));
 
                 String detail = doc.select("#article-detail").text();
 
                 String region = doc.select("#region-name").text();
 
-                Product product = new Product(id, name, img, price, market, seller, updatedate, heart, detail, category, url, region);
+                Product product = new Product(id, name, img, price, market, seller, updatedate, views, heart, detail, category, url, region);
                 return product;
             } catch (IOException e) {
                 if (--retry != 0) System.out.println("[Warn] CarrotImpl: 상품 상세 크롤링 오류··· 재시도 중");
@@ -157,7 +158,7 @@ public class CarrotImpl implements Carrot{
                         price = Integer.parseInt(price_string);
                     }
 
-                    Product product = new Product(id, name, img, price, Market.CARROT, null, null, 0, null, null, null, null);
+                    Product product = new Product(id, name, img, price, Market.CARROT, null, null, 0, 0, null, null, null, null);
                     page.put(id, product);
                 }
 
