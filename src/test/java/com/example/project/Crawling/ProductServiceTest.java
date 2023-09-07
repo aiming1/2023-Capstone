@@ -161,7 +161,9 @@ public class ProductServiceTest {
                     .getAttribute("href").split("categories/");
             String category = categoryset.get(Integer.parseInt(categories[1].substring(0, 3)));
 
-            Product product = new Product("227279899", name, img, price, Market.BUNJANG, seller, null, heart, detail, category, url, null);
+            String region = webDriver.findElement(By.cssSelector(".ProductSummarystyle__Value-sc-oxz0oy-19.hdHOwM")).getText();
+
+            Product product = new Product("227279899", name, img, price, Market.BUNJANG, seller, null, heart, detail, category, url, region);
 
             System.out.println("product.getId() = " + product.getId());
             System.out.println("product.getName() = " + product.getName());
