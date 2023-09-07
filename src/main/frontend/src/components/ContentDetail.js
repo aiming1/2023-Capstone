@@ -115,6 +115,7 @@ const ContentDetail = (props) => {
       details: data?.details,
       category: data?.category,
       producturl: data?.producturl,
+      region: data?.region,
     };
 
     axios
