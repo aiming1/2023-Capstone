@@ -136,11 +136,12 @@ public class BunjangImpl implements Bunjang {
                 int price = Integer.parseInt(prices.replaceAll("[^0-9]", ""));
                 String seller = webDriver.findElement(By.className("ProductSellerstyle__Name-sc-1qnzvgu-7")).getText();
 
-                //TODO 업데이트 시간 -> 크롤링 안 됨
                 String hearts = webDriver.findElement(By.className("ProductSummarystyle__StatusValue-sc-oxz0oy-14")).getText();
                 int heart = Integer.parseInt(hearts);
                 String detail = webDriver.findElement(By.className("ProductInfostyle__DescriptionContent-sc-ql55c8-3"))
                         .findElement(By.tagName("p")).getText();
+
+                String updatedate = webDriver.findElement(By.cssSelector(".ProductSummarystyle__Status-sc-oxz0oy-13.jHkOld:nth-child(3)")).getText();
 
                 HashMap<Integer, String> categoryset = getCategory();
                 String[] categories = webDriver.findElement(By.cssSelector(".Productsstyle__ProductBottom-sc-13cvfvh-15.ksyzGu div.Productsstyle__ProductInfoContent-sc-13cvfvh-14.lcdoPu div div div.ProductInfostyle__Description-sc-ql55c8-2.hWujk div.ProductInfostyle__DetailInfo-sc-ql55c8-8.UrLSZ div:nth-child(2) div.ProductInfostyle__InfoValue-sc-ql55c8-13.gLVyVQ a"))
@@ -153,7 +154,7 @@ public class BunjangImpl implements Bunjang {
                 String region = webDriver.findElement(By.cssSelector(".ProductSummarystyle__Value-sc-oxz0oy-19.hdHOwM")).getText();
 
 
-                Product product = new Product(id, name, img, price, market, seller, null, heart, detail, category, url, region);
+                Product product = new Product(id, name, img, price, market, seller, updatedate, heart, detail, category, url, region);
                 return product;
             } catch (Exception e) {
                 if (--retry != 0) System.out.println("[Warn] BunjangImpl: 상품 상세 크롤링 오류··· 재시도 중");
