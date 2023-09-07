@@ -14,6 +14,7 @@ public class Product {
     private Market market;
     private String seller;
     private String updatedate;
+    private int views;
     private int hearts;
     private String details;
     private String category;
@@ -21,7 +22,7 @@ public class Product {
     private String region;
 
     public Product(String id, String name, ArrayList<String> image, int price, Market market, @Nullable String seller,
-                   @Nullable String updatedate, @Nullable int hearts, @Nullable String details, @Nullable String category,
+                   @Nullable String updatedate, @Nullable int views, @Nullable int hearts, @Nullable String details, @Nullable String category,
                    @Nullable String producturl, @Nullable String region) {
         this.id = id;
         this.name = name;
@@ -30,6 +31,7 @@ public class Product {
         this.market = market;
         this.seller = seller;
         this.updatedate = updatedate;
+        this.views = views;
         this.hearts = hearts;
         this.details = details;
         this.category = category;
@@ -131,5 +133,13 @@ public class Product {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
     }
 }

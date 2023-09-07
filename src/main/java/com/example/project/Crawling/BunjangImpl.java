@@ -51,7 +51,7 @@ public class BunjangImpl implements Bunjang {
                                 .replaceAll("[^0-9]", "");
                         int price = Integer.parseInt(price_string);
 
-                        Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, null, null, null, null);
+                        Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, 0, null, null, null, null);
                         page.put(id, product);
                     }
                 }
@@ -96,7 +96,7 @@ public class BunjangImpl implements Bunjang {
                         int price = 0;
                         if (price_string != null) price = Integer.parseInt(price_string);
 
-                        Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, null, null, null, null);
+                        Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, 0, null, null, null, null);
                         page.put(id, product);
                     }
                 }
@@ -142,6 +142,8 @@ public class BunjangImpl implements Bunjang {
                         .findElement(By.tagName("p")).getText();
 
                 String updatedate = webDriver.findElement(By.cssSelector(".ProductSummarystyle__Status-sc-oxz0oy-13.jHkOld:nth-child(3)")).getText();
+                String views_string = webDriver.findElement(By.cssSelector(".ProductSummarystyle__Status-sc-oxz0oy-13.jHkOld:nth-child(2)")).getText();
+                int views = Integer.parseInt(views_string);
 
                 HashMap<Integer, String> categoryset = getCategory();
                 String[] categories = webDriver.findElement(By.cssSelector(".Productsstyle__ProductBottom-sc-13cvfvh-15.ksyzGu div.Productsstyle__ProductInfoContent-sc-13cvfvh-14.lcdoPu div div div.ProductInfostyle__Description-sc-ql55c8-2.hWujk div.ProductInfostyle__DetailInfo-sc-ql55c8-8.UrLSZ div:nth-child(2) div.ProductInfostyle__InfoValue-sc-ql55c8-13.gLVyVQ a"))
@@ -154,7 +156,7 @@ public class BunjangImpl implements Bunjang {
                 String region = webDriver.findElement(By.cssSelector(".ProductSummarystyle__Value-sc-oxz0oy-19.hdHOwM")).getText();
 
 
-                Product product = new Product(id, name, img, price, market, seller, updatedate, heart, detail, category, url, region);
+                Product product = new Product(id, name, img, price, market, seller, updatedate, views, heart, detail, category, url, region);
                 return product;
             } catch (Exception e) {
                 if (--retry != 0) System.out.println("[Warn] BunjangImpl: 상품 상세 크롤링 오류··· 재시도 중");
@@ -193,7 +195,7 @@ public class BunjangImpl implements Bunjang {
                             .replaceAll("[^0-9]", "");
                     int price = Integer.parseInt(price_string);
 
-                    Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, null, null, null, null);
+                    Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, 0, null, null, null, null);
                     page.put(id, product);
                 }
 

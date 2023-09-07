@@ -50,7 +50,7 @@ class CategoryServiceTest {
                 String price_string = prices.get(i).text().replaceAll("[^0-9]", "");
                 int price = Integer.parseInt(price_string);
 
-                Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, null, null, url, null);
+                Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, 0, null, null, url, null);
                 page.put(id, product);
             }
             for (String key:page.keySet()){
@@ -98,7 +98,7 @@ class CategoryServiceTest {
                     int price = Integer.parseInt(price_string);
                     System.out.println("price = " + price);
 
-                    Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, null, null, url, null);
+                    Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, 0, null, null, url, null);
                     page.put(id, product);
                 }
             }
