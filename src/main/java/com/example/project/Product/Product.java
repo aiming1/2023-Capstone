@@ -18,10 +18,11 @@ public class Product {
     private String details;
     private String category;
     private String producturl;
+    private String region;
 
     public Product(String id, String name, ArrayList<String> image, int price, Market market, @Nullable String seller,
                    @Nullable String updatedate, @Nullable int hearts, @Nullable String details, @Nullable String category,
-                   @Nullable String producturl) {
+                   @Nullable String producturl, @Nullable String region) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -33,6 +34,7 @@ public class Product {
         this.details = details;
         this.category = category;
         this.producturl = producturl;
+        this.region = region;
     }
 
     public String getProducturl() {

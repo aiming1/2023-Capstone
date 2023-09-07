@@ -84,7 +84,7 @@ public class ProductServiceTest {
                 }
             }
 
-            Product product = new Product("119272335", name, img, price, Market.JOONGGONARA, seller, updatedate, heart, detail, category, url);
+            Product product = new Product("119272335", name, img, price, Market.JOONGGONARA, seller, updatedate, heart, detail, category, url, null);
 
             System.out.println("product.getId() = " + product.getId());
             System.out.println("product.getName() = " + product.getName());
@@ -161,7 +161,7 @@ public class ProductServiceTest {
                     .getAttribute("href").split("categories/");
             String category = categoryset.get(Integer.parseInt(categories[1].substring(0, 3)));
 
-            Product product = new Product("227279899", name, img, price, Market.BUNJANG, seller, null, heart, detail, category, url);
+            Product product = new Product("227279899", name, img, price, Market.BUNJANG, seller, null, heart, detail, category, url, null);
 
             System.out.println("product.getId() = " + product.getId());
             System.out.println("product.getName() = " + product.getName());
@@ -233,7 +233,9 @@ public class ProductServiceTest {
 
             String detail = doc.select("#article-detail").text();
 
-            Product product = new Product("589353858", name, img, price, Market.CARROT, seller, updatedate, heart, detail, category, url);
+            String region = doc.select("#region-name").text();
+
+            Product product = new Product("589353858", name, img, price, Market.CARROT, seller, updatedate, heart, detail, category, url, region);
 
             System.out.println("product.getId() = " + product.getId());
             System.out.println("product.getName() = " + product.getName());

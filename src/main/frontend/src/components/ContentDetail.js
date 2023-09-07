@@ -1,10 +1,10 @@
-import styles from "../styles/css/ContentDetail.module.css";
-import '@fortawesome/fontawesome-free/css/all.min.css'
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 import HeartButton from "./HeartButton";
 import ImageSlide from "./ImageSlide";
 import Modal from './ImageModal';
+import styles from "../styles/css/ContentDetail.module.css";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import axios from "axios";
 
@@ -122,7 +122,7 @@ const ContentDetail = (props) => {
       .then(function (response) {
         console.log("추가 성공", response);
         setHeart(!heart);
-        alert("찜 성공");
+        alert("찜목록에 추가되었습니다.");
         // response
       })
       .catch(function (error) {
@@ -142,7 +142,7 @@ const ContentDetail = (props) => {
       .then(function (response) {
         console.log("삭제 성공", response);
         setHeart(!heart);
-        alert("찜 해제");
+        alert("찜목록에서 제거합니다.");
       })
       .catch(function (error) {
         // 오류발생시 실행
@@ -171,6 +171,7 @@ const ContentDetail = (props) => {
   }, []);
   // 최근 본  상품.
   // detail 들어가면 product id를 watched에 추가
+
 
 
   // 이미지 클릭 시 모달 열기
