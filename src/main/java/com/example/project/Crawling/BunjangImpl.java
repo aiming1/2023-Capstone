@@ -150,7 +150,10 @@ public class BunjangImpl implements Bunjang {
                     category = categoryset.get(Integer.parseInt(categories[1].substring(0, 3)));
                 }
 
-                Product product = new Product(id, name, img, price, market, seller, null, heart, detail, category, url, null);
+                String region = webDriver.findElement(By.cssSelector(".ProductSummarystyle__Value-sc-oxz0oy-19.hdHOwM")).getText();
+
+
+                Product product = new Product(id, name, img, price, market, seller, null, heart, detail, category, url, region);
                 return product;
             } catch (Exception e) {
                 if (--retry != 0) System.out.println("[Warn] BunjangImpl: 상품 상세 크롤링 오류··· 재시도 중");
