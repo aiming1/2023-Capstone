@@ -51,7 +51,7 @@ public class SearchServiceTest {
                             .replaceAll("[^0-9]", "");
                     int price = Integer.parseInt(price_string);
 
-                    Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, null, null, null, null);
+                    Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, 0, null, null, null, null);
                     page.put(id, product);
                 }
             }
@@ -102,7 +102,7 @@ public class SearchServiceTest {
                     int price = 0;
                     if (price_string != null) price = Integer.parseInt(price_string);
 
-                    Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, null, null, url, null);
+                    Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, 0, null, null, url, null);
                     page.put(id, product);
                 }
             }
@@ -159,7 +159,7 @@ public class SearchServiceTest {
                     price = Integer.parseInt(price_string);
                 }
 
-                Product product = new Product(id, name, img, price, Market.CARROT, null, null, 0, null, null, null, null);
+                Product product = new Product(id, name, img, price, Market.CARROT, null, null, 0, 0, null, null, null, null);
                 page.put(id, product);
             }
             for (String key:page.keySet()){
