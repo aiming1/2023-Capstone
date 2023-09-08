@@ -24,7 +24,7 @@ function Sidebar(props) {
               alt=""
               src= {it[2]}
               style={{
-              borderRadius: 5,
+              borderRadius: 1,
               margin: 5,}}
               onClick={() => {
                 navigate(`/product/${it[0]}`,{
