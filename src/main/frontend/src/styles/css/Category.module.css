@@ -81,7 +81,7 @@ il {
   position: absolute;
   content: "";
   display: block;
-  border-bottom: 3px solid #5d1fc2;
+  border-bottom: 1.5px solid #5d1fc2;
   transition: width 250ms ease-out;
   left: auto;
   right: 0;
