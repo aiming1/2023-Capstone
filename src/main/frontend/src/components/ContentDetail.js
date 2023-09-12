@@ -1,10 +1,10 @@
-import styles from "../styles/css/ContentDetail.module.css";
-import '@fortawesome/fontawesome-free/css/all.min.css'
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 import HeartButton from "./HeartButton";
 import ImageSlide from "./ImageSlide";
 import Modal from './ImageModal';
+import styles from "../styles/css/ContentDetail.module.css";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 import axios from "axios";
 
@@ -111,10 +111,12 @@ const ContentDetail = (props) => {
       market: productMarket,
       seller: data?.seller,
       updatedate: data?.updatedate,
+      views: data?.views,
       hearts: data?.hearts,
       details: data?.details,
       category: data?.category,
       producturl: data?.producturl,
+      region: data?.region,
     };
 
     axios
@@ -204,23 +206,34 @@ const ContentDetail = (props) => {
               <div className={styles.category}>
                 <div className={styles.homebtn}>
                 {/* <i class="fas fa-home" style={{ marginRight: '5px' }}></i>*/}
-                홈
+                홈 >
                 </div>
-                <div className={styles.categoryname}>
-                  <i className="fas fa-angle-right" style={{ margin: 'auto 10px' }}></i>
-                  {data?.category == null ? "카테고리" : data?.category}
+                <div className={styles.categoryname} style={{ marginLeft: '5px' }}>
+                  {/*<i className="fas fa-angle-right" style={{ margin: 'auto 10px' }}></i>*/}
+                  {data?.category == null ? "기타 카테고리" : data?.category}
                 </div>
 {/*                {`홈 > `}
                 {data?.category == null ? "카테고리" : data?.category}*/}
               </div>
               <div className={styles.title}>{data?.name}</div>
               <div className={styles.name}>{data?.seller}</div>
+              <div className={styles.location}>
+                <i class="fas fa-map-marker-alt" style={{ fontSize: '15px', margin: '0 5px' }}></i>
+                거래지역 : {data?.region == null ? "전국" : data?.region}
+              </div>
               <div className={styles.state}>
                 <div className={styles.date}>
+                  <i class="far fa-clock" style={{ fontSize: '15px', margin: '5px' }}></i>
                   {data?.updatedate == null ? "0분전" : data?.updatedate}
                 </div>
-                <div className={styles.views}>조회 20000</div>
-                <div className={styles.heart}>찜 {data?.hearts}</div>
+                <div className={styles.views}>
+                  <i class="fas fa-search" style={{ fontSize: '15px', margin: '5px' }}></i>
+                  조회 {data?.views == null ? "0" : data?.views}
+                </div>
+                <div className={styles.heart}>
+                  <i class="fas fa-heart" style={{ fontSize: '15px', margin: '5px' }}></i>
+                  찜 {data?.hearts}
+                </div>
               </div>
               <div className={styles.price}>{data?.price}원</div>
             </div>

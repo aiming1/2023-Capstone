@@ -15,8 +15,8 @@
   gap: 5px;
   position: relative;
   width: calc(25% - 44px);
-  margin-top: 34px;
-  margin-bottom: 56px;
+  margin-top: 30px;
+  margin-bottom: 40px;
 }
 
 .imgContainer {
@@ -26,8 +26,9 @@
 
 .itemimg {
   width: 100%;
-  height: 150px;
+  height: 170px;
   object-fit: cover;
+  border-radius: 5px;
 }
 
 .heartButton {

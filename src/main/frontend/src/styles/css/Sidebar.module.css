@@ -6,35 +6,38 @@
   bottom: 0;
   left: 0;
   box-sizing: border-box;
+  padding: 10px;
 
-  border-radius: 5px;
-  border: 3px solid #dbdbdb;
+  /*border-radius: 5px;*/
+  border: 1px solid #dbdbdb;
 }
 .div {
   width: 114px;
-  height: 412px;
+  height: 460px;
   text-align: center;
   background-color: white;
 }
 
 .div,
-.title,
 .box {
   position: absolute;
 }
 .title {
-  top: 18px;
-  left: 15px;
+  margin: 15px 0px;
+  width: 100%;
   font-weight: bold;
   text-align: center;
   color: #767676;
   font-size: 16px;
   font-family: "Noto Sans KR";
+
+  padding-bottom: 15px;
+  border-bottom: 2px dotted rgb(136, 136, 136);
 }
 .item {
   position: relative;
-  top: 60px;
   left: 1px;
   width: 80px;
-  height: 50px;
+  height: 60px;
+  object-fit: cover
 }

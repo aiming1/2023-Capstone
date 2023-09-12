@@ -19,7 +19,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 200px;
+  /*width: 200px;*/
   border: none;
   background: none;
   cursor: pointer;
@@ -38,7 +38,7 @@
 .planetParent {
   top: 5px;
   left: 0;
-  width: 181.14px;
+  /*width: 181.14px;*/
 }
 .basketAlt3Icon,
 .userCicrleDuotoneIcon {
