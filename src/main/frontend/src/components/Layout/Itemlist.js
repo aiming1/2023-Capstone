@@ -16,7 +16,7 @@ const ItemList = ({ selectedCategoryId }) => {
   const [error, setError] = useState(null);
 
   //페이징
-  const [oneViewNumber, setOneViewNumber] = useState(8);
+  const [oneViewNumber, setOneViewNumber] = useState(20);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * oneViewNumber;
 
@@ -26,13 +26,13 @@ const ItemList = ({ selectedCategoryId }) => {
 
   const fetchData = async () => {
     try {
-      // 요청이 시작 할 때에는 error 와 users 를 초기화하고
+      // 요청시작 할 때, error 와 users 를 초기화
       setError(null);
       setData(null);
-      // loading 상태를 true 로 바꿉니다.
+      // loading 상태를 true 로 바꿈
       setLoading(true);
       const response = await axios.get("/api");
-      setData(response.data); // 데이터는 response.data 안에 들어있습니다.
+      setData(response.data); // 데이터는 response.data 안에 들어있음
     } catch (e) {
       setError(e);
     }
