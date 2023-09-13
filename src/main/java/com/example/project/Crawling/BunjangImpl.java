@@ -36,9 +36,9 @@ public class BunjangImpl implements Bunjang {
                 webDriver.get(url);
                 Thread.sleep(500);
 
-                List<WebElement> webElements = webDriver.findElements(By.className("sc-gVLVqr"));
+                List<WebElement> webElements = webDriver.findElements(By.className("sc-cmjSyW"));
 
-                for (WebElement webElement : webElements) {
+                for(WebElement webElement : webElements){
                     String ad = webElement.findElement(By.cssSelector("a div.sc-iGPElx div.sc-gtfDJT div.sc-fOICqy")).getText();
                     if (!ad.equals("AD")) {
                         String id = webElement.findElement(By.tagName("a")).getAttribute("data-pid");
@@ -51,7 +51,7 @@ public class BunjangImpl implements Bunjang {
                                 .replaceAll("[^0-9]", "");
                         int price = Integer.parseInt(price_string);
 
-                        Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, null, null, null);
+                        Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, 0, null, null, null, null);
                         page.put(id, product);
                     }
                 }
@@ -81,23 +81,24 @@ public class BunjangImpl implements Bunjang {
                 webDriver.get(url);
                 Thread.sleep(500);
 
-                List<WebElement> webElements = webDriver.findElements(By.className("sc-kcDeIU"));
+                List<WebElement> webElements = webDriver.findElements(By.className("sc-cHSUfg"));
 
                 for (WebElement webElement : webElements) {
                     String id = webElement.findElement(By.tagName("a")).getAttribute("data-pid");
+                    if (id != null) {
+                        String name = webElement.findElement(By.cssSelector("a div.sc-eInJlc div.sc-gtfDJT")).getText();
 
-                    String name = webElement.findElement(By.cssSelector("a div.sc-eInJlc div.sc-gtfDJT")).getText();
+                        ArrayList<String> img = new ArrayList<>();
+                        img.add(webElement.findElement(By.cssSelector("a div.sc-hgHYgh img")).getAttribute("src"));
 
-                    ArrayList<String> img = new ArrayList<>();
-                    img.add(webElement.findElement(By.cssSelector("a div.sc-hgHYgh img")).getAttribute("src"));
+                        String price_string = webElement.findElement(By.cssSelector("a div.sc-eInJlc div.sc-jeCdPy div")).getText()
+                                .replaceAll("[^0-9]", "");
+                        int price = 0;
+                        if (price_string != null) price = Integer.parseInt(price_string);
 
-                    String price_string = webElement.findElement(By.cssSelector("a div.sc-eInJlc div.sc-jeCdPy div")).getText()
-                            .replaceAll("[^0-9]", "");
-                    ;
-                    int price = Integer.parseInt(price_string);
-
-                    Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, null, null, null);
-                    page.put(id, product);
+                        Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, 0, null, null, null, null);
+                        page.put(id, product);
+                    }
                 }
 
                 retry = 0;
@@ -135,11 +136,14 @@ public class BunjangImpl implements Bunjang {
                 int price = Integer.parseInt(prices.replaceAll("[^0-9]", ""));
                 String seller = webDriver.findElement(By.className("ProductSellerstyle__Name-sc-1qnzvgu-7")).getText();
 
-                //TODO 업데이트 시간 -> 크롤링 안 됨
                 String hearts = webDriver.findElement(By.className("ProductSummarystyle__StatusValue-sc-oxz0oy-14")).getText();
                 int heart = Integer.parseInt(hearts);
                 String detail = webDriver.findElement(By.className("ProductInfostyle__DescriptionContent-sc-ql55c8-3"))
                         .findElement(By.tagName("p")).getText();
+
+                String updatedate = webDriver.findElement(By.cssSelector(".ProductSummarystyle__Status-sc-oxz0oy-13.jHkOld:nth-child(3)")).getText();
+                String views_string = webDriver.findElement(By.cssSelector(".ProductSummarystyle__Status-sc-oxz0oy-13.jHkOld:nth-child(2)")).getText();
+                int views = Integer.parseInt(views_string);
 
                 HashMap<Integer, String> categoryset = getCategory();
                 String[] categories = webDriver.findElement(By.cssSelector(".Productsstyle__ProductBottom-sc-13cvfvh-15.ksyzGu div.Productsstyle__ProductInfoContent-sc-13cvfvh-14.lcdoPu div div div.ProductInfostyle__Description-sc-ql55c8-2.hWujk div.ProductInfostyle__DetailInfo-sc-ql55c8-8.UrLSZ div:nth-child(2) div.ProductInfostyle__InfoValue-sc-ql55c8-13.gLVyVQ a"))
@@ -149,7 +153,10 @@ public class BunjangImpl implements Bunjang {
                     category = categoryset.get(Integer.parseInt(categories[1].substring(0, 3)));
                 }
 
-                Product product = new Product(id, name, img, price, market, seller, null, heart, detail, category, url);
+                String region = webDriver.findElement(By.cssSelector(".ProductSummarystyle__Value-sc-oxz0oy-19.hdHOwM")).getText();
+
+
+                Product product = new Product(id, name, img, price, market, seller, updatedate, views, heart, detail, category, url, region);
                 return product;
             } catch (Exception e) {
                 if (--retry != 0) System.out.println("[Warn] BunjangImpl: 상품 상세 크롤링 오류··· 재시도 중");
@@ -188,7 +195,7 @@ public class BunjangImpl implements Bunjang {
                             .replaceAll("[^0-9]", "");
                     int price = Integer.parseInt(price_string);
 
-                    Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, null, null, null);
+                    Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, 0, null, null, null, null);
                     page.put(id, product);
                 }
 

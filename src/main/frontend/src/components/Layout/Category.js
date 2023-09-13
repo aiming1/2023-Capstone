@@ -19,11 +19,12 @@ const CategoryBox = ({ onCategorySelect }) => {
 
   return (
     <AnimatePresence>
+      <motion.div layout className={styles.categoryWrapper}>
       <motion.div
         layout
         className={styles.categorybox}
         onClick={toggleOpen}
-        initial={{ borderRadius: 10 }}
+        initial={{ borderRadius: 5 }}
       >
         <motion.div layout className={styles.accordionTitle}>
           <motion.img
@@ -49,6 +50,7 @@ const CategoryBox = ({ onCategorySelect }) => {
             ))}
           </motion.div>
         )}
+      </motion.div>
       </motion.div>
     </AnimatePresence>
   );

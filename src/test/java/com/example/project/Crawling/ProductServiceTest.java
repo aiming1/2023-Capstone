@@ -68,6 +68,7 @@ public class ProductServiceTest {
             String[] etcs = doc.select(".text-body span").text().split(" · ");
             String updatedate = etcs[0];
 
+            int views = Integer.parseInt(etcs[1].replaceAll("[^0-9]", ""));
             int heart = Integer.parseInt(etcs[2].replaceAll("[^0-9]", ""));
 
             String detail = doc.select(".col-span-3 article p").text();
@@ -84,7 +85,8 @@ public class ProductServiceTest {
                 }
             }
 
-            Product product = new Product("119272335", name, img, price, Market.JOONGGONARA, seller, updatedate, heart, detail, category, url);
+
+            Product product = new Product("119272335", name, img, price, Market.JOONGGONARA, seller, updatedate, views, heart, detail, category, url, null);
 
             System.out.println("product.getId() = " + product.getId());
             System.out.println("product.getName() = " + product.getName());
@@ -97,6 +99,7 @@ public class ProductServiceTest {
             System.out.println("product.getDetails() = " + product.getDetails());
             System.out.println("product.getCategory() = " + product.getCategory());
             System.out.println("product.getProducturl() = " + product.getProducturl());
+            System.out.println("product.getViews() = " + product.getViews());
         } catch (Exception e){
             System.out.println("중고나라 크롤링 오류_상품 상세");
         } finally {
@@ -146,9 +149,8 @@ public class ProductServiceTest {
 
             String seller = webDriver.findElement(By.className("ProductSellerstyle__Name-sc-1qnzvgu-7")).getText();
 
-            /** 업데이트 시간 수정해야 함 **/
-//            String updatetime = webDriver.findElement(By.xpath("/html/body/div/div/div[4]/div[1]/div/div[2]/div/div[2]/div/div[1]/div[2]/div[1]/div/div[3]/img")).getText();
-//            System.out.println("updatetime = " + updatetime);
+            String updatedate = webDriver.findElement(By.cssSelector(".ProductSummarystyle__Status-sc-oxz0oy-13.jHkOld:nth-child(3)")).getText();
+            System.out.println("updatedate = " + updatedate);
 
             String hearts = webDriver.findElement(By.className("ProductSummarystyle__StatusValue-sc-oxz0oy-14")).getText();
             int heart = Integer.parseInt(hearts);
@@ -161,7 +163,13 @@ public class ProductServiceTest {
                     .getAttribute("href").split("categories/");
             String category = categoryset.get(Integer.parseInt(categories[1].substring(0, 3)));
 
-            Product product = new Product("227279899", name, img, price, Market.BUNJANG, seller, null, heart, detail, category, url);
+            String region = webDriver.findElement(By.cssSelector(".ProductSummarystyle__Value-sc-oxz0oy-19.hdHOwM")).getText();
+
+            String views_string = webDriver.findElement(By.cssSelector(".ProductSummarystyle__Status-sc-oxz0oy-13.jHkOld:nth-child(2)")).getText();
+            int views = Integer.parseInt(views_string);
+
+
+            Product product = new Product("227279899", name, img, price, Market.BUNJANG, seller, updatedate, views, heart, detail, category, url, region);
 
             System.out.println("product.getId() = " + product.getId());
             System.out.println("product.getName() = " + product.getName());
@@ -174,6 +182,8 @@ public class ProductServiceTest {
             System.out.println("product.getDetails() = " + product.getDetails());
             System.out.println("product.getCategory() = " + product.getCategory());
             System.out.println("product.getProducturl() = " + product.getProducturl());
+            System.out.println("product.getRegion() = " + product.getRegion());
+            System.out.println("product.getViews() = " + product.getViews());
         } catch(Exception e){
             System.out.println("번개장터 크롤링 오류_상품 상세");
         } finally {
@@ -230,10 +240,13 @@ public class ProductServiceTest {
 
             String[] etcs = doc.select("#article-counts").text().split(" ∙ ");
             int heart = Integer.parseInt(etcs[0].replaceAll("[^0-9]", ""));
+            int views = Integer.parseInt(etcs[2].replaceAll("[^0-9]", ""));
 
             String detail = doc.select("#article-detail").text();
 
-            Product product = new Product("589353858", name, img, price, Market.CARROT, seller, updatedate, heart, detail, category, url);
+            String region = doc.select("#region-name").text();
+
+            Product product = new Product("589353858", name, img, price, Market.CARROT, seller, updatedate, views, heart, detail, category, url, region);
 
             System.out.println("product.getId() = " + product.getId());
             System.out.println("product.getName() = " + product.getName());
@@ -246,6 +259,7 @@ public class ProductServiceTest {
             System.out.println("product.getDetails() = " + product.getDetails());
             System.out.println("product.getCategory() = " + product.getCategory());
             System.out.println("product.getProducturl() = " + product.getProducturl());
+            System.out.println("product.getViews() = " + product.getViews());
         } catch (Exception e){
             System.out.println("당근마켓 크롤링 오류_상품 상세");
         }

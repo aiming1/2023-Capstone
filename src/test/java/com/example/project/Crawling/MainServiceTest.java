@@ -53,7 +53,7 @@ public class MainServiceTest {
                 String price_string = prices.get(i).text().replaceAll("[^0-9]", "");
                 int price = Integer.parseInt(price_string);
 
-                Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, null, null, url);
+                Product product = new Product(id, name, img, price, Market.JOONGGONARA, null, null, 0, 0, null, null, url, null);
                 page.put(id, product);
             }
             for (String key:page.keySet()){
@@ -101,7 +101,7 @@ public class MainServiceTest {
                         .replaceAll("[^0-9]", "");
                 int price = Integer.parseInt(price_string);
 
-                Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, null, null, null);
+                Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, 0, null, null, null, null);
                 page.put(id, product);
             }
             for (String key:page.keySet()){
@@ -156,7 +156,7 @@ public class MainServiceTest {
                     price = Integer.parseInt(price_string);
                 }
 
-                Product product = new Product(id, name, img, price, Market.CARROT, null, null, 0, null, null, null);
+                Product product = new Product(id, name, img, price, Market.CARROT, null, null, 0, 0, null, null, null, null);
                 page.put(id, product);
             }
             for (String key:page.keySet()){
