@@ -172,7 +172,7 @@ const ContentDetail = (props) => {
 
       <div className={styles.line}></div>
       <div className={styles.div8}>{data?.details}</div>
-{/*      <div className={styles.div9}>
+/*      <div className={styles.div9}>
         <p className={styles.p}>거래거래</p>
         <p className={styles.p}>대충 거래글 끝</p>
       </div>
