@@ -3,9 +3,11 @@ import axios from "axios";
 import styles from "../styles/css/ContentDetail.module.css";
 import style2 from "../styles/css/Category.module.css";
 import HeartList from "./HeartList";
+import Loading from "./Loading";
 
 const LikedPage = () => {
   const [deleteAll, setDeleteAll] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   //찜 해제
   const deleteHeartAll = async () => {
@@ -26,6 +28,24 @@ const LikedPage = () => {
       });
   };
 
+  const refresh = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get("/api/list/f5");
+      alert("새로고침 완료.");
+    } catch (error) {
+      console.log("에러...", error);
+    }
+    setLoading(false);
+  };
+
+  if (loading)
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
+
   return (
     <div className={styles.divhome}>
       <div className={styles.divcategory}>
@@ -33,6 +53,9 @@ const LikedPage = () => {
           <span className={style2.ctitleLabel}>♥찜</span>
           <span className={style2.cdelete} onClick={deleteHeartAll}>
             전체 삭제
+          </span>
+          <span className={style2.cdelete} onClick={refresh}>
+            새로고침
           </span>
         </div>
       </div>
