@@ -31,6 +31,7 @@ public class BunjangImpl implements Bunjang {
         WebDriver webDriver = chromeDriver.setChrome();
 
         int retry = 5;
+        long beforeTime = System.currentTimeMillis();
 
         while(retry != 0) {
             try {
@@ -64,6 +65,7 @@ public class BunjangImpl implements Bunjang {
             }
         }
 
+        System.out.println("소요 시간: " + (System.currentTimeMillis() - beforeTime));
         return page;
     }
 
