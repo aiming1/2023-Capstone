@@ -1,20 +1,31 @@
 {
   "files": {
-    "main.css": "/static/css/main.715cac1c.css",
-    "main.js": "/static/js/main.d7bfdbfa.js",
+    "main.css": "/static/css/main.875a7337.css",
+    "main.js": "/static/js/main.78d0dfd5.js",
     "static/js/787.5bf74b41.chunk.js": "/static/js/787.5bf74b41.chunk.js",
+    "static/media/fa-solid-900.ttf": "/static/media/fa-solid-900.d75e3fd1eb12e9bd6655.ttf",
+    "static/media/fa-brands-400.ttf": "/static/media/fa-brands-400.016b4a6cdced82ab3aa1.ttf",
+    "static/media/fa-solid-900.woff2": "/static/media/fa-solid-900.b6879d41b0852f01ed5b.woff2",
+    "static/media/fa-brands-400.woff2": "/static/media/fa-brands-400.878f31251d960bd6266f.woff2",
+    "static/media/spinner.gif": "/static/media/spinner.b06b35d5d9a2bc89baa9.gif",
+    "static/media/fa-regular-400.ttf": "/static/media/fa-regular-400.50701fbb8177c2dde530.ttf",
+    "static/media/fa-regular-400.woff2": "/static/media/fa-regular-400.b041b1fa4fe241b23445.woff2",
+    "static/media/fa-v4compatibility.ttf": "/static/media/fa-v4compatibility.c6a0c95b0a95c4553700.ttf",
     "static/media/NotoSansKR-Medium.woff": "/static/media/NotoSansKR-Medium.70f7ac0ebcb6f20973fc.woff",
     "static/media/NotoSansKR-Regular.woff": "/static/media/NotoSansKR-Regular.5ff295d82f4f73ac750d.woff",
     "static/media/NotoSansKR-Bold.woff": "/static/media/NotoSansKR-Bold.b69e14d2e716b9f81764.woff",
     "static/media/NotoSansKR-Light.woff": "/static/media/NotoSansKR-Light.828d8ac30be37411a95d.woff",
     "static/media/NotoSansKR-Thin.woff": "/static/media/NotoSansKR-Thin.4cf21c16519b637e7cc4.woff",
+    "static/media/fa-v4compatibility.woff2": "/static/media/fa-v4compatibility.1bac2991f3dbfa237aec.woff2",
     "index.html": "/index.html",
-    "main.715cac1c.css.map": "/static/css/main.715cac1c.css.map",
-    "main.d7bfdbfa.js.map": "/static/js/main.d7bfdbfa.js.map",
+    "static/media/heart_full.svg": "/static/media/heart_full.e70b7d2abc651c4068c01e9bc7aa2200.svg",
+    "static/media/heart_empty.svg": "/static/media/heart_empty.6eea680683b11e0fa27825a8f327df01.svg",
+    "main.875a7337.css.map": "/static/css/main.875a7337.css.map",
+    "main.78d0dfd5.js.map": "/static/js/main.78d0dfd5.js.map",
     "787.5bf74b41.chunk.js.map": "/static/js/787.5bf74b41.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.715cac1c.css",
-    "static/js/main.d7bfdbfa.js"
+    "static/css/main.875a7337.css",
+    "static/js/main.78d0dfd5.js"
   ]
 }

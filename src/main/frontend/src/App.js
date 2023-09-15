@@ -23,6 +23,8 @@ function App() {
           <Route path="/product/:itemId" element={<ContentDetail />} />
           {/* 검색 */}
           <Route path="/search/:word" element={<SearchPage />} />
+          {/* 카테고리 */}
+          <Route path="/search" element={<Home />} />
           {/* 로그인 */}
           <Route path="/Login" element={<Login />} />
           <Route path="/Logout" element={<Logout />} />
