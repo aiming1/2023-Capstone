@@ -18,10 +18,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.security.core.parameters.P;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.io.IOException;
+import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -45,7 +47,7 @@ public class ProductServiceTest {
         try {
             Document doc = Jsoup.connect(url).get();
             webDriver.get(url);
-            Thread.sleep(500);
+            webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
             String name = doc.select(".pb-5 h1").text();
 
@@ -136,13 +138,12 @@ public class ProductServiceTest {
 
             String name = webDriver.findElement(By.className("ProductSummarystyle__Name-sc-oxz0oy-4")).getText();
 
-            List<WebElement> imgs = webDriver.findElements(By.cssSelector(".sc-kaNhvL"));
+            List<WebElement> imgs = webDriver.findElements(By.cssSelector(".sc-kLIISr"));
             ArrayList<String> img = new ArrayList<>();
             for(WebElement invimg:imgs) {
                 img.add(invimg.getAttribute("src"));
                 System.out.println("invimg = " + invimg.getAttribute("src"));
             }
-
 
             String prices = webDriver.findElement(By.className("ProductSummarystyle__Price-sc-oxz0oy-6")).getText();
             int price = Integer.parseInt(prices.replaceAll("[^0-9]", ""));
@@ -150,7 +151,6 @@ public class ProductServiceTest {
             String seller = webDriver.findElement(By.className("ProductSellerstyle__Name-sc-1qnzvgu-7")).getText();
 
             String updatedate = webDriver.findElement(By.cssSelector(".ProductSummarystyle__Status-sc-oxz0oy-13.jHkOld:nth-child(3)")).getText();
-            System.out.println("updatedate = " + updatedate);
 
             String hearts = webDriver.findElement(By.className("ProductSummarystyle__StatusValue-sc-oxz0oy-14")).getText();
             int heart = Integer.parseInt(hearts);
@@ -158,10 +158,7 @@ public class ProductServiceTest {
             String detail = webDriver.findElement(By.className("ProductInfostyle__DescriptionContent-sc-ql55c8-3"))
                     .findElement(By.tagName("p")).getText();
 
-            HashMap<Integer, String> categoryset = getCategory_B();
-            String[] categories = webDriver.findElement(By.cssSelector(".Productsstyle__ProductBottom-sc-13cvfvh-15.ksyzGu div.Productsstyle__ProductInfoContent-sc-13cvfvh-14.lcdoPu div div div.ProductInfostyle__Description-sc-ql55c8-2.hWujk div.ProductInfostyle__DetailInfo-sc-ql55c8-8.UrLSZ div:nth-child(2) div.ProductInfostyle__InfoValue-sc-ql55c8-13.gLVyVQ a"))
-                    .getAttribute("href").split("categories/");
-            String category = categoryset.get(Integer.parseInt(categories[1].substring(0, 3)));
+            String category = webDriver.findElement(By.cssSelector(".Productsstyle__CategorySelectorWrapper-sc-13cvfvh-6 div div")).getText();
 
             String region = webDriver.findElement(By.cssSelector(".ProductSummarystyle__Value-sc-oxz0oy-19.hdHOwM")).getText();
 

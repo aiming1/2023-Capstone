@@ -1,5 +1,6 @@
 import styles from "../../styles/css/Header.module.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 export default function Searchbar() {
   {}
@@ -33,6 +34,7 @@ export default function Searchbar() {
             name="keyword"
             type="text"
             placeholder="상품명 입력"
+            value={word}
             onChange={(e) => {
               setWord(e.target.value);
               console.log(word);

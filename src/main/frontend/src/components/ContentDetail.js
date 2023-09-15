@@ -283,12 +283,14 @@ const ContentDetail = (props) => {
       <div className={styles.productInfo}>
         <div className={styles.infoHeadLine}>상품 설명</div>
         <div className={styles.description}>
+
           {data?.details.split("\n").map((line, index) => (
             <React.Fragment key={index}>
               {line}
               <br />
             </React.Fragment>
-          ))}
+          ))}*/}
+          {data?.details}
         </div>
       </div>
     </div>

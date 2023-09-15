@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -39,7 +40,7 @@ public class CarrotImpl implements Carrot{
         while(retry != 0) {
             try {
                 webDriver.get(url);
-                Thread.sleep(500);
+                webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
                 //TODO 더보기 버튼 안 눌리는 거 수정...
 
@@ -139,7 +140,7 @@ public class CarrotImpl implements Carrot{
         while(retry != 0) {
             try {
                 webDriver.get(url);
-                Thread.sleep(500);
+                webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
                 List<WebElement> webElements = webDriver.findElements(By.cssSelector("article.card-top"));
 
