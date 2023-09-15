@@ -1,17 +1,20 @@
 .logincontainer{
+    position: absolute;
     height: 350px;
 }
 
 .logoutcontainer{
+    z-index: 100;
+    position: fixed;
     height: 180px;
 }
 
 .joincontainer{
+     position: absolute;
      height: 230px;
  }
 
 .logincontainer, .logoutcontainer, .joincontainer{
-    position: absolute;
     text-align: center;
     width: 400px;
     border: none;
@@ -19,9 +22,11 @@
     background-color: rgba(236, 236, 236, 0.926);
     padding: 20px;
     margin: 150px auto;
-    right: 50%;
-    top: 10%;
-
+    /*right: 50%;
+    top: 10%;*/
+    top: 30%; /* 수직 가운데 정렬을 위해 화면 상단에서 50% 떨어진 위치 */
+    left: 50%; /* 수평 가운데 정렬을 위해 화면 왼쪽에서 50% 떨어진 위치 */
+    transform: translate(-50%, -50%); /* 모달을 정중앙으로 이동 */
 }
 
 .lh2 {
