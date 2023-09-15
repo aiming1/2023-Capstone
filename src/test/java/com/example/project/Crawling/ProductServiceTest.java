@@ -41,7 +41,8 @@ public class ProductServiceTest {
     /** 중고나라 상품 상세 테스트 **/
     @Test
     void getProductTest(){
-        String url = "https://web.joongna.com/product/113380183";
+//        String url = "https://web.joongna.com/product/113380183";
+        String url = "https://web.joongna.com/product/130843978";
         WebDriver webDriver = chromeDriver.setChrome();
 
         try {

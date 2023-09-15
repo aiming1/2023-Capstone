@@ -250,7 +250,7 @@ const ContentDetail = (props) => {
                   찜 {data?.hearts}
                 </div>
               </div>
-              <div className={styles.price}>{data?.price}원</div>
+              <div className={styles.price}>{productPrice}원</div>
             </div>
 
             <div className={styles.productButtons}>
