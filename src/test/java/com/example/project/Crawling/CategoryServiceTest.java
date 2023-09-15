@@ -14,6 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -76,24 +77,25 @@ class CategoryServiceTest {
 
         try {
             webDriver.get(url);
-            Thread.sleep(500);
+            webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
-            List<WebElement> webElements = webDriver.findElements(By.className("sc-cmjSyW"));
+            List<WebElement> webElements = webDriver.findElements(By.cssSelector(".sc-ugnQR"));
 
             for(WebElement webElement : webElements){
-                String ad = webElement.findElement(By.cssSelector("a div.sc-iGPElx div.sc-gtfDJT div.sc-fOICqy")).getText();
+                System.out.println("반복문 들어감");
+                String ad = webElement.findElement(By.cssSelector("a div.sc-ebFjAB div.sc-iBEsjs div.sc-hzNEM")).getText();
                 if(!ad.equals("AD")) {
                     String id = webElement.findElement(By.tagName("a")).getAttribute("data-pid");
                     System.out.println("ppid = " + id);
 
-                    String name = webElement.findElement(By.className("sc-kasBVs")).getText();
+                    String name = webElement.findElement(By.className("sc-jKVCRD")).getText();
                     System.out.println("name = " + name);
 
                     ArrayList<String> img = new ArrayList<>();
                     img.add(webElement.findElement(By.tagName("img")).getAttribute("src"));
                     System.out.println("img = " + img);
 
-                    String price_string = webElement.findElement(By.className("sc-hgHYgh")).getText()
+                    String price_string = webElement.findElement(By.className("sc-kaNhvL")).getText()
                             .replaceAll("[^0-9]", "");
                     int price = Integer.parseInt(price_string);
                     System.out.println("price = " + price);

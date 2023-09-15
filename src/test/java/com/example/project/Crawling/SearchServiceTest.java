@@ -81,21 +81,21 @@ public class SearchServiceTest {
             webDriver.get(url);
             Thread.sleep(500);
 
-            List<WebElement> webElements = webDriver.findElements(By.className("sc-cHSUfg"));
+            List<WebElement> webElements = webDriver.findElements(By.className("sc-dxZgTM"));
 
             for(WebElement webElement : webElements){
                 String id = webElement.findElement(By.tagName("a")).getAttribute("data-pid");
                 if (id != null) {
                     System.out.println("ppid = " + id);
 
-                    String name = webElement.findElement(By.cssSelector("a div.sc-eInJlc div.sc-gtfDJT")).getText();
+                    String name = webElement.findElement(By.cssSelector("a div.sc-LKuAh div")).getText();
                     System.out.println("name = " + name);
 
                     ArrayList<String> img = new ArrayList<>();
-                    img.add(webElement.findElement(By.cssSelector("a div.sc-hgHYgh img")).getAttribute("src"));
+                    img.add(webElement.findElement(By.cssSelector("a div img")).getAttribute("src"));
                     System.out.println("img = " + img);
 
-                    String price_string = webElement.findElement(By.cssSelector("a div.sc-eInJlc div.sc-jeCdPy div")).getText()
+                    String price_string = webElement.findElement(By.cssSelector("a div.sc-LKuAh div.sc-kxynE div")).getText()
                             .replaceAll("[^0-9]", "");
                     ;
                     System.out.println("price_string = " + price_string);
