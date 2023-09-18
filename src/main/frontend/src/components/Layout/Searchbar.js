@@ -8,6 +8,7 @@ export default function Searchbar() {
   const onSubmitSearch = (e) => {
     if(e.key === "Enter"){
         window.location.href = "/search/" + word;
+        alert(word);
     }
   }
 

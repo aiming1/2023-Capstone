@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
+import { useNavigate } from "react-router-dom";
 import HeartButton from "./HeartButton";
 import ImageSlide from "./ImageSlide";
 import Modal from './ImageModal';
@@ -14,6 +15,7 @@ const ContentDetail = (props) => {
   const productMarket = product.state.market[0];
   const productImage = product.state.image;
   const productPrice = product.state.price;
+  const navigate = useNavigate();
 
   const [data, setData] = useState(null);
   const [data2, setData2] = useState(null);
@@ -103,7 +105,9 @@ const ContentDetail = (props) => {
 
   //찜하기
   const addHeart = async () => {
-    const productData = {
+  /*if (!localStorage.getItem("token")) {alert("로그인 후 이용해주세요!"); navigate("/login");}*/
+
+const productData = {
       id: productId,
       name: data?.name,
       image: data?.image,
@@ -119,12 +123,13 @@ const ContentDetail = (props) => {
       region: data?.region,
     };
 
+
     axios
       .get(`/api/product/${productId}/${productMarket}/heart/add`, productData)
       .then(function (response) {
         console.log("추가 성공", response);
         setHeart(!heart);
-        alert("찜목록에 추가되었습니다.");
+        //alert("찜목록에 추가되었습니다.");
         // response
       })
       .catch(function (error) {
@@ -232,7 +237,7 @@ const ContentDetail = (props) => {
                 </div>
                 <div className={styles.heart}>
                   <i class="fas fa-heart" style={{ fontSize: '15px', margin: '5px' }}></i>
-                  찜 {data?.hearts}
+                  찜 {data?.hearts == null ? "0" : data?.hearts}
                 </div>
               </div>
               <div className={styles.price}>{data?.price}원</div>
@@ -268,13 +273,12 @@ const ContentDetail = (props) => {
       <div className={styles.productInfo}>
         <div className={styles.infoHeadLine}>상품 설명</div>
         <div className={styles.description}>
-          {/*{data?.details.split('\n').map((line, index) => (
+          {data?.details.split('\n').map((line, index) => (
             <React.Fragment key={index}>
               {line}
               <br />
             </React.Fragment>
-          ))}*/}
-          {data?.details}
+          ))}
         </div>
       </div>
     </div>
