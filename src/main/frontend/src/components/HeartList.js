@@ -13,20 +13,21 @@ const truncate = (str, n) => {
   return str?.length > n ? str.substr(0, n - 1) + "..." : str;
 };
 
-const isEmptyArr=(arr) => {
-  if(Array.isArray(arr) && arr.length === 0)  {
+const isEmptyArr = (arr) => {
+  if (Array.isArray(arr) && arr.length === 0) {
     return true;
   }
   return false;
-}
+};
 
-const HeartList = ({ deleteAll }) => {
+const HeartList = () => {
   const [data, setData] = useState(null);
   //const [heartListId, setHeartListId] = useState([]); //하트 유지
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isEmpty, setIsEmpty] = useState(true);
+  const [deleteAll, setDeleteAll] = useState(false);
 
   //페이징
   const [oneViewNumber, setOneViewNumber] = useState(20);
@@ -62,6 +63,37 @@ const HeartList = ({ deleteAll }) => {
     fetchData();
   }, [deleteAll, isEmpty]);
 
+  //찜 해제
+  const deleteHeartAll = async () => {
+    axios
+      .get("/api/list/delete")
+      .then(function (response) {
+        console.log("삭제 성공", response);
+        setDeleteAll(true);
+        alert("찜목록을 비웠습니다.");
+      })
+      .catch(function (error) {
+        // 오류발생시 실행
+        console.log("실패", error);
+      })
+      .then(function () {
+        // 항상 실행
+        console.log("데이터 요청 완료");
+      });
+    window.location.reload();
+  };
+
+  const refresh = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get("/api/list/f5");
+      alert("새로고침 완료.");
+    } catch (error) {
+      console.log("에러...", error);
+    }
+    setLoading(false);
+  };
+
   if (loading)
     return (
       <div>
@@ -70,40 +102,55 @@ const HeartList = ({ deleteAll }) => {
     );
   if (error) return <div>에러가 발생했습니다</div>;
   //if (!data) return null;
-  if (isEmpty) return <div><EmptyList /></div>;
-
-  return (
-    <div>
-      <div className={styles.itemlistcontent}>
-        {data.length > 0 &&
-          data
-            .slice(offset, offset + oneViewNumber)
-            .map((item) => (
-              <ListItem
-                className={styles.listItem}
-                key={item.url}
-                id={item.id}
-                market={item.market}
-                price={item.price}
-                name={truncate(item.name, 10)}
-                image={item.image}
-                hearts={item.hearts}
-                data={data}
-              />
-            ))}
+  if (isEmpty)
+    return (
+      <div>
+        <EmptyList />
       </div>
+    );
+  else
+    return (
+      <div>
+        <div className={style2.refresh}>
+          <span className={style2.likedCnt}>상품 {data.length}개</span>
+          <span className={style2.cdelete} onClick={refresh}>
+            새로고침
+          </span>
 
-      <div className={styles.pageMove}>
-        <Pagination
-          postLength={data.length}
-          oneViewNumber={oneViewNumber}
-          page={page}
-          setPage={setPage}
-          inMaxPageListNumber={5}
-        />
+          <span className={style2.cdelete} onClick={deleteHeartAll}>
+            전체삭제
+          </span>
+        </div>
+        <div className={styles.itemlistcontent}>
+          {data.length > 0 &&
+            data
+              .slice(offset, offset + oneViewNumber)
+              .map((item) => (
+                <ListItem
+                  className={styles.listItem}
+                  key={item.url}
+                  id={item.id}
+                  market={item.market}
+                  price={item.price}
+                  name={truncate(item.name, 10)}
+                  image={item.image}
+                  hearts={item.hearts}
+                  data={data}
+                />
+              ))}
+        </div>
+
+        <div className={styles.pageMove}>
+          <Pagination
+            postLength={data.length}
+            oneViewNumber={oneViewNumber}
+            page={page}
+            setPage={setPage}
+            inMaxPageListNumber={5}
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
 };
 
 export default HeartList;

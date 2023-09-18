@@ -3,9 +3,9 @@ import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
 import HeartButton from "./HeartButton";
 import ImageSlide from "./ImageSlide";
-import Modal from './ImageModal';
+import Modal from "./ImageModal";
 import styles from "../styles/css/ContentDetail.module.css";
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import axios from "axios";
 
@@ -105,9 +105,15 @@ const ContentDetail = (props) => {
 
   //찜하기
   const addHeart = async () => {
+<<<<<<< HEAD
   /*if (!localStorage.getItem("token")) {alert("로그인 후 이용해주세요!"); navigate("/login");}*/
 
 const productData = {
+=======
+    //if (!localStorage.getItem("token")) {alert("로그인 후 이용해주세요!"); navigate("/login");}
+
+    const productData = {
+>>>>>>> f51d7bf3d3dc1c3148cb87cbb69e4a1edd6eaacb
       id: productId,
       name: data?.name,
       image: data?.image,
@@ -179,8 +185,6 @@ const productData = {
   // 최근 본  상품.
   // detail 들어가면 product id를 watched에 추가
 
-
-
   // 이미지 클릭 시 모달 열기
   const openModal = (image) => {
     setSelectedImage(image);
@@ -201,38 +205,48 @@ const productData = {
             <ImageSlide images={data?.image} onImageClick={openModal} />
           </div>
         </div>
-        {isModalOpen && (
-           <Modal image={selectedImage} onClose={closeModal} />
-        )}
+        {isModalOpen && <Modal image={selectedImage} onClose={closeModal} />}
 
         <div className={styles.productSummaryWrapper}>
           <div className={styles.parent}>
             <div className={styles.productDetails}>
               <div className={styles.category}>
                 <div className={styles.homebtn}>
-                {/* <i class="fas fa-home" style={{ marginRight: '5px' }}></i>*/}
-                홈 >
+                  {/* <i class="fas fa-home" style={{ marginRight: '5px' }}></i>*/}
+                  홈 {">"}
                 </div>
-                <div className={styles.categoryname} style={{ marginLeft: '5px' }}>
+                <div
+                  className={styles.categoryname}
+                  style={{ marginLeft: "5px" }}
+                >
                   {/*<i className="fas fa-angle-right" style={{ margin: 'auto 10px' }}></i>*/}
                   {data?.category == null ? "기타 카테고리" : data?.category}
                 </div>
-{/*                {`홈 > `}
+                {/*                {`홈 > `}
                 {data?.category == null ? "카테고리" : data?.category}*/}
               </div>
               <div className={styles.title}>{data?.name}</div>
               <div className={styles.name}>{data?.seller}</div>
               <div className={styles.location}>
-                <i class="fas fa-map-marker-alt" style={{ fontSize: '15px', margin: '0 5px' }}></i>
+                <i
+                  class="fas fa-map-marker-alt"
+                  style={{ fontSize: "15px", margin: "0 5px" }}
+                ></i>
                 거래지역 : {data?.region == null ? "전국" : data?.region}
               </div>
               <div className={styles.state}>
                 <div className={styles.date}>
-                  <i class="far fa-clock" style={{ fontSize: '15px', margin: '5px' }}></i>
+                  <i
+                    class="far fa-clock"
+                    style={{ fontSize: "15px", margin: "5px" }}
+                  ></i>
                   {data?.updatedate == null ? "0분전" : data?.updatedate}
                 </div>
                 <div className={styles.views}>
-                  <i class="fas fa-search" style={{ fontSize: '15px', margin: '5px' }}></i>
+                  <i
+                    class="fas fa-search"
+                    style={{ fontSize: "15px", margin: "5px" }}
+                  ></i>
                   조회 {data?.views == null ? "0" : data?.views}
                 </div>
                 <div className={styles.heart}>
@@ -240,7 +254,7 @@ const productData = {
                   찜 {data?.hearts == null ? "0" : data?.hearts}
                 </div>
               </div>
-              <div className={styles.price}>{data?.price}원</div>
+              <div className={styles.price}>{productPrice}원</div>
             </div>
 
             <div className={styles.productButtons}>

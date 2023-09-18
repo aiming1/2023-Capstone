@@ -17,7 +17,6 @@ import java.sql.*;
 //@EntityScan(basePackages = {"com.example.project.domain"})
 @SpringBootApplication
 public class ProjectApplication {
-/** DB 정해지면 application.properties 수정 후 위 annotation의 exclude 옵션 삭제 **/
 	@Bean
 	public BCryptPasswordEncoder encoder(){
 		return new BCryptPasswordEncoder();
