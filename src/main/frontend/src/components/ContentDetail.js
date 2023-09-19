@@ -42,6 +42,15 @@ const ContentDetail = (props) => {
           });
           setHeart(isHeart);
           //console.log("heart", isHeart);
+
+          //data?.updatedate 값이 -로 시작할때 함수 호출
+          if (data?.updatedate && data.updatedate.startsWith('-')) {
+            const updatedateMinutes = handleNegativeUpdatedate(data?.updatedate);
+            setData((prevData) => ({
+              ...prevData,
+              updatedate: updatedateMinutes,
+            }));
+          }
         })
       )
       .catch((e) => {
@@ -61,6 +70,41 @@ const ContentDetail = (props) => {
   useEffect(() => {
     fetchData();
   }, []); */
+
+  function handleNegativeUpdatedate(inputSeconds) {
+    const std = 32405;
+    // 입력값을 숫자로 변환
+    const seconds = parseFloat(inputSeconds);
+
+    if (isNaN(seconds)) {
+      // 유효하지 않은 입력값 처리
+      console.error('유효하지 않은 입력값입니다.');
+      return null;
+    }
+
+    let unit = '초';
+    let resultValue = std + seconds;
+
+    if (resultValue >= 60) {  // 60 이상일 경우 분 단위로 변환
+      resultValue /= 60;
+      unit = '분';
+
+      if (resultValue >= 60) {  // 60 이상일 경우 시간 단위로 변환
+        resultValue /= 60;
+        unit = '시간';
+
+        if (resultValue >= 24) {  // 24 이상일 경우 일 단위로 변환
+          resultValue /= 24;
+          unit = '일';
+        }
+      }
+    }
+
+    // 결과값을 내림하여 정수로 변환
+    resultValue = Math.floor(resultValue);
+
+    return `${resultValue}${unit}`;
+  }
 
   const renderLogo = () => {
     if (data?.market === "CARROT") {
@@ -105,15 +149,9 @@ const ContentDetail = (props) => {
 
   //찜하기
   const addHeart = async () => {
-<<<<<<< HEAD
-  /*if (!localStorage.getItem("token")) {alert("로그인 후 이용해주세요!"); navigate("/login");}*/
-
-const productData = {
-=======
     //if (!localStorage.getItem("token")) {alert("로그인 후 이용해주세요!"); navigate("/login");}
 
     const productData = {
->>>>>>> f51d7bf3d3dc1c3148cb87cbb69e4a1edd6eaacb
       id: productId,
       name: data?.name,
       image: data?.image,
@@ -240,7 +278,7 @@ const productData = {
                     class="far fa-clock"
                     style={{ fontSize: "15px", margin: "5px" }}
                   ></i>
-                  {data?.updatedate == null ? "0분전" : data?.updatedate}
+                  {data?.updatedate == null ? "0분" : data?.updatedate} 전
                 </div>
                 <div className={styles.views}>
                   <i
