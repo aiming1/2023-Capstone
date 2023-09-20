@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
+import { useNavigate } from "react-router-dom";
 import HeartButton from "./HeartButton";
 import ImageSlide from "./ImageSlide";
-import Modal from './ImageModal';
+import Modal from "./ImageModal";
 import styles from "../styles/css/ContentDetail.module.css";
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import axios from "axios";
 
@@ -14,6 +15,7 @@ const ContentDetail = (props) => {
   const productMarket = product.state.market[0];
   const productImage = product.state.image;
   const productPrice = product.state.price;
+  const navigate = useNavigate();
 
   const [data, setData] = useState(null);
   const [data2, setData2] = useState(null);
@@ -103,6 +105,8 @@ const ContentDetail = (props) => {
 
   //찜하기
   const addHeart = async () => {
+    //if (!localStorage.getItem("token")) {alert("로그인 후 이용해주세요!"); navigate("/login");}
+
     const productData = {
       id: productId,
       name: data?.name,
@@ -124,7 +128,7 @@ const ContentDetail = (props) => {
       .then(function (response) {
         console.log("추가 성공", response);
         setHeart(!heart);
-        alert("찜목록에 추가되었습니다.");
+        //alert("찜목록에 추가되었습니다.");
         // response
       })
       .catch(function (error) {
@@ -174,8 +178,6 @@ const ContentDetail = (props) => {
   // 최근 본  상품.
   // detail 들어가면 product id를 watched에 추가
 
-
-
   // 이미지 클릭 시 모달 열기
   const openModal = (image) => {
     setSelectedImage(image);
@@ -196,46 +198,59 @@ const ContentDetail = (props) => {
             <ImageSlide images={data?.image} onImageClick={openModal} />
           </div>
         </div>
-        {isModalOpen && (
-           <Modal image={selectedImage} onClose={closeModal} />
-        )}
+        {isModalOpen && <Modal image={selectedImage} onClose={closeModal} />}
 
         <div className={styles.productSummaryWrapper}>
           <div className={styles.parent}>
             <div className={styles.productDetails}>
               <div className={styles.category}>
                 <div className={styles.homebtn}>
-                {/* <i class="fas fa-home" style={{ marginRight: '5px' }}></i>*/}
-                홈 >
+                  {/* <i class="fas fa-home" style={{ marginRight: '5px' }}></i>*/}
+                  홈 {">"}
                 </div>
-                <div className={styles.categoryname} style={{ marginLeft: '5px' }}>
+                <div
+                  className={styles.categoryname}
+                  style={{ marginLeft: "5px" }}
+                >
                   {/*<i className="fas fa-angle-right" style={{ margin: 'auto 10px' }}></i>*/}
                   {data?.category == null ? "기타 카테고리" : data?.category}
                 </div>
-{/*                {`홈 > `}
+                {/*                {`홈 > `}
                 {data?.category == null ? "카테고리" : data?.category}*/}
               </div>
               <div className={styles.title}>{data?.name}</div>
               <div className={styles.name}>{data?.seller}</div>
               <div className={styles.location}>
-                <i class="fas fa-map-marker-alt" style={{ fontSize: '15px', margin: '0 5px' }}></i>
+                <i
+                  class="fas fa-map-marker-alt"
+                  style={{ fontSize: "15px", margin: "0 5px" }}
+                ></i>
                 거래지역 : {data?.region == null ? "전국" : data?.region}
               </div>
               <div className={styles.state}>
                 <div className={styles.date}>
-                  <i class="far fa-clock" style={{ fontSize: '15px', margin: '5px' }}></i>
+                  <i
+                    class="far fa-clock"
+                    style={{ fontSize: "15px", margin: "5px" }}
+                  ></i>
                   {data?.updatedate == null ? "0분전" : data?.updatedate}
                 </div>
                 <div className={styles.views}>
-                  <i class="fas fa-search" style={{ fontSize: '15px', margin: '5px' }}></i>
+                  <i
+                    class="fas fa-search"
+                    style={{ fontSize: "15px", margin: "5px" }}
+                  ></i>
                   조회 {data?.views == null ? "0" : data?.views}
                 </div>
                 <div className={styles.heart}>
-                  <i class="fas fa-heart" style={{ fontSize: '15px', margin: '5px' }}></i>
+                  <i
+                    class="fas fa-heart"
+                    style={{ fontSize: "15px", margin: "5px" }}
+                  ></i>
                   찜 {data?.hearts}
                 </div>
               </div>
-              <div className={styles.price}>{data?.price}원</div>
+              <div className={styles.price}>{productPrice}원</div>
             </div>
 
             <div className={styles.productButtons}>
@@ -268,12 +283,14 @@ const ContentDetail = (props) => {
       <div className={styles.productInfo}>
         <div className={styles.infoHeadLine}>상품 설명</div>
         <div className={styles.description}>
-          {data?.details.split('\n').map((line, index) => (
+
+          {data?.details.split("\n").map((line, index) => (
             <React.Fragment key={index}>
               {line}
               <br />
             </React.Fragment>
-          ))}
+          ))}*/}
+          {data?.details}
         </div>
       </div>
     </div>

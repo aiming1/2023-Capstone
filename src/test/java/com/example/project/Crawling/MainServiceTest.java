@@ -91,15 +91,18 @@ public class MainServiceTest {
 
             for(WebElement webElement : webElements){
                 String id = webElement.findElement(By.tagName("a")).getAttribute("data-pid");
+                System.out.println("ppid = " + id);
 
-                String name = webElement.findElement(By.className("sc-kasBVs")).getText();
+                String name = webElement.findElement(By.cssSelector("a div.sc-ebFjAB div")).getText();
+                System.out.println("name = " + name);
 
                 ArrayList<String> img = new ArrayList<>();
                 img.add(webElement.findElement(By.tagName("img")).getAttribute("src"));
 
-                String price_string = webElement.findElement(By.className("sc-hgHYgh")).getText()
+                String price_string = webElement.findElement(By.cssSelector("a div.sc-ebFjAB div.sc-LKuAh div")).getText()
                         .replaceAll("[^0-9]", "");
                 int price = Integer.parseInt(price_string);
+                System.out.println("price = " + price);
 
                 Product product = new Product(id, name, img, price, Market.BUNJANG, null, null, 0, 0, null, null, null, null);
                 page.put(id, product);

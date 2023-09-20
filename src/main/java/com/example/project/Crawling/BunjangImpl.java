@@ -8,6 +8,7 @@ import org.openqa.selenium.*;
 import org.springframework.stereotype.Component;
 
 import java.net.URLEncoder;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -30,24 +31,25 @@ public class BunjangImpl implements Bunjang {
         WebDriver webDriver = chromeDriver.setChrome();
 
         int retry = 5;
+        long beforeTime = System.currentTimeMillis();
 
         while(retry != 0) {
             try {
                 webDriver.get(url);
-                Thread.sleep(500);
+                webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
-                List<WebElement> webElements = webDriver.findElements(By.className("sc-cmjSyW"));
+                List<WebElement> webElements = webDriver.findElements(By.className("sc-ugnQR"));
 
                 for(WebElement webElement : webElements){
-                    String ad = webElement.findElement(By.cssSelector("a div.sc-iGPElx div.sc-gtfDJT div.sc-fOICqy")).getText();
+                    String ad = webElement.findElement(By.cssSelector("a div.sc-ebFjAB div.sc-iBEsjs div.sc-hzNEM")).getText();
                     if (!ad.equals("AD")) {
                         String id = webElement.findElement(By.tagName("a")).getAttribute("data-pid");
 
-                        String name = webElement.findElement(By.className("sc-kasBVs")).getText();
+                        String name = webElement.findElement(By.className("sc-jKVCRD")).getText();
                         ArrayList<String> img = new ArrayList<>();
                         img.add(webElement.findElement(By.tagName("img")).getAttribute("src"));
 
-                        String price_string = webElement.findElement(By.className("sc-hgHYgh")).getText()
+                        String price_string = webElement.findElement(By.className("sc-kaNhvL")).getText()
                                 .replaceAll("[^0-9]", "");
                         int price = Integer.parseInt(price_string);
 
@@ -63,6 +65,7 @@ public class BunjangImpl implements Bunjang {
             }
         }
 
+        System.out.println("소요 시간: " + (System.currentTimeMillis() - beforeTime));
         return page;
     }
 
@@ -79,19 +82,19 @@ public class BunjangImpl implements Bunjang {
         while(retry != 0) {
             try {
                 webDriver.get(url);
-                Thread.sleep(500);
+                webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
-                List<WebElement> webElements = webDriver.findElements(By.className("sc-cHSUfg"));
+                List<WebElement> webElements = webDriver.findElements(By.className("sc-dxZgTM"));
 
                 for (WebElement webElement : webElements) {
                     String id = webElement.findElement(By.tagName("a")).getAttribute("data-pid");
                     if (id != null) {
-                        String name = webElement.findElement(By.cssSelector("a div.sc-eInJlc div.sc-gtfDJT")).getText();
+                        String name = webElement.findElement(By.cssSelector("a div.sc-LKuAh div")).getText();
 
                         ArrayList<String> img = new ArrayList<>();
-                        img.add(webElement.findElement(By.cssSelector("a div.sc-hgHYgh img")).getAttribute("src"));
+                        img.add(webElement.findElement(By.cssSelector("a div img")).getAttribute("src"));
 
-                        String price_string = webElement.findElement(By.cssSelector("a div.sc-eInJlc div.sc-jeCdPy div")).getText()
+                        String price_string = webElement.findElement(By.cssSelector("a div.sc-LKuAh div.sc-kxynE div")).getText()
                                 .replaceAll("[^0-9]", "");
                         int price = 0;
                         if (price_string != null) price = Integer.parseInt(price_string);
@@ -122,11 +125,11 @@ public class BunjangImpl implements Bunjang {
         while(retry != 0) {
             try {
                 webDriver.get(url);
-                Thread.sleep(500);
+                webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
                 String name = webDriver.findElement(By.className("ProductSummarystyle__Name-sc-oxz0oy-4")).getText();
 
-                List<WebElement> imgs = webDriver.findElements(By.cssSelector(".sc-kaNhvL"));
+                List<WebElement> imgs = webDriver.findElements(By.cssSelector(".sc-kLIISr"));
                 ArrayList<String> img = new ArrayList<>();
                 for(WebElement invimg:imgs) {
                     img.add(invimg.getAttribute("src"));
@@ -145,14 +148,7 @@ public class BunjangImpl implements Bunjang {
                 String views_string = webDriver.findElement(By.cssSelector(".ProductSummarystyle__Status-sc-oxz0oy-13.jHkOld:nth-child(2)")).getText();
                 int views = Integer.parseInt(views_string);
 
-                HashMap<Integer, String> categoryset = getCategory();
-                String[] categories = webDriver.findElement(By.cssSelector(".Productsstyle__ProductBottom-sc-13cvfvh-15.ksyzGu div.Productsstyle__ProductInfoContent-sc-13cvfvh-14.lcdoPu div div div.ProductInfostyle__Description-sc-ql55c8-2.hWujk div.ProductInfostyle__DetailInfo-sc-ql55c8-8.UrLSZ div:nth-child(2) div.ProductInfostyle__InfoValue-sc-ql55c8-13.gLVyVQ a"))
-                        .getAttribute("href").split("categories/");
-                String category = null;
-                if (categoryset.containsKey(Integer.parseInt(categories[1].substring(0, 3)))) {
-                    category = categoryset.get(Integer.parseInt(categories[1].substring(0, 3)));
-                }
-
+                String category = webDriver.findElement(By.cssSelector(".Productsstyle__CategorySelectorWrapper-sc-13cvfvh-6 div div")).getText();
                 String region = webDriver.findElement(By.cssSelector(".ProductSummarystyle__Value-sc-oxz0oy-19.hdHOwM")).getText();
 
 
@@ -180,18 +176,18 @@ public class BunjangImpl implements Bunjang {
         while(retry != 0) {
             try {
                 webDriver.get(url);
-                Thread.sleep(500);
+                webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
                 List<WebElement> webElements = webDriver.findElements(By.className("styled__ProductWrapper-sc-32dn86-1"));
 
                 for (WebElement webElement : webElements) {
                     String id = webElement.findElement(By.tagName("a")).getAttribute("data-pid");
 
-                    String name = webElement.findElement(By.className("sc-kasBVs")).getText();
+                    String name = webElement.findElement(By.cssSelector("a div.sc-ebFjAB div")).getText();
                     ArrayList<String> img = new ArrayList<>();
                     img.add(webElement.findElement(By.tagName("img")).getAttribute("src"));
 
-                    String price_string = webElement.findElement(By.className("sc-hgHYgh")).getText()
+                    String price_string = webElement.findElement(By.cssSelector("a div.sc-ebFjAB div.sc-LKuAh div")).getText()
                             .replaceAll("[^0-9]", "");
                     int price = Integer.parseInt(price_string);
 

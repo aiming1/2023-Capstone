@@ -2,14 +2,17 @@ import React from "react";
 import styles from "../styles/css/Login.module.css";
 import { useNavigate } from "react-router-dom";
 
-function Logout() {
+function Logout({ onClose }) {
   //로그아웃 페이지
     const navigate = useNavigate();
     function logout(){
         localStorage.removeItem("email")
         localStorage.removeItem("name")
         localStorage.removeItem("token")
-        navigate('/')
+        onClose();
+
+        alert("로그아웃 되었습니다.");
+        navigate("/");
     }
 
     return (

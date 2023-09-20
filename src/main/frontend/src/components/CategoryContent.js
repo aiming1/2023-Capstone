@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router";
 import styles from "../styles/css/Category.module.css";
 
 export const CategoryContent = ({ text = "여성패션", category_id, onCategorySelect}) => {
@@ -9,7 +10,7 @@ export const CategoryContent = ({ text = "여성패션", category_id, onCategory
     const changeCategory = () => {
       onCategorySelect(category_id); // 선택한 카테고리를 부모 컴포넌트로 전달
       //alert(category_id);
-      //navigate(`/productlist/search?category=${category_id}`);
+      navigate(`/search?category=${category_id}`, {state: category_id});
       //window.location.reload();
     }
 

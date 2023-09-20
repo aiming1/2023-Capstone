@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -81,7 +82,7 @@ public class JoonggonaraImpl implements Joonggonara{
         while(retry != 0) {
             try {
                 webDriver.get(url);
-                Thread.sleep(500);
+                webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
                 List<WebElement> webElements = webDriver.findElements(By.cssSelector("a.group.box-border"));
 
@@ -126,7 +127,7 @@ public class JoonggonaraImpl implements Joonggonara{
             try {
                 Document doc = Jsoup.connect(url).get();
                 webDriver.get(url);
-                Thread.sleep(500);
+                webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
                 String name = doc.select(".pb-5 h1").text();
 
