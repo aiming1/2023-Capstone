@@ -16,8 +16,12 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const limit = 8; //페이지 당 최대 게시물 수
-  const [page, setPage] = useState(1);
   const params = useParams();
+
+  //페이징
+  const [oneViewNumber, setOneViewNumber] = useState(20);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * oneViewNumber;
 
   /*
   한 페이지에 출력할 물건 개수 조절하려면 이부분 주석 해제하고
@@ -81,10 +85,11 @@ const Search = () => {
 
       <div className={styles.pageMove}>
         <Pagination
-          total={data.length}
-          limit={limit}
+          postLength={data.length}
+          oneViewNumber={oneViewNumber}
           page={page}
           setPage={setPage}
+          inMaxPageListNumber={5}
         />
       </div>
     </div>

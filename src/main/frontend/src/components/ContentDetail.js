@@ -103,7 +103,7 @@ const ContentDetail = (props) => {
     // 결과값을 내림하여 정수로 변환
     resultValue = Math.floor(resultValue);
 
-    return `${resultValue}${unit}`;
+    return `${resultValue}${unit} 전`;
   }
 
   const renderLogo = () => {
@@ -270,7 +270,7 @@ const ContentDetail = (props) => {
                   class="fas fa-map-marker-alt"
                   style={{ fontSize: "15px", margin: "0 5px" }}
                 ></i>
-                거래지역 : {data?.region == null ? "전국" : data?.region}
+                희망 거래지역 : {data?.region == null ? "전국" : data?.region}
               </div>
               <div className={styles.state}>
                 <div className={styles.date}>
@@ -278,7 +278,7 @@ const ContentDetail = (props) => {
                     class="far fa-clock"
                     style={{ fontSize: "15px", margin: "5px" }}
                   ></i>
-                  {data?.updatedate == null ? "0분" : data?.updatedate} 전
+                  {data?.updatedate == null ? "0분 전" : data?.updatedate}
                 </div>
                 <div className={styles.views}>
                   <i
