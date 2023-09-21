@@ -1,16 +1,14 @@
 .background {
   width: 100vw;
-  height: 50vh;
 
   background: #ffffffb7;
-  z-index: 99;
+  z-index: 101;
   display: flex;
   flex-direction: column;
   align-items: center;
   /*justify-content: center;*/
 
-  position: absolute;
-  top: 50px;
+  position: fixed;
 }
 
 .loadingText {
