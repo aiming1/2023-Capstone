@@ -33,7 +33,7 @@ export default function Searchbar() {
           </button>
 
           <input
-            className={styles.div16}
+            className={styles.searchBox}
             name="keyword"
             type="text"
             placeholder= {item.word === undefined? "검색어를 입력하세요" : item.word}
