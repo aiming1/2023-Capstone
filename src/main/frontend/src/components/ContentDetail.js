@@ -105,40 +105,46 @@ const ContentDetail = (props) => {
 
   //찜하기
   const addHeart = async () => {
-    //if (!localStorage.getItem("token")) {alert("로그인 후 이용해주세요!"); navigate("/login");}
+    if (!localStorage.getItem("token")) {
+      alert("로그인 후 이용해주세요!");
+      navigate("/login");
+    } else {
+      const productData = {
+        id: productId,
+        name: data?.name,
+        image: data?.image,
+        price: data?.price,
+        market: productMarket,
+        seller: data?.seller,
+        updatedate: data?.updatedate,
+        views: data?.views,
+        hearts: data?.hearts,
+        details: data?.details,
+        category: data?.category,
+        producturl: data?.producturl,
+        region: data?.region,
+      };
 
-    const productData = {
-      id: productId,
-      name: data?.name,
-      image: data?.image,
-      price: data?.price,
-      market: productMarket,
-      seller: data?.seller,
-      updatedate: data?.updatedate,
-      views: data?.views,
-      hearts: data?.hearts,
-      details: data?.details,
-      category: data?.category,
-      producturl: data?.producturl,
-      region: data?.region,
-    };
-
-    axios
-      .get(`/api/product/${productId}/${productMarket}/heart/add`, productData)
-      .then(function (response) {
-        console.log("추가 성공", response);
-        setHeart(!heart);
-        //alert("찜목록에 추가되었습니다.");
-        // response
-      })
-      .catch(function (error) {
-        // 오류발생시 실행
-        console.log("실패", error);
-      })
-      .then(function () {
-        // 항상 실행
-        console.log("데이터 요청 완료");
-      });
+      axios
+        .get(
+          `/api/product/${productId}/${productMarket}/heart/add`,
+          productData
+        )
+        .then(function (response) {
+          console.log("추가 성공", response);
+          setHeart(!heart);
+          //alert("찜목록에 추가되었습니다.");
+          // response
+        })
+        .catch(function (error) {
+          // 오류발생시 실행
+          console.log("실패", error);
+        })
+        .then(function () {
+          // 항상 실행
+          console.log("데이터 요청 완료");
+        });
+    }
   };
 
   //찜 해제
@@ -254,21 +260,22 @@ const ContentDetail = (props) => {
             </div>
 
             <div className={styles.productButtons}>
-              {heart ? (
-                <HeartButton heart={heart} onClick={deleteHeart}></HeartButton>
-              ) : (
-                <HeartButton heart={heart} onClick={addHeart}></HeartButton>
-              )}
-
               <div
                 className={styles.btn_golink}
                 onClick={() => {
                   window.open(data?.producturl);
                 }}
               >
-                <div className={styles.child} />
-                <div className={styles.div7}>보러 가기</div>
+                <div className={styles.child}>보러 가기</div>
+                {/*<div className={styles.div7}></div>*/}
               </div>
+
+              <span className={styles.shortline} />
+              {heart ? (
+                <HeartButton heart={heart} onClick={deleteHeart}></HeartButton>
+              ) : (
+                <HeartButton heart={heart} onClick={addHeart}></HeartButton>
+              )}
             </div>
           </div>
         </div>
@@ -283,13 +290,13 @@ const ContentDetail = (props) => {
       <div className={styles.productInfo}>
         <div className={styles.infoHeadLine}>상품 설명</div>
         <div className={styles.description}>
-
           {data?.details.split("\n").map((line, index) => (
             <React.Fragment key={index}>
               {line}
               <br />
             </React.Fragment>
-          ))}*/}
+          ))}
+
           {data?.details}
         </div>
       </div>

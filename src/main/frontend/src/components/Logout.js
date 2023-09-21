@@ -24,7 +24,7 @@ function Logout({ onClose }) {
         <br></br>
         <div>
           <button className={styles.no}
-            onClick={() => navigate(-1)}> 취소 </button>
+            onClick={() => onClose()}> 취소 </button>
           <button className={styles.yes}
             onClick={logout}> 확인 </button>
         </div>

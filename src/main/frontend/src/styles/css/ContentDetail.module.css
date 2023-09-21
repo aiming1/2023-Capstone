@@ -22,7 +22,6 @@
   width: 90px;
 }
 
-
 /* Home.js */
 .divhome {
   position: relative;
@@ -49,10 +48,9 @@
   /*left: 80px;*/
 }
 
-
 /* ContentDetail.js */
 .wrap {
-    min-height: 100%;
+  min-height: 100%;
 }
 
 .icon {
@@ -81,7 +79,7 @@
   left: 1px;
   height: 31px;
   width: 100%;
- /* margin-top: 10px; */
+  /* margin-top: 10px; */
   padding: 30px 0px;
 }
 .state {
@@ -161,7 +159,6 @@
   align-items: center;
 }
 
-
 .parent {
   position: relative;
   display: flex;
@@ -172,7 +169,6 @@
   font-size: var(--font-size-sm);
 }
 
-.child,
 .icon1,
 .icon2,
 .icon3,
@@ -183,18 +179,18 @@
   width: 74px;
   height: 49px;
 }
-.child,
+
 .icon2,
 .icon3,
 .icon4 {
   top: 340px;
 }
-.child,
+
 .icon3,
 .icon4 {
   top: 251px;
 }
-.child,
+
 .icon4 {
   top: 517px;
   height: 50px;
@@ -205,23 +201,58 @@
   top: 0;
   right: 0;
   bottom: 0;
-  left: 0;
 
   border-radius: 5px;
   border: 3px solid #606cd6;
-  background: #fff;
+  background: #606cd6;
   box-sizing: border-box;
+
+  font-weight: 500;
+  color: #fff;
+
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-family: "Noto Sans KR";
+  cursor: pointer;
 }
+.child:hover {
+  background-color: #535ec3;
+  transition: 0.1s;
+}
+
+.starButton {
+  margin-left: 13px;
+  margin-top: 2px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.shortline {
+  display: inline;
+  margin-left: 20px;
+  margin-top: 3px;
+  border-right: 1px solid var(--color-gainsboro);
+  width: 1px;
+  height: 40px;
+  background: #dbdbdb;
+  align-items: center;
+  justify-content: center;
+}
+
 .btn_golink {
-  left: 150px;
-  width: 201px;
-  height: 54px;
+  width: 350px;
+  height: 48px;
   cursor: pointer;
 }
 .btn_golink,
 .div7 {
-  position: absolute;
+  display: inline;
 }
+
 .div7 {
   top: 14px;
   left: 34px;
@@ -231,6 +262,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
   width: 134px;
   height: 27px;
 
@@ -284,7 +316,6 @@
 .icon5 {
   position: absolute;
 }
-
 
 .planet {
   position: absolute;
@@ -376,7 +407,6 @@
   box-sizing: border-box;
 }
 
-
 .div20 {
   font-weight: 500;
   display: flex;
@@ -401,8 +431,8 @@
   max-width: 100%;
   overflow: hidden;
   max-height: 100%;
-/*  object-fit: cover; <- 당근마켓이 짤려요ㅠㅠ*/
-  object-fit: contain
+  /*  object-fit: cover; <- 당근마켓이 짤려요ㅠㅠ*/
+  object-fit: contain;
 }
 .wrapicon {
   width: 100%;
@@ -420,7 +450,6 @@
   height: 21px;
   font-size: var(--font-size-sm);
 }
-
 
 .productPage {
   top: 130px;
@@ -441,7 +470,7 @@
   display: flex;
   padding-top: 30px;
   padding-bottom: 10px;
-/*  padding: 30px 0px;*/
+  /*  padding: 30px 0px;*/
 }
 
 .productImageWrapper {
@@ -457,14 +486,13 @@
 }
 .productButtons {
   display: flex;
+  justify-content: flex-start;
   width: 100%;
 }
 
 .productInfo {
-/*  padding-bottom: 40px;*/
+  /*  padding-bottom: 40px;*/
 }
-
-
 
 /* ImageSlide.js */
 .imageSlide {
@@ -478,7 +506,7 @@
     left: 20px;
     font-size: 14px;
     z-index: 2;
-    background-color: rgba( 255, 255, 255, 0.5 );
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 5px;
     padding: 1px 5px;
 
@@ -518,7 +546,7 @@
       height: 400px;
       object-fit: cover;
       cursor: pointer;
-      transition: 0.3s
+      transition: 0.3s;
     }
 
     &:hover .buttonPrev {

@@ -40,6 +40,7 @@
   left: 0;
   /*width: 181.14px;*/
 }
+
 .basketAlt3Icon,
 .userCicrleDuotoneIcon {
   position: absolute;
@@ -50,6 +51,7 @@
   cursor: pointer;
 }
 .userCicrleDuotoneIcon {
+  top: 3px;
   left: 1070px;
   border: none;
   background: none;

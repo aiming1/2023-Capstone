@@ -1,16 +1,15 @@
 import React from "react";
 import styles from "../styles/css/ContentDetail.module.css";
+import FullStartImg from "../assets/star_full.svg";
+import EmptyStarImg from "../assets/star_light.svg";
 
 const HeartButton = ({ heart, onClick }) => {
   return (
-    <div
-      className={heart ? styles.btn_unheart : styles.btn_heart}
+    <img
+      className={styles.starButton}
+      src={heart ? FullStartImg : EmptyStarImg}
       onClick={onClick}
-    >
-      <div className={heart ? styles.div17 : styles.div177}>
-        {heart ? <p>찜해제</p> : <p>찜하기</p>}
-      </div>
-    </div>
+    />
   );
 };
 
