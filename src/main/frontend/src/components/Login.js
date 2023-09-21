@@ -13,7 +13,7 @@ class Login extends Component {
           <img alt="" src={"img/임시로고.svg"} className={styles.logoimg}/>
         </a>
         <br/>
-        <div className={styles.lh2}> 로그인하기 </div>
+        <div className={styles.lih2}> 로그인하기 </div>
         <br/>
         <div className={styles.loginbox}>
           <div className={styles.buttons}>

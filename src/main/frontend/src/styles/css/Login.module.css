@@ -22,14 +22,15 @@
     z-index: 100;
     position: fixed;
     height: 180px;
-    margin: 150px auto;
+    margin: 120px auto;
     background-color: rgba(236, 236, 236, 0.926);
 }
 
 .joincontainer{
-     position: absolute;
+     position: fixed;
      height: 230px;
      background-color: rgba(236, 236, 236, 0.926);
+     margin: 120px auto;
  }
 
 .logoutcontainer, .joincontainer{
@@ -38,7 +39,7 @@
     border: none;
     border-radius: 20px;
     padding: 20px;
-    margin: 150px auto;
+
     /*right: 50%;
     top: 10%;*/
     top: 30%; /* 수직 가운데 정렬을 위해 화면 상단에서 50% 떨어진 위치 */
@@ -46,8 +47,12 @@
     transform: translate(-50%, -50%); /* 모달을 정중앙으로 이동 */
 }
 
-.lh2 {
+.lih2 {
     margin-top: 40px;
+    font-weight: 600;
+    font-size: 20px;
+}
+.loh2 {
     font-weight: 600;
     font-size: 20px;
 }

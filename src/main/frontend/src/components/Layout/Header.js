@@ -19,9 +19,9 @@ const Header = () => {
         navigate("/login");
       } else {
         setIsLogoutModalOpen(true);
+        navigate("/logout");
       }
   }
-
 
   function heartlink() {
     if (!localStorage.getItem("token")) {alert("로그인 후 이용해주세요!"); navigate("/login");}
@@ -32,7 +32,7 @@ const Header = () => {
     <div className={styles.groupParent}>
       <div className={styles.planetParent}>
         <button className={styles.planet} onClick={() => {navigate("/")
-                window.location.reload()}}>
+          window.location.reload()}}>
           <img src="/img/임시로고.svg" />
         </button>
       </div>
@@ -45,7 +45,7 @@ const Header = () => {
       <button className={styles.userCicrleDuotoneIcon} onClick={loginlink}>
         <img src="/img/user-cicrle-duotone.svg" />
       </button>
-      {isLogoutModalOpen && <LogoutModal onClose={() => setIsLogoutModalOpen(false)} />}
+      {/*{isLogoutModalOpen && <LogoutModal onClose={() => setIsLogoutModalOpen(false)} />}*/}
       <Searchbar></Searchbar>
       <div className={styles.line} />
       {/*<div className={styles.groupItem} />
