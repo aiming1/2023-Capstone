@@ -33,7 +33,7 @@ const Header = () => {
       <div className={styles.planetParent}>
         <button className={styles.planet} onClick={() => {navigate("/")
           window.location.reload()}}>
-          <img src="/img/임시로고.svg" />
+          <img src="/img/임시로고.svg" width="200" />
         </button>
       </div>
       <div
