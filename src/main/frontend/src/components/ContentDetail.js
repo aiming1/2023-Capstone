@@ -149,38 +149,46 @@ const ContentDetail = (props) => {
 
   //찜하기
   const addHeart = async () => {
-    const productData = {
-      id: productId,
-      name: data?.name,
-      image: data?.image,
-      price: data?.price,
-      market: productMarket,
-      seller: data?.seller,
-      updatedate: data?.updatedate,
-      views: data?.views,
-      hearts: data?.hearts,
-      details: data?.details,
-      category: data?.category,
-      producturl: data?.producturl,
-      region: data?.region,
-    };
+    if (!localStorage.getItem("token")) {
+      alert("로그인 후 이용해주세요!");
+      navigate("/login");
+    } else {
+      const productData = {
+        id: productId,
+        name: data?.name,
+        image: data?.image,
+        price: data?.price,
+        market: productMarket,
+        seller: data?.seller,
+        updatedate: data?.updatedate,
+        views: data?.views,
+        hearts: data?.hearts,
+        details: data?.details,
+        category: data?.category,
+        producturl: data?.producturl,
+        region: data?.region,
+      };
 
-    axios
-      .get(`/api/product/${productId}/${productMarket}/heart/add`, productData)
-      .then(function (response) {
-        console.log("추가 성공", response);
-        setHeart(!heart);
-        //alert("찜목록에 추가되었습니다.");
-        // response
-      })
-      .catch(function (error) {
-        // 오류발생시 실행
-        console.log("실패", error);
-      })
-      .then(function () {
-        // 항상 실행
-        console.log("데이터 요청 완료");
-      });
+      axios
+        .get(
+          `/api/product/${productId}/${productMarket}/heart/add`,
+          productData
+        )
+        .then(function (response) {
+          console.log("추가 성공", response);
+          setHeart(!heart);
+          //alert("찜목록에 추가되었습니다.");
+          // response
+        })
+        .catch(function (error) {
+          // 오류발생시 실행
+          console.log("실패", error);
+        })
+        .then(function () {
+          // 항상 실행
+          console.log("데이터 요청 완료");
+        });
+    }
   };
 
   //찜 해제
@@ -323,21 +331,12 @@ const ContentDetail = (props) => {
       <div className={styles.productInfo}>
         <div className={styles.infoHeadLine}>상품 설명</div>
         <div className={styles.description}>
-<<<<<<< HEAD
           {data?.details.split("\n").map((line, index) => (
-=======
-          {data?.details.split('\n').map((line, index) => (
->>>>>>> de30033d846a93f3e99630a43163f82400bb0a8f
             <React.Fragment key={index}>
               {line}
               <br />
             </React.Fragment>
           ))}
-<<<<<<< HEAD
-
-          {data?.details}
-=======
->>>>>>> de30033d846a93f3e99630a43163f82400bb0a8f
         </div>
       </div>
     </div>
