@@ -11,9 +11,7 @@ const Layout = () => {
       <div className={styles.contentWrapper}>
         <Outlet></Outlet>
       </div>
-      <div className={styles.divfooter}>
-        <Footer></Footer>
-      </div>
+      <Footer></Footer>
       <div className={styles.divsidebar}>
         <Sidebar></Sidebar>
       </div>

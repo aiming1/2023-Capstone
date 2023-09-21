@@ -1,8 +1,19 @@
+.rectangleParent {
+  position: relative;
+  margin-top: 200px;
+  margin-left: -8px;
+  margin-right: -8px;
+  vertical-align: bottom;
+  /*
+  font-size: var(--font-size-xs);
+  font-family: var(--font-inter);
+  */
+}
 .box {
-  position: absolute;
+  /*position: absolute;*/
   top: 0;
   background-color: #ededed;
-  width: 100%;
+  /*width: 92.8%;*/
   height: 50px;
   padding: 50px;
 
@@ -24,15 +35,4 @@
   font-size: 12px;
   font-family: Inter;
   text-align: center;
-}
-.rectangleParent {
-  position: relative;
-  margin-top: 200px;
-  margin-left: -6px;
-  margin-right: -8px;
-  vertical-align: bottom;
-  /*
-  font-size: var(--font-size-xs);
-  font-family: var(--font-inter);
-  */
 }
