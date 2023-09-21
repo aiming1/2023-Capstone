@@ -42,6 +42,15 @@ const ContentDetail = (props) => {
           });
           setHeart(isHeart);
           //console.log("heart", isHeart);
+
+          //data?.updatedate 값이 -로 시작할때 함수 호출
+          if (data?.updatedate && data.updatedate.startsWith('-')) {
+            const updatedateMinutes = handleNegativeUpdatedate(data?.updatedate);
+            setData((prevData) => ({
+              ...prevData,
+              updatedate: updatedateMinutes,
+            }));
+          }
         })
       )
       .catch((e) => {
@@ -61,6 +70,41 @@ const ContentDetail = (props) => {
   useEffect(() => {
     fetchData();
   }, []); */
+
+  function handleNegativeUpdatedate(inputSeconds) {
+    const std = 32405;
+    // 입력값을 숫자로 변환
+    const seconds = parseFloat(inputSeconds);
+
+    if (isNaN(seconds)) {
+      // 유효하지 않은 입력값 처리
+      console.error('유효하지 않은 입력값입니다.');
+      return null;
+    }
+
+    let unit = '초';
+    let resultValue = std + seconds;
+
+    if (resultValue >= 60) {  // 60 이상일 경우 분 단위로 변환
+      resultValue /= 60;
+      unit = '분';
+
+      if (resultValue >= 60) {  // 60 이상일 경우 시간 단위로 변환
+        resultValue /= 60;
+        unit = '시간';
+
+        if (resultValue >= 24) {  // 24 이상일 경우 일 단위로 변환
+          resultValue /= 24;
+          unit = '일';
+        }
+      }
+    }
+
+    // 결과값을 내림하여 정수로 변환
+    resultValue = Math.floor(resultValue);
+
+    return `${resultValue}${unit} 전`;
+  }
 
   const renderLogo = () => {
     if (data?.market === "CARROT") {
@@ -105,46 +149,38 @@ const ContentDetail = (props) => {
 
   //찜하기
   const addHeart = async () => {
-    if (!localStorage.getItem("token")) {
-      alert("로그인 후 이용해주세요!");
-      navigate("/login");
-    } else {
-      const productData = {
-        id: productId,
-        name: data?.name,
-        image: data?.image,
-        price: data?.price,
-        market: productMarket,
-        seller: data?.seller,
-        updatedate: data?.updatedate,
-        views: data?.views,
-        hearts: data?.hearts,
-        details: data?.details,
-        category: data?.category,
-        producturl: data?.producturl,
-        region: data?.region,
-      };
+    const productData = {
+      id: productId,
+      name: data?.name,
+      image: data?.image,
+      price: data?.price,
+      market: productMarket,
+      seller: data?.seller,
+      updatedate: data?.updatedate,
+      views: data?.views,
+      hearts: data?.hearts,
+      details: data?.details,
+      category: data?.category,
+      producturl: data?.producturl,
+      region: data?.region,
+    };
 
-      axios
-        .get(
-          `/api/product/${productId}/${productMarket}/heart/add`,
-          productData
-        )
-        .then(function (response) {
-          console.log("추가 성공", response);
-          setHeart(!heart);
-          //alert("찜목록에 추가되었습니다.");
-          // response
-        })
-        .catch(function (error) {
-          // 오류발생시 실행
-          console.log("실패", error);
-        })
-        .then(function () {
-          // 항상 실행
-          console.log("데이터 요청 완료");
-        });
-    }
+    axios
+      .get(`/api/product/${productId}/${productMarket}/heart/add`, productData)
+      .then(function (response) {
+        console.log("추가 성공", response);
+        setHeart(!heart);
+        //alert("찜목록에 추가되었습니다.");
+        // response
+      })
+      .catch(function (error) {
+        // 오류발생시 실행
+        console.log("실패", error);
+      })
+      .then(function () {
+        // 항상 실행
+        console.log("데이터 요청 완료");
+      });
   };
 
   //찜 해제
@@ -231,7 +267,7 @@ const ContentDetail = (props) => {
                   class="fas fa-map-marker-alt"
                   style={{ fontSize: "15px", margin: "0 5px" }}
                 ></i>
-                거래지역 : {data?.region == null ? "전국" : data?.region}
+                희망 거래지역 : {data?.region == null ? "전국" : data?.region}
               </div>
               <div className={styles.state}>
                 <div className={styles.date}>
@@ -239,7 +275,7 @@ const ContentDetail = (props) => {
                     class="far fa-clock"
                     style={{ fontSize: "15px", margin: "5px" }}
                   ></i>
-                  {data?.updatedate == null ? "0분전" : data?.updatedate}
+                  {data?.updatedate == null ? "0분 전" : data?.updatedate}
                 </div>
                 <div className={styles.views}>
                   <i
@@ -249,11 +285,8 @@ const ContentDetail = (props) => {
                   조회 {data?.views == null ? "0" : data?.views}
                 </div>
                 <div className={styles.heart}>
-                  <i
-                    class="fas fa-heart"
-                    style={{ fontSize: "15px", margin: "5px" }}
-                  ></i>
-                  찜 {data?.hearts}
+                  <i class="fas fa-heart" style={{ fontSize: '15px', margin: '5px' }}></i>
+                  찜 {data?.hearts == null ? "0" : data?.hearts}
                 </div>
               </div>
               <div className={styles.price}>{productPrice}원</div>
@@ -290,14 +323,21 @@ const ContentDetail = (props) => {
       <div className={styles.productInfo}>
         <div className={styles.infoHeadLine}>상품 설명</div>
         <div className={styles.description}>
+<<<<<<< HEAD
           {data?.details.split("\n").map((line, index) => (
+=======
+          {data?.details.split('\n').map((line, index) => (
+>>>>>>> de30033d846a93f3e99630a43163f82400bb0a8f
             <React.Fragment key={index}>
               {line}
               <br />
             </React.Fragment>
           ))}
+<<<<<<< HEAD
 
           {data?.details}
+=======
+>>>>>>> de30033d846a93f3e99630a43163f82400bb0a8f
         </div>
       </div>
     </div>

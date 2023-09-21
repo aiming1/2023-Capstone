@@ -7,7 +7,8 @@ export default function Searchbar() {
 
   const onSubmitSearch = (e) => {
     if(e.key === "Enter"){
-        window.location.href = "/search/" + word;
+      window.location.href = "/search/" + word;
+      //alert(word);
     }
   }
 
@@ -35,6 +36,7 @@ export default function Searchbar() {
             type="text"
             placeholder="상품명 입력"
             value={word}
+            autocomplete="off"
             onChange={(e) => {
               setWord(e.target.value);
               console.log(word);
