@@ -1,8 +1,8 @@
 import styles from "../../styles/css/Header.module.css";
 import Searchbar from "./Searchbar";
-import LoginModal from '../Login.js';
-import LogoutModal from '../Logout.js';
-import React, { useState } from 'react';
+import LoginModal from "../Login.js";
+import LogoutModal from "../Logout.js";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
@@ -24,27 +24,34 @@ const Header = () => {
   }
 
   function heartlink() {
-    if (!localStorage.getItem("token")) {alert("로그인 후 이용해주세요!"); navigate("/login");}
-    else navigate("/heartList");
+    if (!localStorage.getItem("token")) {
+      alert("로그인 후 이용해주세요!");
+      navigate("/login");
+    } else navigate("/heartList");
   }
 
   return (
     <div className={styles.groupParent}>
       <div className={styles.planetParent}>
-        <button className={styles.planet} onClick={() => {navigate("/")
-          window.location.reload()}}>
+        <button
+          className={styles.planet}
+          onClick={() => {
+            navigate("/");
+            window.location.reload();
+          }}
+        >
           <img src="/img/임시로고.svg" width="200" />
         </button>
       </div>
-      <div
-        className={styles.basketAlt3Icon}
-        onClick={heartlink}
-      >
-        <img src="/img/basket-alt-3.svg" />
-      </div>
-      <button className={styles.userCicrleDuotoneIcon} onClick={loginlink}>
-        <img src="/img/user-cicrle-duotone.svg" />
-      </button>
+
+      <div className={styles.cartGroup}>
+        <div className={styles.basketAlt3Icon} onClick={heartlink} >
+          <img src="/img/basket-alt-3.svg" />
+        </div>
+        <div className={styles.line} />
+        <button className={styles.userCicrleDuotoneIcon} onClick={loginlink}>
+          <img src="/img/user-cicrle-duotone.svg" />
+        </button>
       {/*{isLogoutModalOpen && <LogoutModal onClose={() => setIsLogoutModalOpen(false)} />}*/}
       <Searchbar></Searchbar>
       <div className={styles.line} />
@@ -53,6 +60,7 @@ const Header = () => {
       <input className={styles.div16}
         placeholder="상품명 입력"
         />*/}
+      </div>
     </div>
   );
 };
