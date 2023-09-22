@@ -299,21 +299,22 @@ const ContentDetail = (props) => {
             </div>
 
             <div className={styles.productButtons}>
-              {heart ? (
-                <HeartButton heart={heart} onClick={deleteHeart}></HeartButton>
-              ) : (
-                <HeartButton heart={heart} onClick={addHeart}></HeartButton>
-              )}
-
               <div
                 className={styles.btn_golink}
                 onClick={() => {
                   window.open(data?.producturl);
                 }}
               >
-                <div className={styles.child} />
-                <div className={styles.div7}>보러 가기</div>
+                <div className={styles.child}>보러 가기</div>
+                {/*<div className={styles.div7}>보러 가기</div>*/}
               </div>
+
+              <span className={styles.shortline} />
+                {heart ? (
+                  <HeartButton heart={heart} onClick={deleteHeart}></HeartButton>
+                ) : (
+                  <HeartButton heart={heart} onClick={addHeart}></HeartButton>
+              )}
             </div>
           </div>
         </div>
@@ -328,7 +329,7 @@ const ContentDetail = (props) => {
       <div className={styles.productInfo}>
         <div className={styles.infoHeadLine}>상품 설명</div>
         <div className={styles.description}>
-          {data?.details.split('\n').map((line, index) => (
+          {data?.details.split("\n").map((line, index) => (
             <React.Fragment key={index}>
               {line}
               <br />
