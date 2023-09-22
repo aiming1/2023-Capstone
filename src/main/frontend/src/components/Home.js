@@ -62,11 +62,10 @@ const Home = () => {
         <div className={styles.divcategorylabel}>
           <p style={{ marginBottom: '0px' }}><i class="fas fa-home" style={{ fontSize: '13px', margin: '0 5px' }}></i>
           홈 > {categoryName}</p>
-          {/*<p><a href="/">Home</<a>» {categoryName}</p>*/}
         </div>)}
       </div>
       <div className={styles.divcontent}>
-        <ItemList selectedCategoryId={selectedCategory} ></ItemList>
+        <ItemList selectedCategoryId={selectedCategory} />
       </div>
     </div>
   );
