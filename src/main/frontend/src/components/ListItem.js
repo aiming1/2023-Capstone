@@ -139,7 +139,7 @@ export const ListItem = ({
       <div className={styles.iteminfo}>
         {renderLogo()}
         <div className={styles.itemname}>{name}</div>
-        <div className={styles.itempick}>찜 {hearts}</div>
+        {/*<div className={styles.itempick}>찜 {hearts}</div>*/}
         <div className={styles.itemprice}>{price} 원</div>
       </div>
     </div>
