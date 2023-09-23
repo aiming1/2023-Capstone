@@ -41,7 +41,13 @@ const ContentDetail = (props) => {
             return x?.id === data?.id;
           });
           setHeart(isHeart);
-          //console.log("heart", isHeart);
+
+          if (!localStorage.getItem("token")) {
+            //console.log("로그아웃됨"); 로그아웃 안됨-임시추가
+            setData2(null);
+            setHeart(false);
+          }
+          //console.log("heart", isHeart, data2);
 
           //data?.updatedate 값이 -로 시작할때 함수 호출
           if (data?.updatedate && data.updatedate.startsWith('-')) {
