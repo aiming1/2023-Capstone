@@ -14,12 +14,13 @@ const Header = () => {
     else navigate("/logout");
   }*/
   function loginlink() {
-    if (!localStorage.getItem("token")) {
-      // 모달을 열기 위해 openModal 함수 호출
-      navigate("/login");
-    } else {
-      setIsLogoutModalOpen(true);
-    }
+      if (!localStorage.getItem("token")) {
+        // 모달을 열기 위해 openModal 함수 호출
+        navigate("/login");
+      } else {
+        setIsLogoutModalOpen(true);
+        navigate("/logout");
+      }
   }
 
   function heartlink() {
@@ -39,7 +40,7 @@ const Header = () => {
             window.location.reload();
           }}
         >
-          <img src="/img/임시로고.svg" />
+          <img src="/img/임시로고.svg" width="200" />
         </button>
       </div>
 
@@ -51,12 +52,11 @@ const Header = () => {
         <button className={styles.userCicrleDuotoneIcon} onClick={loginlink}>
           <img src="/img/user-cicrle-duotone.svg" />
         </button>
-        {isLogoutModalOpen && (
-          <LogoutModal onClose={() => setIsLogoutModalOpen(false)} />
-        )}
-        <Searchbar></Searchbar>
 
-        {/*<div className={styles.groupItem} />
+      {/*{isLogoutModalOpen && <LogoutModal onClose={() => setIsLogoutModalOpen(false)} />}*/}
+      <Searchbar></Searchbar>
+      <div className={styles.line} />
+      {/*<div className={styles.groupItem} />
       <img className={styles.searchAltIcon} alt="" src="/img/search-alt.svg" />
       <input className={styles.div16}
         placeholder="상품명 입력"

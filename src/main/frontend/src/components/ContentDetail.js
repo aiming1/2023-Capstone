@@ -151,8 +151,8 @@ const ContentDetail = (props) => {
   const addHeart = async () => {
     if (!localStorage.getItem("token")) {
       alert("로그인 후 이용해주세요!");
-      navigate("/login");
-    } else {
+      navigate("/login");}
+    else {
       const productData = {
         id: productId,
         name: data?.name,
@@ -170,10 +170,7 @@ const ContentDetail = (props) => {
       };
 
       axios
-        .get(
-          `/api/product/${productId}/${productMarket}/heart/add`,
-          productData
-        )
+        .get(`/api/product/${productId}/${productMarket}/heart/add`, productData)
         .then(function (response) {
           console.log("추가 성공", response);
           setHeart(!heart);
@@ -190,6 +187,7 @@ const ContentDetail = (props) => {
         });
     }
   };
+
 
   //찜 해제
   const deleteHeart = async () => {

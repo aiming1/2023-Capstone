@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 export default function Searchbar() {
   {}
 
+  const item = useParams();
+
   const onSubmitSearch = (e) => {
     if(e.key === "Enter"){
       window.location.href = "/search/" + word;
@@ -31,10 +33,10 @@ export default function Searchbar() {
           </button>
 
           <input
-            className={styles.div16}
+            className={styles.searchBox}
             name="keyword"
             type="text"
-            placeholder="상품명 입력"
+            placeholder= {item.word === undefined? "검색어를 입력하세요" : item.word}
             value={word}
             autocomplete="off"
             onChange={(e) => {

@@ -26,7 +26,8 @@ function App() {
           {/* 카테고리 */}
           <Route path="/search" element={<Home />} />
           {/* 로그인 */}
-          <Route path="/Login" element={<Login />} />
+          {/*<Route path="/Login" element={<Login />} />*/}
+          {/* 로그아웃 */}
           <Route path="/Logout" element={<Logout />} />
           <Route path="/Join" element={<Join />} />
           {/* 찜목록 */}
@@ -34,6 +35,8 @@ function App() {
         </Route>
         {/* <NotFoundPage /> */}
         <Route path="*" element={<NotFoundPage />} />
+        {/* 로그인 */}
+        <Route path="/Login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );

@@ -75,7 +75,7 @@
   height: 58px;
   flex-shrink: 0;
   top: 0;
-  left: 285px;
+  left: 320px;
 
   background-color: var(--color-white);
 
@@ -88,7 +88,7 @@
   width: 100%;
   height: 100%;
 }
-.div16,
+.searchBox,
 .searchAltIcon {
   border: none;
   background-color: transparent;
@@ -100,7 +100,7 @@
   padding-left: 15px;
   margin-top: 5px;
 }
-.div16 {
+.searchBox {
   width: 100%;
   height: 80%;
   font-size: 18px;
@@ -112,6 +112,9 @@
   align-items: center;
   margin-top: 5px;
   margin-right: 20px;
+}
+.searchBox:focus, .searchBox:active {
+  outline: none; /* 포커스 또는 클릭시 기본 아웃라인 스타일 제거 */
 }
 .groupParent {
   position: absolute;

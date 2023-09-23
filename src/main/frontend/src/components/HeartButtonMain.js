@@ -6,8 +6,6 @@ import FullHeartImg from "../assets/heart_full.svg";
 import EmptyHeartImg from "../assets/heart_empty.svg";
 import styles from "../styles/css/ItemList.module.css";
 
-
-
 const HeartButtonMain = ({ heart, onClick }) => {
   return (
     <img
