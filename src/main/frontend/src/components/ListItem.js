@@ -44,7 +44,7 @@ export const ListItem = ({
         <img
           className={styles.itemstorelogo}
           alt=""
-          src="/img/중고나라 아이콘 1.png"
+          src="/img/중고나라 아이콘.png"
         />
       );
     }

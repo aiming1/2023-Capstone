@@ -41,7 +41,13 @@ const ContentDetail = (props) => {
             return x?.id === data?.id;
           });
           setHeart(isHeart);
-          //console.log("heart", isHeart);
+
+          if (!localStorage.getItem("token")) {
+            //console.log("로그아웃됨"); 로그아웃 안됨-임시추가
+            setData2(null);
+            setHeart(false);
+          }
+          //console.log("heart", isHeart, data2);
 
           //data?.updatedate 값이 -로 시작할때 함수 호출
           if (data?.updatedate && data.updatedate.startsWith('-')) {
@@ -138,7 +144,7 @@ const ContentDetail = (props) => {
           <img
             className={styles.icon6}
             alt=""
-            src="/img/중고나라 아이콘 1.png"
+            src="/img/중고나라 아이콘.png"
           />
           <span className={styles.div20}>중고나라</span>
         </div>
@@ -306,14 +312,14 @@ const ContentDetail = (props) => {
                 }}
               >
                 <div className={styles.child}>보러 가기</div>
-                {/*<div className={styles.div7}>보러 가기</div>*/}
+                {/*<div className={styles.div7}></div>*/}
               </div>
 
               <span className={styles.shortline} />
-                {heart ? (
-                  <HeartButton heart={heart} onClick={deleteHeart}></HeartButton>
-                ) : (
-                  <HeartButton heart={heart} onClick={addHeart}></HeartButton>
+              {heart ? (
+                <HeartButton heart={heart} onClick={deleteHeart}></HeartButton>
+              ) : (
+                <HeartButton heart={heart} onClick={addHeart}></HeartButton>
               )}
             </div>
           </div>

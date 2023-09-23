@@ -45,13 +45,14 @@ const Header = () => {
       </div>
 
       <div className={styles.cartGroup}>
-        <div className={styles.basketAlt3Icon} onClick={heartlink} >
-          <img src="/img/basket-alt-3.svg" />
+        <div className={styles.basketAlt3Icon} onClick={heartlink}>
+          <img src="/img/Favorite-Cart.svg" />
         </div>
         <div className={styles.line} />
         <button className={styles.userCicrleDuotoneIcon} onClick={loginlink}>
           <img src="/img/user-cicrle-duotone.svg" />
         </button>
+
       {/*{isLogoutModalOpen && <LogoutModal onClose={() => setIsLogoutModalOpen(false)} />}*/}
       <Searchbar></Searchbar>
       <div className={styles.line} />

@@ -1,3 +1,4 @@
+/*
 import React, { useState, useEffect } from "react";
 
 import styled from "styled-components";
@@ -16,3 +17,4 @@ const HeartButtonMain = ({ heart, onClick }) => {
 };
 
 export default HeartButtonMain;
+*/
