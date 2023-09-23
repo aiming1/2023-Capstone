@@ -138,7 +138,7 @@ const ContentDetail = (props) => {
           <img
             className={styles.icon6}
             alt=""
-            src="/img/중고나라 아이콘 1.png"
+            src="/img/중고나라 아이콘.png"
           />
           <span className={styles.div20}>중고나라</span>
         </div>
